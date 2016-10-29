@@ -1,0 +1,56 @@
+\documentclass[11pt,a4paper]{amsart}
+% or letter or a5paper or ... etc
+\usepackage[left=1in,top=1in,right=1in,bottom=1in]{geometry}
+% \geometry{landscape} % rotated page geometry
+\usepackage{graphicx}%
+\usepackage{float}
+\usepackage{url}
+% See the ``Article customise'' template for come common customisations
+\usepackage{times}
+\usepackage{xcolor}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+            \usepackage{hyperref}
+%\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    pdfborder={0 0 0},
+}
+\title{Project Proposal: Text Mining Toolkit for Digital Humanities}
+\author{Olga Scrivner, Irina Trapido, Jay Lee\\
+\url{olgas2@illinois.edu},\url{trapido2@illinois.edu},\url{lee9@illinois.edu}}
+\date{} % delete this line to display the current date
+\pagestyle{plain}
+%%% BEGIN DOCUMENT
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+%\tableofcontents
+\section{Goals}
+Access to large digitized collections present a new opportunity to digital humanities researchers. At the same time, traditional methodology (e.g. close reading or keyword search) becomes very inefficient for literary data analysis. On the other hand, most available mining tools are built for different purposes and often require programming skills (even for software installation). Our project addresses these needs by building a Shiny web application \href{https://languagevariationsuite.shinyapps.io/TextMining/}{ITMS} that would allow researchers to explore visually  and interactively their data collection. In addition, this application does not require any installation. While the core of this tool has been built, a lot of tuning and evaluation is needed, similar to META tool, in which  the user is able to select parameters. Finally, the current tool uses various topic modeling algorithms, each with a different parameter setting, thus providing their evaluation and guidance to a non-technical user is necessary.
+\begin{figure}[H]
+\includegraphics[width=4.7in]{itms.png}
+\caption{Interactive Text Mining Suite - Design}
+\end{figure}
+\section{Research Outlines}
+\subsection{Functionalities} i) interactive text pre-processing, stopwords selection, stemming, ii) interactive data selection, iii) frequency analysis, iv) topic modeling and model evaluation, v) cluster analysis, vi) name entities relation network
+\subsection{Existing Tools} \href{https://voyant-tools.org/}{Voyant}  and \href{http://papermachines.org/}{Zotero pluggin Paper-Machine}. Voyant does not provide a topic modeling and cluster analyses. Paper-Machine is based on Zotero reference manager and is mainly built for bibliography. In both tools users cannot tune analyses.
+\subsection{Users} Researchers in Digital Humanities and Linguistics fields
+\subsection{Techniques and Resources} We will implement the following techniques: clustering, topic modeling, name entity network modeling. These techniques will be performed by using several text mining packages and topic modeling packages in R, such as \textit{tm}, \textit{lda}, \textit{topicmodels}, \textit{NLP}, and \textit{stm}.
+
+\section{Timeline of the Project}
+ \noindent \textbf{Nov 7}  Parameters for topic modeling: adding more parameter options to existing functions
+ \vskip5pt
+ \noindent \textbf{Nov 14}  Interactive data selection by chapters or other segments (term and abstract extraction is already implemented): creating a function that takes users input and segments data accordingly
+  \vskip5pt
+ \noindent \textbf{Nov 21} Cluster analysis: tuning and parameters evaluation. Review literature on clustering visualization. %Name entities: building a function for network analysis - the relation between characters across a text
+  \vskip5pt
+ \noindent \textbf{Nov 28}  Topic modeling evaluation. Review literature on various types of evaluation (e.g. best K topic, best parameters etc). Currently, only one evaluation is included, namely a best K topic analysis based on Log-likelihood ratio. This evaluation suggests how many topics users should choose.
+
+
+
+\end{document}
