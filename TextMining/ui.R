@@ -85,7 +85,7 @@ shinyUI(navbarPage(theme = "bootstrap.min.css",
                                 tabsetPanel(type = "tabs", 
                                             tabPanel("Data",
                                                      br(),
-                                                     tabsetPanel(title="Data",
+                                                     tabsetPanel(#title="Data",
                                                                  tabPanel("Upload Instructions", 
                                                                           fluidPage(
                                                                             shiny::tags$head(shiny::tags$style(shiny::HTML(
@@ -166,7 +166,7 @@ shinyUI(navbarPage(theme = "bootstrap.min.css",
                                                                  #            ))))),
                                                                  # #  ),
                                                                  tabPanel("Data Cleaning",
-                                                                          tabsetPanel(title="Data",
+                                                                          tabsetPanel(#title="Data",
                                                                                       tabPanel("Remove",
                                                                                                fluidPage(p("If you document contains html tags, urls or bibliography, you can remove them from your data. Leave the default `Do not Remove'."),
                                                                                                          fluidRow( 
