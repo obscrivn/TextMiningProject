@@ -1,0 +1,21 @@
+body {padding-top: 70px;}
+
+.navbar-brand {
+	padding: 5px;
+}
+
+.app-logo {
+	float:left;
+	margin-right:10px;
+}
+
+.app-title {
+	width:350px;
+	margin-right:10px;
+	padding: 10px;
+}
+
+.welcome {
+	font-weight: bold;
+	color: dodgerblue;
+}
