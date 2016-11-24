@@ -12,10 +12,10 @@ shinyUI(
     navbarPage(
       title = div(
         img(src="itmslogo.jpg", class="app-logo", height = 40),
-        div(class="app-title", "Interactive Text Mining Suite ITMS")
+        div(class="app-title", tags$h5(strong("Interactive Text Mining Suite ITMS")))
       ),
       position="fixed-top",
-      tabPanel("About", 
+      tabPanel(strong("About"), 
         div(class="jumbotron",
           h2(class="welcome", "Welcome!"),
           p("Interactive Text Mining Suite ITMS is a web application for text analysis. This application offers the computational and statistical power of R and the interactivity of Shiny web app."),
@@ -47,7 +47,7 @@ shinyUI(
         div(style="margin-bottom:20px",a(href="http://cl.indiana.edu/~obscrivn/", target="_blank", "Dr. Olga Scrivner"))
       ),
       navbarMenu(title = "File Uploads",
-        tabPanel("Text Files",
+        tabPanel(strong("Text Files"),
           fluidPage(
             shiny::tags$head(shiny::tags$style(shiny::HTML(
               "#text { font-size: 15px; height: 300px; overflow: auto; }"
@@ -71,7 +71,7 @@ shinyUI(
             )
           ) 
         ),
-        tabPanel("PDF Files",
+        tabPanel(strong("PDF Files"),
           fluidPage(
             shiny::tags$head(shiny::tags$style(shiny::HTML(
               "#text { font-size: 15px; height: 300px; overflow: auto; }"
@@ -102,10 +102,10 @@ shinyUI(
             )
           ) 
         ),
-        tabPanel("ZOTERO", "Under development"),
-        tabPanel("JSON", "Under development")
+        tabPanel(strong("ZOTERO"), "Under development"),
+        tabPanel(strong("JSON"), "Under development")
       ),     
-      tabPanel("Data Preparation",
+      tabPanel(strong("Data Preparation"),
 
         tabsetPanel(type = "tabs", 
           tabPanel(
