@@ -5,7 +5,7 @@ source("MyPlot.R")
 source("extractContent.R")
 #source("extractMetadata.R")
 source("abstract.R")
-source("listTerms.R")
+source("words.R")
 source("preprocess.R")
 library(tm)
 library(qdap)
@@ -33,11 +33,11 @@ library(RTextTools)
 shinyServer(function(input, output) {
   
   output$print_name_article <- renderPrint({
-    if (is.null(input$file.article)) { return() }
+    if (is.null(input$file.article)) { return()}
     paste(input$file.article$name, sep="\n")
   }) 
   output$print_name_article_txt <- renderPrint({
-    if (is.null(input$file.article.txt)) { return() }
+    if (is.null(input$file.article.txt)) { return()}
     paste(input$file.article.txt$name, sep="\n")
   }) 
 output$print_length_pdf <- renderUI({
@@ -64,35 +64,7 @@ output$print_length_txt <- renderUI({
                    selected="NULL",
                    multiple = FALSE) 
   })
-  output$choose_article_content <- renderUI({
-    names <- c("Full Text","Abstract")
-    selectizeInput("article_content", label = "Select Abstract",
-                   choices = names,
-                   selected="Full Text",
-                   multiple = FALSE)   
-  }) 
-  output$choose_type <- renderUI({
-    names <- c("NULL","Text","Article")
-    selectizeInput("choose_type", label = "Select Type", #ABSTRACT, FULL TEXT 
-                   # or TRANSCRIPT to analyze", 
-                   choices = names,
-                   selected=FALSE,
-                   multiple = FALSE)   
-  }) 
-  output$choose_intro <- renderUI({
-     if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-    if ((is.null(input$choose_type)) || (input$choose_type=="NULL")) {return()}
-    if ((input$choose_type=="Article") && (input$article_content=="Abstract"))  {
-      #names <- c("NULL","Full text","Abstract","Transcript")
-      names <- c("NULL","Introduction","1. Introduction","Section 1","Type here")
-      selectizeInput("choose_intro", label = "Name of Section 1", #ABSTRACT, FULL TEXT 
-                     # or TRANSCRIPT to analyze", 
-                     options = list(create = TRUE),
-                     choices = names,
-                     selected=FALSE,
-                     multiple = FALSE)  
-    }
-  }) 
+  
   output$choose_column <- renderUI({
     if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
     if ((is.null(input$choose_type)) || (input$choose_type=="NULL")) {return()}
@@ -151,7 +123,7 @@ output$print_length_txt <- renderUI({
                      Sys.sleep(0.25)
                    }
                  })
-    word <- ListTerms()$corpus.lda#d[[2]]#[1:x]
+    word <- ListTerms()$d[[2]]#[1:x]
     selectizeInput("choose_term", label = "Select term(s)", 
                    choices = word,
                    options = list(create = TRUE),
@@ -316,15 +288,6 @@ output$print_length_txt <- renderUI({
     return(info)
   })
 
-output$load_metadata_pdf <- renderUI({
-  if (is.null(input$file.article)) { return() }
- names = c("NULL","Load")
-  selectizeInput("metadata_pdf", label = "Read Metadata from PDF", 
-                 choices = names,
-                 selected=FALSE,
-                 multiple = FALSE
-  )
-}) 
 ## Reading Metadata File from csv
 output$load_metadata_csv <- renderUI({
   if ((is.null(input$file.article)) & (is.null(input$file.article.txt))) { return() }
@@ -356,43 +319,49 @@ output$print_metadata_csv <- renderDataTable({
 
 output$print_metadata_pdf <- renderTable({
   if (is.null(input$file.article)) { return() }
-  withProgress(message = 'Loading Metadata',
+  if (input$metadata=="Load") {
+   a <- metadataPdf()$authors
+   t <- metadataPdf()$titles
+   dt <- metadataPdf()$datetimes
+   withProgress(message = 'Loading Metadata',
                value = 0, {
                  for (i in 1:15) {
                    incProgress(1/15)
                    Sys.sleep(0.25)
                  }
                })
-
-  a <- metadataPdf()$authors
-  t <- metadataPdf()$titles
-  dt <- metadataPdf()$datetimes
   d <- data.frame(date=dt, title=t, author = a)
+  }
+  else if (input$metadata=="None"){
+    d <- "You need to select metadata"
+  }
 })
+
 output$print_content_txt <- renderUI({
   if (is.null(input$file.article.txt))  { return() }
-  withProgress(message = 'Loading in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
       txt.lines <-  ExtractRawContentTXT()
+      withProgress(message = 'Loading txt file',
+                   detail = '....', value = 0, {
+                     for (i in 1:15) {
+                       incProgress(1/15)
+                       Sys.sleep(0.25)
+                     }
+                   })
       HTML(paste("<br/>", "Document: ",txt.lines, sep="<br/>"))
  
 
 }) 
+
 output$print_content_pdf <- renderUI({
   if (is.null(input$file.article))  { return() }
-  withProgress(message = 'Loading in progress',
-               detail = 'This may take a while...', value = 0, {
+  pdf.lines <-  ExtractRawContentPDF()
+  withProgress(message = 'Loading pdf file',
+               detail = '....', value = 0, {
                  for (i in 1:15) {
                    incProgress(1/15)
                    Sys.sleep(0.25)
                  }
                })
-  pdf.lines <-  ExtractRawContentPDF()
   HTML(paste("<br/>", "Document: ",pdf.lines, sep="<br/>"))
 }) 
 
@@ -409,30 +378,19 @@ output$print_abstract <- renderUI({
 
 output$print_preprocessed <- renderUI({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt)))   { return() }
- # if ((is.null(input$select_processed)) || (input$select_processed=="NULL")){ return() }
-  withProgress(message = 'Preprocessing',
-               detail = 'Almost done...', value = 0, {
-                 for (i in 1:60) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
-  
   if (input$preprocessing=="No Changes") {
     pdf.lines <- "No pre-processing steps are applied"
   }
   else if (input$preprocessing=="Apply Steps") {
-   # if (!is.null(input$file.article)) {
-      # pdf.lines <- ExtractContentPDF()$text.extract
+    withProgress(message = 'Preprocessing',
+                 detail = 'Almost done...', value = 0, {
+                   for (i in 1:60) {
+                     incProgress(1/15)
+                     Sys.sleep(0.25)
+                   }
+                 })
       pdf.lines <- PreprocessingSteps()[6]#$lda.format#window.one()$lda.format
-      # pdf.lines <- Selection()$text.extract
     }
-   # if (!is.null(input$file.article.txt)) {
-     # pdf.lines <-  WindowSelect()
-      #pdf.lines <-ExtractContent()
-   # }
- # }
-
   HTML(paste("<br/>", "Document: ",pdf.lines, sep="<br/>"))
 }) 
 
@@ -496,106 +454,7 @@ PreprocessingSteps <- reactive ({
  return(mylist)
   })
 
-# window.one <- reactive ({
-#   if ((is.null(input$file.article)) && (is.null(input$file.article.txt)))   { return() }
-# text.extract <- vector()
-# lda.format <- vector()  
-# novel.list <- list()
-# punct.list <-vector()
-# novel.lda <- list()
-# if(!is.null(input$file.article)) {
-#   num <-length(input$file.article$name)
-#   file.names <-input$file.article$name
-# }
-# if(!is.null(input$file.article.txt)) {
-#   num <-length(input$file.article.txt$name)
-#   file.names <-input$file.article.txt$name
-# }
-# 
-# #text <- vector()
-# datum<- WindowSelect()
-# for (i in 1:num) {
-#   data<- datum[i]
-#   text <- paste(data, collapse = " ")
-#   text.punct <- data
-# if ((input$remove_html=="Do not Remove HTML") || (is.null(input$remove_html))) {
-#   text.punct <- text.punct
-# }
-# else if (input$remove_html=="Remove HTML") {
-#   text.punct <- rm_bracket(text.punct)
-# }
-# 
-# if ((is.null(input$remove_what)) || (input$remove_what=="NULL")) {
-#   text.punct <- text.punct
-# }
-# else if ((!is.null(input$remove_what)) && (!is.null(input$remove_by))) {
-#   what <- input$remove_what
-#   by <- input$remove_by
-#   text.punct <-  gsub(what, by, text.punct)
-# }
-# if ((input$lower_cases=="Do not Lower Cases") || (is.null(input$lower_cases))) {
-#   text.punct <- text.punct
-# }
-# else if (input$lower_cases=="Lower Cases") {
-#   text.punct <- tolower(text.punct)
-# }
-# if ((input$remove_numbers=="Do not Remove Numbers")|| (is.null(input$remove_numbers))) {
-#   text.punct <- text.punct
-# }
-# else if (input$remove_numbers=="Remove Numbers") {
-#   text.punct<-  gsub('[[:digit:]]+', '', text.punct)
-# }
-# if ((input$remove_punctuation=="Do not Remove Punctuation") || (is.null(input$remove_punctuation))){
-#   text.punct <- text.punct
-# }
-# else if (input$remove_punctuation=="Remove Punctuation") {
-#   if ((input$exceptions=="NULL") || (is.null(input$exceptions))) {
-#     text.punct <- gsub("[^[:alnum:] ]", "", text.punct) 
-#   }
-#   else if (input$exceptions=="Keep apostrophe") {
-#     text.punct <- gsub("-", " ", text.punct) 
-#     text.punct <- strip(text.punct, char.keep="~~",digit.remove = FALSE, apostrophe.remove = FALSE,
-#                         lower.case = FALSE)
-#   }
-#   else if (input$exceptions=="Keep hyphen") {
-#     text.punct <- strip(text.punct, char.keep="-",digit.remove = FALSE, apostrophe.remove = FALSE,
-#                         lower.case = FALSE)
-#   }
-#   else if (input$exceptions=="Keep apostrophe and hyphen") {
-#     text.punct <- strip(text.punct, char.keep="-",digit.remove = FALSE, apostrophe.remove = FALSE,
-#                         lower.case = FALSE)}      
-# }
-# if ((input$remove_urls=="Do not Remove Urls") || (is.null(input$remove_urls))) {
-#   text.punct <- text.punct
-# }
-# else if (input$remove_urls=="Remove Urls") {
-#   text.punct <- rm_email(text.punct)
-#   text.punct <- rm_url(text.punct)
-#   text.punct <- rm_twitter_url(text.punct)
-# }
-# if ((input$remove_references=="Do not Remove References")|| (is.null(input$remove_references))) {
-#   text.punct <-text.punct
-# }
-# else if (input$remove_references=="Remove References") {
-#   text.punct <-rm_citation(text.punct)
-#   text.punct <-rm_citation(text.punct, pattern="@rm_citation3")
-#   text.punct <-rm_citation(text.punct, pattern="@rm_citation2")
-#   text.punct <-rm_round(text.punct)
-#   text.punct <-rm_curly(text.punct)
-#   text.punct <-rm_square(text.punct)
-#   text.split<-strsplit(text.punct, "References|references|REFERENCES")
-#   #text.split <- unlist(text.p)
-#   text.punct<-text.split[[1]]
-#   
-# }
-# if ((is.null(input$remove_html_symbol)) || (input$remove_html_symbol=="NULL")) {
-#   text.punct <- text.punct
-# }
-# else if ((!is.null(input$remove_html_symbol)) && (input$remove_html_symbol!="NULL")){
-#   htm <- input$remove_html_symbol
-#   for (i in 1:length(input$remove_html_symbol)) {
-#     text.punct <- gsub(htm[i],"",text.punct)
-#   }
+
 # }
 #   if ((input$stem=="NULL") || (is.null(input$stem))) {
 #     text.punct <- text.punct
@@ -604,31 +463,6 @@ PreprocessingSteps <- reactive ({
 #     text.split <- unlist(strsplit(text.punct, " "))
 #     text.punct <- paste(wordStem(text.split, language = "english"),collapse = " ")
 #   }
-# text.punct <- gsub("\\s\\s+"," ",text.punct)
-# text.punct <- str_c(text.punct)
-# text.punct<- str_trim(text.punct)  
-# text.split<-strsplit(text.punct, " ")
-# text.split <- unlist(text.split)
-# data.del <- gsub("[A-Za-z0-9]"," \\1", data)
-# data.del.w <- paste(data.del, collapse = " ")
-# data.no.punct<- gsub("([!¿?;,¡:]|(\\.+))", " \\1 ", data.del.w)
-# data.no.punct <-  gsub("\\s+"," ",data.no.punct)
-# file.name <- sub("(.*\\/)([^.]+)(\\.[[:alnum:]]+$)", "\\2", file.names[i])#input$file.article.txt$name[i])   
-# text.split<-strsplit(text.punct, " ")
-# text.split <- unlist(text.split)
-# text.freq <- table(text.split)
-# text.relative <- 100*(text.freq/sum(text.freq))
-# novel.list[[file.name]] <- text.relative
-# punct.list[i] <-data.no.punct
-# novel.lda[i] <-text.punct
-# lda.format[i] <- text.punct
-# text.extract[i] <- text
-# #  }
-# }
-# info<-list(data=data, novel.list=novel.list,text.extract=text.extract,punct.list=punct.list,novel.lda=novel.lda,lda.format=lda.format,data=data)
-# return(info)
-# })
-
 
 
 ##### STOP WORDS #######
@@ -637,18 +471,14 @@ stopWordsTxt <- reactive ({
   stop_words<-vector()
   if (input$stops=="Default") {
     stop_words <- stopwords("SMART")
-  #  word <- unlist(stop_words)
   }
   if (input$stops=="Upload") {
     uris.name <- input$stopwords.txt$datapath
     text.scan <- scan(uris.name, what="character", sep="\n",blank.lines.skip = FALSE)
     x=enc2utf8(text.scan)
-    x <- tolower(x)
-    text.punct <- removePunctuation(x)
-    text.punct <- str_c(text.punct)
+    text.punct <- str_c(x)#text.punct)
     text.punct<- str_trim(text.punct)
     text.punct <- gsub("\\s\\s+", " ", text.punct)   
-   # stops<-strsplit(text.punct, " ")
     stops<-strsplit(text.punct, " ")
     stop_words<-unlist(stops)
   }
@@ -656,108 +486,171 @@ stopWordsTxt <- reactive ({
 })
 
 output$print_stopwords <- renderPrint({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if (input$show_stopwords=="Show Stopwords") {
-    stopWordsTxt()
-  }
+  if (input$stops=="None") {"Stopwords are not selected"}
+ else{ 
+   stopWordsTxt()}
 })
 
-output$show_cutoff_lower <-renderUI ({
-  freq <- c(0,1,2,3,4)
-  selectizeInput("cutoff_lower", label = "Select or Type Lower Cutoff", 
-                 choices = freq,
-                 options = list(create = TRUE),
-                 selected = 0,
-                 multiple = FALSE) 
+#Allows for interactive instant word removals from user
+RemoveWordsStepOne <-reactive({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  #cutoff.lower=0#input$cutoff_lower
+  #cutoff.high=input$cutoff_high
+  mycorpus <- PreprocessingSteps()[6]
+  if  (input$stops=="None") {
+    corpus.paste <-paste(mycorpus, sep=" ")
+    corpus.list <- strsplit(corpus.paste, "\\s+")
+    terms <- table(unlist(corpus.list))
+    terms.sorted <- sort(terms, decreasing = TRUE)
+    terms.matrix<-as.matrix(terms.sorted)
+    d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
+    d$word <- row.names(d)
+    agg_freq <- aggregate(frequency ~ word, data = d, sum)
+    d <- d[order(d$frequency, decreasing = T), ]
+    words.list <- as.list(d$word)
+    corpus <- mycorpus
+  }
+  else if  ((input$stops=="Default")||(input$stops=="Upload")) {
+    remove_word <- stopWordsTxt()
+    doc.vect <- VectorSource(mycorpus)
+    corpus.tm <-Corpus(doc.vect)
+    corpus.tm <- tm_map(corpus.tm,removeWords,stopWordsTxt())
+    corpus <- list()
+    for (i in 1:length(corpus.tm)) {
+      doc <-corpus.tm[[i]]$content
+      corpus[[i]] <- doc
+    }
+    corpus <-unlist(corpus)
+    corpus.paste <-paste(mycorpus, sep=" ")
+    corpus.list <- strsplit(corpus.paste, "\\s+")
+    terms <- table(unlist(corpus.list))
+    terms.sorted <- sort(terms, decreasing = TRUE)
+    terms.matrix<-as.matrix(terms.sorted)
+    d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
+    d$word <- row.names(d)
+    agg_freq <- aggregate(frequency ~ word, data = d, sum)
+    d <- d[order(d$frequency, decreasing = T), ]
+    words.list <- as.list(d$word)
+  }
+  info <- list(corpus=corpus,d=d, words.list=words.list)
+  return(info)
 })
-output$show_cutoff_high <-renderUI ({
-  freq <- c(300,200,100)
-  selectizeInput("cutoff_high", label = "Select or Type Upper Cutoff", 
-                 choices = freq,
-                 options = list(create = TRUE),
-                 selected = NULL,
-                 multiple = FALSE) 
+
+RemoveWordsStepTwo <-reactive({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if (is.null(input$remove_manual)) {
+    corpus <-RemoveWordsStepOne()$corpus
+    d <-RemoveWordsStepOne()$d
+    words.list <-RemoveWordsStepOne()$words.list
+  }
+  else {
+    mycorpus <-RemoveWordsStepOne()$corpus
+    doc.vect <- VectorSource(mycorpus)
+    corpus.tm <-Corpus(doc.vect)
+    corpus.tm <- tm_map(corpus.tm,removeWords,stopWordsTxt())
+    corpus <- list()
+    for (i in 1:length(corpus.tm)) {
+      doc <-corpus.tm[[i]]$content
+      corpus[[i]] <- doc
+    }
+    corpus <-unlist(corpus)
+    corpus.paste <-paste(corpus, sep=" ")
+    corpus.list <- strsplit(corpus.paste, "\\s+")
+    terms <- table(unlist(corpus.list))
+    terms.sorted <- sort(terms, decreasing = TRUE)
+    remove_word <- stopWordsTxt()
+    del <- names(terms) %in% remove_word #| terms < cutoff.lower
+    terms <- terms[!del]
+    terms.matrix<-as.matrix(terms)
+    d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
+    d$word <- row.names(d)
+    agg_freq <- aggregate(frequency ~ word, data = d, sum)
+    d <- d[order(d$frequency, decreasing = T), ] 
+    words.list <- as.list(d$word)
+  }
+  info <- list(corpus=corpus,d=d, words.list=words.list)
+  return(info)
+})
+
+RemoveWordsStepThree <-reactive({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if(input$stopwords=="None") {
+    corpus <-RemoveWordsStepOne()$corpus
+    d <-RemoveWordsStepOne()$d
+    words.list <-RemoveWordsStepOne()$words.list
+  }
+  else if(input$stopwords=="Apply Stopwords") {
+    if ((input$stops=="None") && (input$remove==FALSE))  {"No stopwords are selected"}
+    else {
+      corpus <-RemoveWordsStepTwo()$corpus
+      d <-RemoveWordsStepTwo()$d
+      words.list <-RemoveWordsStepTwo()$words.list
+    }
+  }
+  info <- list(d=d, words.list=words.list,corpus=corpus)
+  return(info)
+})
+
+output$print_apply_stops <- renderUI({
+  if (input$stopwords=="No Changes") {"No changes are made. You need to select stopwords first"}
+  if (input$stopwords=="Apply Stopwords") {
+    HTML(paste0(RemoveWordsStepThree()$corpus))
+  }
 })
 #########
 rawFrequency <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  corpus.lda <- PreprocessingSteps()$lda.format#window.one()$lda.format
-  lda.list <- strsplit(corpus.lda, "\\s+")
-  terms <- table(unlist(lda.list))
-  terms <- sort(terms, decreasing = TRUE)
-  terms.matrix<-as.matrix(terms)
-  d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
-  d$word <- row.names(d)
-  agg_freq <- aggregate(frequency ~ word, data = d, sum)
-  d <- d[order(d$frequency, decreasing = T), ] 
+  d<-ListTerms()$d
+  # corpus <-ListTerms()$corpus# PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
+  # corpus <-unlist(corpus)
+  # corpus.paste <-paste(corpus, sep=" ")
+  #  lda.list <- strsplit(corpus.paste, "\\s+")
+  #  terms <- table(unlist(lda.list))
+  #  terms <- sort(terms, decreasing = TRUE)
+  #  terms.matrix<-as.matrix(terms)
+  # df <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
+  #  df$word <- row.names(df)
+  #  agg_freq <- aggregate(frequency ~ word, data = df, sum)
+  #  df <- df[order(df$frequency, decreasing = T), ] 
+  #  relfreq <- df$frequency/sum(df$frequency)
+  #    d <-data.frame(df,relfreq)
   return(d)
-})
-
-output$show_freq <-renderUI ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  freq <- c("NULL", "Frequency", "Frequency with stopwords")
-  selectizeInput("show_freq", label = "Select FREQUENCY", 
-                 choices = freq,
-                 selected = NULL,
-                 multiple = FALSE) 
 })
 
 output$freq <- renderDataTable ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$show_freq)) || (input$show_freq=="NULL")){ return() }
-  if (input$show_freq=="Frequency") {
-   word <- rawFrequency()[[2]]
-   frequency <- rawFrequency()[[1]]
-    df <- data.frame(word, frequency)
-  relfreq <- df$frequency/sum(df$frequency)
-  d <-data.frame(df,relfreq)
-  }
-  if (input$show_freq=="Frequency with stopwords") {
-  word <- RemoveWordsFinal()$d[[2]]
-  frequency <- RemoveWordsFinal()$d[[1]]
-  df <- data.frame(word, frequency)
-  relfreq <- df$frequency/sum(df$frequency)
-  d <-data.frame(df,relfreq)
-  }
+ # if (input$show_freq==FALSE){ "Frequency Analysis is not requested" }
+ # if (input$show_freq=="Frequency") {
+ # d<-ListTerms()$d.clean
+ # d<-rawFrequency()
+   word <- rawFrequency()[[2]] #ListTerms()$d.clean#$d.clean[[2]] #rawFrequency()[[2]]
+   frequency <- rawFrequency()[[1]]# ListTerms()$d.clean[[2]]#d.clean[[1]]#rawFrequency()[[1]]
+     df <- data.frame(word, frequency)
+  # df <- df[order(df$frequency), ]
+  # frequency = sort(rowSums(terms.matrix), decreasing = TRUE)
+   relfreq <- df$frequency/sum(df$frequency)
+   d <-data.frame(df,relfreq)
+  
   return(d)#,options=list(lengthMenu = c(5, 10, 15), pageLength = 5))
 })
+
 output$zipf <- renderPlot ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$show_freq)) || (input$show_freq=="NULL")){ return() }
-  withProgress(message = 'Plot Creation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
-  tdm <- RemoveWords()$tdm
+  tdm <- ListTerms()$tdm
   p<- Zipf_plot(tdm, type="l")
   return(p)
 })
 
 output$heaps <- renderPlot ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$show_freq)) || (input$show_freq=="NULL")){ return() }
-  withProgress(message = 'Plot Creation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
-  tdm <- RemoveWords()$tdm
-  p<- Heaps_plot(tdm, type="l")
-  return(p)
+  #if((is.null(input$show_freq)) || (input$show_freq=="NULL")){ return() }
+ # if (input$show_freq=="Frequency") {
+  tdm <-ListTerms()$tdm  #RemoveWords()$tdm
+ # p<- Heaps_plot(tdm, type="l")
+ # return(p)
+ # }
 })
 
-output$show_word <- renderUI({
-  names <- c("NULL","Word Length", "Sentence Length")
-  selectizeInput("show_word", label = "Select Word or Sentence Length", 
-                 choices = names,
-                 selected="NULL",
-                 multiple = FALSE) 
-}) 
 
 output$choose_text <- renderUI({
   if (!is.null(input$file.article)) {
@@ -774,7 +667,7 @@ output$choose_text <- renderUI({
 })
 
 LengthWord <- reactive ({
-  if ((input$show_word=="NULL")|| (is.null(input$show_word))) {return()}
+  if (input$show_word=="None") {return()}
   if ((input$show_text=="NULL")|| (is.null(input$show_text))) {return()}
   i <- input$show_text
   if (!is.null(input$file.article)) {
@@ -803,25 +696,26 @@ tab <- LengthSent()
 return(tab)
 })
 output$length_word_table <- renderTable ({
-  if ((input$show_word=="NULL")|| (is.null(input$show_word))) {return()} 
-  withProgress(message = 'Calculation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
+  if (input$show_word=="None") {"Length analysis is not selected"} 
+
   if (input$show_word=="Word Length") {
    tab <- LengthWord()
   }
   if (input$show_word=="Sentence Length") {
     tab <- LengthSent()$newtab
   }
+  withProgress(message = 'Length calculation',
+               detail = 'in progress...', value = 0, {
+                 for (i in 1:15) {
+                   incProgress(1/15)
+                   Sys.sleep(0.25)
+                 }
+               })
   return(tab)
   })
 
 output$words <- renderPlot ({
-  if ((input$show_word=="NULL")|| (is.null(input$show_word))) {return()}
+  if (input$show_word=="None") {"Select Word or Sentence Length"}
   if (input$show_word=="Word Length") {
   newtab <- LengthWord()
   plots <- ggplot(newtab, aes(x=word_length,y=proportion)) + geom_line() + ggtitle(input$show_text)
@@ -834,7 +728,7 @@ output$words <- renderPlot ({
 })
 
 LengthSent <- reactive ({
-  if ((input$show_text=="NULL")|| (is.null(input$show_text))) {return()}
+  if (input$show_text=="None") {return()}
   i <- input$show_text
   if (!is.null(input$file.article)) {
     names <- input$file.article$name
@@ -862,539 +756,162 @@ LengthSent <- reactive ({
 })
 
 ##### Extracting Data
-ExtractContentPDF <- reactive({
-  if (is.null(input$file.article))  { return() }
-  text.extract <- vector()
-  lda.format <- vector()
-  text.list <- vector()
-  novel.list <- list()
-  line="One"
-  num <-length(input$file.article$name)
-  cont <- rep("",num)
-
-  for (i in 1:num) {
-    uris.name <- input$file.article$datapath[i]
-    tempPDF <- readPDF(control = list(text = "-layout"))(elem = list(uri = uris.name),
-                                                         language="en",id="id1")
-    read.file <- tempPDF$content
-    x <- enc2utf8(read.file)
-   w<-x
-   #------------- Identifying One or Two column Format -------------#
-
-    
-    locAbstract<- grep("Abstract|ABSTRACT", x)  # line location - fine "abstract line"
-    if (length(locAbstract)>0) {
-      w<-x[(locAbstract):length(x)]  # shorter version from Abstract to the end   
-      w.test <- gsub("^\\s\\s\\s+","", w) # delete spaces at the beginning of lines
-      w.test <- gsub("^\\s","", w.test)
-    }
-    else {
-      w <-x
-      w.test <- gsub("^\\s\\s\\s+","", w) # delete spaces at the beginning of lines
-      w.test <- gsub("^\\s","", w.test)
-    }
-   
-    split.testing <- gsub("\\s\\s\\s+","SPLIT", w.test)
-    if (grepl("SPLIT",split.testing)==FALSE) {   # ONE COLUMN DOCUMENT
-      line="FALSE"
-     # x <-gsub("\\f","",x)
-      w <-gsub("\\f","",w)
-      if ((input$article_content =="Full text") || (is.null(input$article_content))){
-        lines = w
-      }
-      if (input$article_content =="Abstract"){
-        loc.a<- grep("Abstract|ABSTRACT", w)
-        loc.b <- grep("Introduction|INTRODUCTION",w)
-        lines =  w[(loc.a+1):(loc.b-1)]   # EXTRACTING SECTIONS 
-      }
-      test.columns <- gsub("^\\s\\s\\s+","", lines)
-      test.columns <- gsub("^\\s","", test.columns)
-      text.collapse <- paste(test.columns, collapse=" ")
-      text.collapse <- enc2utf8(text.collapse)
-      text.hyphen <- gsub("-\\s+", "", text.collapse)
-      text.punct <- gsub("\\s\\s+", " ", text.hyphen) 
-   text  <- text.punct
-      if ((input$lower_cases=="Do not Lower Cases") || (is.null(input$lower_cases))){
-        text.punct <- text.punct
-      }
-      else if (input$lower_cases=="Lower Cases") {
-        text.punct <- tolower(text.punct)
-      }
-      if ((input$remove_numbers=="Do not Remove Numbers") || (is.null(input$remove_numbers))){
-        text.punct <- text.punct
-      }
-      else if (input$remove_numbers=="Remove Numbers") {
-        text.punct<-  gsub('[[:digit:]]+', '', text.punct)
-      }
-   if ((input$remove_punctuation=="Do not Remove Punctuation")|| (is.null(input$remove_punctuation))) {
-     text.punct <- text.punct
-   }
-      else if (input$remove_punctuation=="Remove Punctuation") {
-        if (input$exceptions=="NULL") {
-          text.punct <- gsub("[^[:alnum:] ]", "", text.punct) 
-        }
-        else if (input$exceptions=="Keep apostrophe") {
-          text.punct <- gsub("-", " ", text.punct) 
-          text.punct <- strip(text.punct, char.keep="~~",digit.remove = FALSE, apostrophe.remove = FALSE,
-                              lower.case = FALSE)
-        }
-        else if (input$exceptions=="Keep hyphen") {
-          text.punct <- strip(text.punct, char.keep="-",digit.remove = FALSE, apostrophe.remove = FALSE,
-                              lower.case = FALSE)
-        }
-        else if (input$exceptions=="Keep apostrophe and hyphen") {
-          text.punct <- strip(text.punct, char.keep="-",digit.remove = FALSE, apostrophe.remove = FALSE,
-                              lower.case = FALSE)}      
-      }
-   if ((input$remove_urls=="Do not Remove Urls") || (is.null(input$remove_urls))){
-     text.punct <- text.punct
-   }
-      else if (input$remove_urls=="Remove Urls") {
-        text.punct <- rm_email(text.punct)
-        text.punct <- rm_url(text.punct)
-        text.punct <- rm_twitter_url(text.punct)
-      }
-   if ((input$remove_references=="Do not Remove References") || (is.null(input$remove_references))){
-     text.punct <-text.punct
-   }
-      else if (input$remove_references=="Remove References") {
-        text.punct <-rm_citation(text.punct)
-        text.punct <-rm_citation(text.punct, pattern="@rm_citation3")
-        text.punct <-rm_citation(text.punct, pattern="@rm_citation2")
-        text.punct <-rm_round(text.punct)
-        text.punct <-rm_curly(text.punct)
-        text.punct <-rm_square(text.punct)
-        text.split<-strsplit(text.punct, "References|references|REFERENCES")
-        text.punct<-text.split[[1]]
-        
-      }
-   if ((input$stem=="NULL")|| (is.null(input$stem))) {
-     text.punct<-text.punct
-   }
-      else if (input$stem=="Stem") {
-        text.splits <- unlist(strsplit(text.punct, " "))
-        text.punct <- paste(wordStem(text.splits, language = "english"),collapse = " ")
-      }
-      text.punct <- str_c(text.punct)
-      text.punct<- str_trim(text.punct)
-      text.punct <- which(text.punct!="")
-      lda.format[i] <- text.punct
-      text.extract[i] <- text
-      file.name <- input$file.article$name[i]
-      text.freq <- table(text.punct)#split)
-      text.relative <- 100*(text.freq/sum(text.freq))
-      # # novel.list[i] <- text.punct # for stm
-      novel.list[[file.name]] <- text.relative
-    } # END ONE COLUMN
-    # ### START TWO COLUMNS
-    if (grepl("SPLIT",split.testing)==TRUE) {  # TWO-COLUMN DOCUMENT  
-      line="TRUE"
-      #### Splitting by Pages and Columns, then pasting each column separately and pasting pages together
-      w.col <- gsub("^\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s+","COLUMN2", w)
-      text.split <- gsub("^\\s\\s\\s+","", w.col)
-      text.split <-gsub("COLUMN2Abstract","Abstract",text.split)
-      text.split <-gsub("\\s\\s\\s+","SPLIT", text.split)
-      text.collapse <- paste(text.split, collapse="NEWLINE")    
-      text.vector <- lapply(text.collapse, FUN=function(x){strsplit(x, "\\f")})  # split fy page
-      cols1 <-vector()
-      cols2<-vector()
-      pages.all <-vector()
-      pages.papers <- vector()
-      page.columns <- vector()
-      for (l in 1:length(text.vector[[1]][[1]])) {   # PAGES
-        new.line <- strsplit(text.vector[[1]][[1]][l], "NEWLINE")   # PAGE ONE
-        for (j in 1:length(new.line[[1]])) {   # LOOP OVER FIRST PAGE LINES
-          mid.split <- as.list(strsplit(new.line[[1]][j],"SPLIT"))   # SPLIT THE FIRST LINE
-          substring="COLUMN2"
-          if (grepl(substring, mid.split)==TRUE) { # FIND EMPTY 1st COLUMN
-            col2 = mid.split[1]
-            col2 = gsub("COLUMN2","",col2)
-            col1 = ""
-          }
-          if (grepl(substring, mid.split)==FALSE) {  # FIND FULL TWO COLUMNS
-            if (length(mid.split[[1]]>1)) {
-              col1 <- mid.split[[1]][1]
-              col2 <-mid.split[[1]][2]
-            }
-            if (length(mid.split[[1]]<2)) {
-              col1 <- mid.split[[1]][1]
-              col2 <-""
-            }
-          }
-          cols1[j]<-col1   # Collecting all lines for 1st column
-          cols2[j]<-col2    # Collecting lines for 2nd column   
-        }  # End of ONE PAGE
-        column1 <- paste(cols1, collapse= " ")   # joing lines for the 1st column
-      #  column1 <-gsub("- ", "", column1)
-        column1 <-gsub("- ", "-", column1)
-        column2 <-paste(cols2, collapse=" ")  # joing lines for the 2nd column
-        column2 <-gsub("- ", "-", column2) 
-     # column2 <-gsub("- ", "", column2) 
-        columns <- paste(column1, column2, collapse=" ")  # joing two columns on the same page       
-        pages.all[l]<-columns
-        full.page <- paste(pages.all, collapse=" ")
-        if ((input$article_content =="Full text")||(is.null(input$article_content))){
-          lines <- full.page
-        }
-        if (input$article_content =="Abstract"){
-          loc.a <- str_extract(full.page, "Abstract.+Introduction")
-          loc.a <- gsub("1.Introduction","",loc.a[1])
-          lines=gsub("^\\s\\s\\s+","", loc.a)
-        }  
-        text.punct <- gsub("\\s*\\([^\\)]+\\)", "", lines)#clean)
-        text.punct <- gsub("^\\s","",text.punct)
-        text.punct <- gsub("\\s\\s+"," ",text.punct)
-      text <- text.punct
-      if ((input$lower_cases=="Do not Lower Cases")||(is.null(input$lower_cases))) {
-        text.punct <- text.punct
-      }
-      else if (input$lower_cases=="Lower Cases") {
-        text.punct <- tolower(text.punct)
-      }
-    if ((input$remove_numbers=="Do not Remove Numbers")|| (is.null(input$remove_numbers))) {
-      text.punct <- text.punct
-    }
-     else if (input$remove_numbers=="Remove Numbers") {
-        text.punct<-  gsub('[[:digit:]]+', '', text.punct)
-      }
-    if ((input$remove_punctuation=="Do not Remove Punctuation")||(is.null(input$remove_punctuation))) {
-      text.punct <- text.punct
-    }
-      else if (input$remove_punctuation=="Remove Punctuation") {
-        if (input$exceptions=="NULL") {
-          text.punct <- gsub("[^[:alnum:] ]", "", text.punct) 
-        }
-        else if (input$exceptions=="Keep apostrophe") {
-          text.punct <- gsub("-", " ", text.punct) 
-          text.punct <- strip(text.punct, char.keep="~~",digit.remove = FALSE, apostrophe.remove = FALSE,
-                              lower.case = FALSE)
-        }
-        else if (input$exceptions=="Keep hyphen") {
-          text.punct <- strip(text.punct, char.keep="-",digit.remove = FALSE, apostrophe.remove = FALSE,
-                              lower.case = FALSE)
-        }
-        else if (input$exceptions=="Keep apostrophe and hyphen") {
-          text.punct <- strip(text.punct, char.keep="-",digit.remove = FALSE, apostrophe.remove = FALSE,
-                              lower.case = FALSE)}      
-      }
-    if ((input$remove_urls=="Do not Remove Urls") || (is.null(input$remove_urls))){
-      text.punct <-  text.punct
-    }
-     else if (input$remove_urls=="Remove Urls") {
-        text.punct <- rm_email(text.punct)
-        text.punct <- rm_url(text.punct)
-        text.punct <- rm_twitter_url(text.punct)
-      }
-      
-    if ((input$remove_references=="Do not Remove References") ||(is.null(input$remove_references))) {
-      text.punct <-  text.punct
-    }
-     else if (input$remove_references=="Remove References") {
-        text.punct <-rm_citation(text.punct)
-        text.punct <-rm_citation(text.punct, pattern="@rm_citation3")
-        text.punct <-rm_citation(text.punct, pattern="@rm_citation2")
-        text.punct <-rm_round(text.punct)
-        text.punct <-rm_curly(text.punct)
-        text.punct <-rm_square(text.punct)
-        text.split<-strsplit(text.punct, "References|references|REFERENCES")
-        text.punct<-text.split[[1]]
-        
-      }
-    if ((input$stem=="NULL") || (is.null(input$stem))){
-      text.punct<-text.punct
-    }
-     else if (input$stem=="Stem") {
-        text.split <- unlist(strsplit(text.punct, " "))
-        text.punct <- paste(wordStem(text.split, language = "english"),collapse = " ")
-      }
-  
-        text.punct <- gsub("\\s*\\([^\\)]+\\)", "", text.punct)#clean)
-        text.punct <- gsub("^\\s","",text.punct)
-        text.punct <- gsub("\\s\\s+"," ",text.punct)
-
-        text.punct <- str_c(text.punct)
-        text.punct<- str_trim(text.punct)
-        file.name <- input$file.article$name[i]
-        text.split<-strsplit(text.punct, " ")
-        text.split <- unlist(text.split)
-        text.freq <- table(text.split)
-        text.relative <- 100*(text.freq/sum(text.freq))
-        # novel.list[i] <- text.punct # for stm
-        novel.list[[file.name]] <- text.relative
-        lda.format[i] <- text.punct
-        text.extract[i] <- text
-    
-      }  # End TWO-COLUMN
-    }
-  }
-    info <- list(lda.format = lda.format, text.extract = text.extract,novel.list=novel.list)
-    return(info)  
-  })  
+# ExtractContentPDF <- reactive({
+#   if (is.null(input$file.article))  { return() }
+#   text.extract <- vector()
+#   lda.format <- vector()
+#   text.list <- vector()
+#   novel.list <- list()
+#   line="One"
+#   num <-length(input$file.article$name)
+#   cont <- rep("",num)
+# 
+#   for (i in 1:num) {
+#     uris.name <- input$file.article$datapath[i]
+#     tempPDF <- readPDF(control = list(text = "-layout"))(elem = list(uri = uris.name),
+#                                                          language="en",id="id1")
+#     read.file <- tempPDF$content
+#     x <- enc2utf8(read.file)
+#    w<-x
+#    #------------- Identifying One or Two column Format -------------#
+#     locAbstract<- grep("Abstract|ABSTRACT", x)  # line location - fine "abstract line"
+#     if (length(locAbstract)>0) {
+#       w<-x[(locAbstract):length(x)]  # shorter version from Abstract to the end   
+#       w.test <- gsub("^\\s\\s\\s+","", w) # delete spaces at the beginning of lines
+#       w.test <- gsub("^\\s","", w.test)
+#     }
+#     else {
+#       w <-x
+#       w.test <- gsub("^\\s\\s\\s+","", w) # delete spaces at the beginning of lines
+#       w.test <- gsub("^\\s","", w.test)
+#     }
+#     split.testing <- gsub("\\s\\s\\s+","SPLIT", w.test)
+#     if (grepl("SPLIT",split.testing)==FALSE) {   # ONE COLUMN DOCUMENT
+#       line="FALSE"
+#      # x <-gsub("\\f","",x)
+#       w <-gsub("\\f","",w)
+#       if ((input$article_content =="Full text") || (is.null(input$article_content))){
+#         lines = w
+#       }
+#       if (input$article_content =="Abstract"){
+#         loc.a<- grep("Abstract|ABSTRACT", w)
+#         loc.b <- grep("Introduction|INTRODUCTION",w)
+#         lines =  w[(loc.a+1):(loc.b-1)]   # EXTRACTING SECTIONS 
+#       }
+#     # ### START TWO COLUMNS
+#     if (grepl("SPLIT",split.testing)==TRUE) {  # TWO-COLUMN DOCUMENT  
+#       line="TRUE"
+#       #### Splitting by Pages and Columns, then pasting each column separately and pasting pages together
+#       w.col <- gsub("^\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s\\s+","COLUMN2", w)
+#       text.split <- gsub("^\\s\\s\\s+","", w.col)
+#       text.split <-gsub("COLUMN2Abstract","Abstract",text.split)
+#       text.split <-gsub("\\s\\s\\s+","SPLIT", text.split)
+#       text.collapse <- paste(text.split, collapse="NEWLINE")    
+#       text.vector <- lapply(text.collapse, FUN=function(x){strsplit(x, "\\f")})  # split fy page
+#       cols1 <-vector()
+#       cols2<-vector()
+#       pages.all <-vector()
+#       pages.papers <- vector()
+#       page.columns <- vector()
+#       for (l in 1:length(text.vector[[1]][[1]])) {   # PAGES
+#         new.line <- strsplit(text.vector[[1]][[1]][l], "NEWLINE")   # PAGE ONE
+#         for (j in 1:length(new.line[[1]])) {   # LOOP OVER FIRST PAGE LINES
+#           mid.split <- as.list(strsplit(new.line[[1]][j],"SPLIT"))   # SPLIT THE FIRST LINE
+#           substring="COLUMN2"
+#           if (grepl(substring, mid.split)==TRUE) { # FIND EMPTY 1st COLUMN
+#             col2 = mid.split[1]
+#             col2 = gsub("COLUMN2","",col2)
+#             col1 = ""
+#           }
+#           if (grepl(substring, mid.split)==FALSE) {  # FIND FULL TWO COLUMNS
+#             if (length(mid.split[[1]]>1)) {
+#               col1 <- mid.split[[1]][1]
+#               col2 <-mid.split[[1]][2]
+#             }
+#             if (length(mid.split[[1]]<2)) {
+#               col1 <- mid.split[[1]][1]
+#               col2 <-""
+#             }
+#           }
+#           cols1[j]<-col1   # Collecting all lines for 1st column
+#           cols2[j]<-col2    # Collecting lines for 2nd column   
+#         }  # End of ONE PAGE
+#         column1 <- paste(cols1, collapse= " ")   # joing lines for the 1st column
+#       #  column1 <-gsub("- ", "", column1)
+#         column1 <-gsub("- ", "-", column1)
+#         column2 <-paste(cols2, collapse=" ")  # joing lines for the 2nd column
+#         column2 <-gsub("- ", "-", column2) 
+#      # column2 <-gsub("- ", "", column2) 
+#         columns <- paste(column1, column2, collapse=" ")  # joing two columns on the same page       
+#         pages.all[l]<-columns
+#         full.page <- paste(pages.all, collapse=" ")
+#         if ((input$article_content =="Full text")||(is.null(input$article_content))){
+#           lines <- full.page
+#         }
+#         if (input$article_content =="Abstract"){
+#           loc.a <- str_extract(full.page, "Abstract.+Introduction")
+#           loc.a <- gsub("1.Introduction","",loc.a[1])
+#           lines=gsub("^\\s\\s\\s+","", loc.a)
+#         }  
+#         text.punct <- gsub("\\s*\\([^\\)]+\\)", "", lines)#clean)
+#         text.punct <- gsub("^\\s","",text.punct)
+#         text.punct <- gsub("\\s\\s+"," ",text.punct)
+#       }  # End TWO-COLUMN
+#     }
+#   }
+#     info <- list(lda.format = lda.format, text.extract = text.extract,novel.list=novel.list)
+#     return(info)  
+#   })  
 
 ExtractRawContentTXT <- reactive ({
   if (is.null(input$file.article.txt)) { return() }
   extractContentTxt(input$file.article.txt)
 })
 
-ExtractContentTXT2 <- reactive ({
-  if (is.null(input$file.article.txt)) { return() }
-  text.extract <- vector()
-  lda.format <- vector()  
-  novel.list <- list()
-  punct.list <-vector()
-  novel.lda <- list()
-  num <-length(input$file.article.txt$name)
-  text <- vector()
-  datum<- ExtractRawContentTXT()
-  for (i in 1:num) {
-  data<- datum[i]
-    text <- paste(data, collapse = " ")
-  if (input$article_content =="Abstract") {
-    text1 <- str_replace(text, "Abstract|ABSTRACT|abstract", "mystringreplacement")
-    text1 <- sub(".*mystringreplacement","",text1)
-  #  text1 <- sub(".*(Abstract|ABSTRACT|abstract)","",text)
-    text.punct<-sub("(1.)?.?Introduction.*","",text1)    
-    text.punct<- rm_white(text.punct)
-#    text.punct <- ex_between(text,"Abstract|ABSTRACT","Introduction|INTRODUCTION")
- # text.punct <-text
-  }
-  else {
-    text.punct <-text
-  }
-   
-    
-    if ((input$remove_html=="Do not Remove HTML") || (is.null(input$remove_html))) {
-      text.punct <- text.punct
-    }
-    else if (input$remove_html=="Remove HTML") {
-      text.punct <- rm_bracket(text.punct)
-    }
-    
-    if ((is.null(input$remove_what)) || (input$remove_what=="NULL")) {
-      text.punct <- text.punct
-    }
-    else if ((!is.null(input$remove_what)) && (!is.null(input$remove_by))) {
-      what <- input$remove_what
-      by <- input$remove_by
-      text.punct <-  gsub(what, by, text.punct)
-    }
-  if ((input$lower_cases=="Do not Lower Cases") || (is.null(input$lower_cases))) {
-    text.punct <- text.punct
-  }
-  else if (input$lower_cases=="Lower Cases") {
-    text.punct <- tolower(text.punct)
-  }
-    if ((input$remove_numbers=="Do not Remove Numbers")|| (is.null(input$remove_numbers))) {
-      text.punct <- text.punct
-    }
-   else if (input$remove_numbers=="Remove Numbers") {
-      text.punct<-  gsub('[[:digit:]]+', '', text.punct)
-    }
-   if ((input$remove_punctuation=="Do not Remove Punctuation") || (is.null(input$remove_punctuation))){
-      text.punct <- text.punct
-    }
-    else if (input$remove_punctuation=="Remove Punctuation") {
-      if ((input$exceptions=="NULL") || (is.null(input$exceptions))) {
-        text.punct <- gsub("[^[:alnum:] ]", "", text.punct) 
-      }
-      else if (input$exceptions=="Keep apostrophe") {
-        text.punct <- gsub("-", " ", text.punct) 
-        text.punct <- strip(text.punct, char.keep="~~",digit.remove = FALSE, apostrophe.remove = FALSE,
-                            lower.case = FALSE)
-      }
-      else if (input$exceptions=="Keep hyphen") {
-        text.punct <- strip(text.punct, char.keep="-",digit.remove = FALSE, apostrophe.remove = FALSE,
-                            lower.case = FALSE)
-      }
-      else if (input$exceptions=="Keep apostrophe and hyphen") {
-        text.punct <- strip(text.punct, char.keep="-",digit.remove = FALSE, apostrophe.remove = FALSE,
-                            lower.case = FALSE)}      
-    }
-if ((input$remove_urls=="Do not Remove Urls") || (is.null(input$remove_urls))) {
-  text.punct <- text.punct
-}
-    else if (input$remove_urls=="Remove Urls") {
-      text.punct <- rm_email(text.punct)
-      text.punct <- rm_url(text.punct)
-      text.punct <- rm_twitter_url(text.punct)
-    }
-    if ((input$remove_references=="Do not Remove References")|| (is.null(input$remove_references))) {
-      text.punct <-text.punct
-    }
-   else if (input$remove_references=="Remove References") {
-      text.punct <-rm_citation(text.punct)
-      text.punct <-rm_citation(text.punct, pattern="@rm_citation3")
-      text.punct <-rm_citation(text.punct, pattern="@rm_citation2")
-      text.punct <-rm_round(text.punct)
-      text.punct <-rm_curly(text.punct)
-      text.punct <-rm_square(text.punct)
-      text.split<-strsplit(text.punct, "References|references|REFERENCES")
-      #text.split <- unlist(text.p)
-      text.punct<-text.split[[1]]
-      
-    }
-    if ((input$stem=="NULL") || (is.null(input$stem))) {
-      text.punct <- text.punct
-    }
-else if (input$stem=="Stem") {
-  text.split <- unlist(strsplit(text.punct, " "))
-  text.punct <- paste(wordStem(text.split, language = "english"),collapse = " ")
-}
-     if ((!is.null(input$speaker_name)) && (input$speaker_name!="NULL")) {
-      name.speaker <- input$speaker_name
-      name.interviewer <- input$interviewer_name
-      new.line <- gsub(name.speaker, "NEWLINE SPEAKER",text.punct)
-      new.line <- gsub(name.interviewer, "NEWLINE INTERVIEWER",new.line)
-      split.sub <- unlist(strsplit(new.line,"NEWLINE"))
-      speaker <-grep("SPEAKER", split.sub)
-      text.sub <- split.sub[speaker]
-      text.sub <- gsub("SPEAKER","",text.sub)
-      text.punct <- paste(text.sub, collapse = " ")
-     }
-    else {
-      text.punct <- text.punct
-    }
-    
-    if ((is.null(input$remove_html_symbol)) || (input$remove_html_symbol=="NULL")) {
-      text.punct <- text.punct
-    }
-    else if ((!is.null(input$remove_html_symbol)) && (input$remove_html_symbol!="NULL")){
-      htm <- input$remove_html_symbol
-      for (i in 1:length(input$remove_html_symbol)) {
-      text.punct <- gsub(htm[i],"",text.punct)
-      }
-    }
-   # else if ((is.null(input$speaker_name)) && (is.null(input$interviewer_name))) { 
-    text.punct <- gsub("\\s\\s+"," ",text.punct)
-    text.punct <- str_c(text.punct)
-    text.punct<- str_trim(text.punct)  
-    text.split<-strsplit(text.punct, " ")
-    text.split <- unlist(text.split)
-    data.del <- gsub("[A-Za-z0-9]"," \\1", data)
-    data.del.w <- paste(data.del, collapse = " ")
-    data.no.punct<- gsub("([!¿?;,¡:]|(\\.+))", " \\1 ", data.del.w)
-    data.no.punct <-  gsub("\\s+"," ",data.no.punct)
-    file.name <- sub("(.*\\/)([^.]+)(\\.[[:alnum:]]+$)", "\\2", input$file.article.txt$name[i])   
-    text.split<-strsplit(text.punct, " ")
-    text.split <- unlist(text.split)
-    text.freq <- table(text.split)
-    text.relative <- 100*(text.freq/sum(text.freq))
-    novel.list[[file.name]] <- text.relative
-    punct.list[i] <-data.no.punct
-    novel.lda[i] <-text.punct
-    lda.format[i] <- text.punct
-    text.extract[i] <- text
-  #  }
-  }
-  info<-list(novel.list=novel.list,text.extract=text.extract,punct.list=punct.list,novel.lda=novel.lda,lda.format=lda.format,data=data)
-  return(info)
-})
-
-#Allows for interactive instant word removals from user
-RemoveWordsNew <-reactive({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  cutoff.lower=input$cutoff_lower
-  cutoff.high=input$cutoff_high
-    corpus.lda <- PreprocessingSteps()$lda.format#window.one()$lda.format 
-if  (input$stops==FALSE) {
-    lda.list <- strsplit(corpus.lda, "\\s+")
-    terms <- table(unlist(lda.list))
-    terms <- sort(terms, decreasing = TRUE)
-  #  empty <- names(terms) %in% names(terms)==""
-    del <- names(terms) %in%  terms < cutoff.lower
-    terms <- terms[!del]
-    terms.matrix<-as.matrix(terms)
-    d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
-    d$word <- row.names(d)
-    agg_freq <- aggregate(frequency ~ word, data = d, sum)
-    d <- d[order(d$frequency, decreasing = T), ] 
-    corpus.lda <- as.list(d$word)
-    vector.lda <- as.vector(unlist(corpus.lda))
-  }
-  else if  ((input$stops=="Default")||(input$stops=="Upload")) {
-    remove_word <- stopWordsTxt()
-    lda.list <- strsplit(corpus.lda, "\\s+")
-    terms <- table(unlist(lda.list))
-    terms <- sort(terms, decreasing = TRUE)
-    del <- names(terms) %in% remove_word | terms < cutoff.lower
-    terms <- terms[!del]
-    terms.matrix<-as.matrix(terms)
-    d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
-    d$word <- row.names(d)
-    agg_freq <- aggregate(frequency ~ word, data = d, sum)
-    d <- d[order(d$frequency, decreasing = T), ] 
-    corpus.lda <- as.list(d$word)
-    vector.lda <- as.vector(unlist(corpus.lda))
-  } 
-  
-
-  info <- list(d=d, corpus.lda=corpus.lda,vector.lda=vector.lda)
-  return(info)
-})
-
-RemoveWordsFinal <-reactive({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-
-  if(is.null(input$remove_words)) {
-    corpus.lda <- RemoveWordsNew()$corpus.lda
-    terms <- table(unlist(corpus.lda))
-    terms <- sort(terms, decreasing = TRUE)
-    terms.matrix<-as.matrix(terms)
-   d <-RemoveWordsNew()$d
-    list.lda <- as.list(d$word)
-    vector.lda <- as.vector(unlist(list.lda))
-  }
-
-  if(!is.null(input$remove_words)) {
-    corpus.lda <- PreprocessingSteps()$lda.format#window.one()$lda.format
-   # if(!is.null(input$file.article)) {
-    #  corpus.lda <- ExtractContentPDF()$lda.format
-    #}
-    #if(!is.null(input$file.article.txt)) {
-     # corpus.lda <- ExtractContentTXT()$lda.format 
-    #}
-    cutoff.lower=input$cutoff_lower
-    cutoff.high=input$cutoff_high
-    corpus.lda <- removeWords(corpus.lda, c(input$remove_words))
-    corpus <- Corpus(VectorSource(corpus.lda))
-    remove_word <- stopWordsTxt()
-    lda.list <- strsplit(corpus.lda, "\\s+")
-    terms <- table(unlist(lda.list))
-    terms <- sort(terms, decreasing = TRUE)
-    del <- names(terms) %in% remove_word | terms < cutoff.lower
-    terms <- terms[!del]
-    terms.matrix<-as.matrix(terms)
-    d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
-    d$word <- row.names(d)
-    agg_freq <- aggregate(frequency ~ word, data = d, sum)
-    d <- d[order(d$frequency, decreasing = T), ] 
-    list.lda <- as.list(d$word)
-    vector.lda <- as.vector(unlist(corpus.lda))
-  }
- 
-  info <- list(d=d, list.lda=list.lda,vector.lda=vector.lda)
-  return(info)
-})
-
-RemoveWords <- reactive({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  corpus.lda <- PreprocessingSteps()$lda.format#window.one()$lda.format 
-# if(!is.null(input$file.article)) {
- #  corpus.lda <- ExtractContentPDF()$lda.format
+#     text <- paste(data, collapse = " ")
+#   if (input$article_content =="Abstract") {
+#     text1 <- str_replace(text, "Abstract|ABSTRACT|abstract", "mystringreplacement")
+#     text1 <- sub(".*mystringreplacement","",text1)
+#   #  text1 <- sub(".*(Abstract|ABSTRACT|abstract)","",text)
+#     text.punct<-sub("(1.)?.?Introduction.*","",text1)    
+#     text.punct<- rm_white(text.punct)
+# else if (input$stem=="Stem") {
+#   text.split <- unlist(strsplit(text.punct, " "))
+#   text.punct <- paste(wordStem(text.split, language = "english"),collapse = " ")
 # }
- #if(!is.null(input$file.article.txt)) {
-  # corpus.lda <- ExtractContentTXT()$lda.format 
- #}
-  corpus <- Corpus(VectorSource(corpus.lda))
-  tdm <- TermDocumentMatrix(corpus)
-  terms.matrix <- as.matrix(tdm)
-  d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
-  d$word <- row.names(d)
-  agg_freq <- aggregate(frequency ~ word, data = d, sum)
-  d <- d[order(d$frequency, decreasing = T), ] 
-  info <- list(d=d,corpus.lda=corpus.lda,tdm=tdm)
-  return(info)
-})
+#      if ((!is.null(input$speaker_name)) && (input$speaker_name!="NULL")) {
+#       name.speaker <- input$speaker_name
+#       name.interviewer <- input$interviewer_name
+#       new.line <- gsub(name.speaker, "NEWLINE SPEAKER",text.punct)
+#       new.line <- gsub(name.interviewer, "NEWLINE INTERVIEWER",new.line)
+#       split.sub <- unlist(strsplit(new.line,"NEWLINE"))
+#       speaker <-grep("SPEAKER", split.sub)
+#       text.sub <- split.sub[speaker]
+#       text.sub <- gsub("SPEAKER","",text.sub)
+#       text.punct <- paste(text.sub, collapse = " ")
+#      }
+
+
+
+# RemoveWords <- reactive({
+#   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+#   corpus.lda <- PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format 
+# # if(!is.null(input$file.article)) {
+#  #  corpus.lda <- ExtractContentPDF()$lda.format
+# # }
+#  #if(!is.null(input$file.article.txt)) {
+#   # corpus.lda <- ExtractContentTXT()$lda.format 
+#  #}
+#   corpus <- Corpus(VectorSource(corpus.lda))
+#   tdm <- TermDocumentMatrix(corpus)
+#   terms.matrix <- as.matrix(tdm)
+#   d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
+#   d$word <- row.names(d)
+#   agg_freq <- aggregate(frequency ~ word, data = d, sum)
+#   d <- d[order(d$frequency, decreasing = T), ] 
+#   info <- list(d=d,corpus.lda=corpus.lda,tdm=tdm)
+#   return(info)
+# })
 
 output$choose_top <- renderUI({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
@@ -1407,13 +924,22 @@ output$choose_top <- renderUI({
 }) 
 output$choose_remove <- renderUI({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  word <- RemoveWordsNew()$d[[2]]#[1:x]
+  if (is.null(input$remove_manual)) {"No manual selection is applied"}
+  if (input$remove_manual=="Apply Manual") {
+  word <- RemoveWordsStepTwo()$d[[2]]
   selectizeInput("remove_words", label = "Select words to be removed", 
                  choices = word,
                  options = list(create = TRUE),
                  selected = NULL,
                  multiple = TRUE) 
+  }
+ 
 }) 
+output$printWords <- renderUI({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if (is.null(input$remove_manual)) { return() }
+  HTML(paste0(RemoveWordsStepTwo()$words.list))#PreprocessingSteps()$lda.format))# RemoveWordsNew()$corpus.lda))
+})
 
 output$word_count <- renderPlot({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
@@ -1486,17 +1012,7 @@ output$print_cloud <-renderPlot({
  # wordcloud(d$word, d$freq)
 })
 
-output$printWords <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  withProgress(message = 'Stop Words',
-               detail = 'Almost done...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
-  HTML(paste0(RemoveWordsNew()$corpus.lda))
-})
+
 
 ##### LDA Analysis
 output$choose_topic_num <- renderUI({
@@ -1565,7 +1081,7 @@ chronology <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
   if((is.null(input$chronology)) ||(input$chronology=="NULL")) { return() }
   remove.words.file <- stopWordsTxt()
-  corpus.lda <- PreprocessingSteps()$lda.format#window.one()$lda.format 
+  corpus.lda <- PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format 
   corpus.lda <- removeWords(corpus.lda, remove.words.file)
   corpus.lda <- removeWords(corpus.lda, c(input$remove_words))
   corpus.lda <- gsub("\\s+"," ",corpus.lda)
@@ -1664,19 +1180,19 @@ BestK <- reactive ({
                  }
                })
   remove.words.file <- stopWordsTxt()
-  cutoff.lower=input$cutoff_lower
-  cutoff.high=input$cutoff_high
+  cutoff.lower=0#input$cutoff_lower
+ # cutoff.high=input$cutoff_high
   if(!is.null(input$file.article)) {
-    novel.vector <- PreprocessingSteps()$lda.format#window.one()$lda.format 
+    novel.vector <- PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format 
   #  novel.vector <- ExtractContentPDF()$lda.format
    # num.documents <- length(ExtractContentPDF()$lda.format)
-    num.documents <- length(PreprocessingSteps()$lda.format)#window.one()$lda.format)
+    num.documents <- length(PreprocessingSteps()[6])#PreprocessingSteps()$lda.format)#window.one()$lda.format)
     file.names <- input$file.article$name  
   }
   if(!is.null(input$file.article.txt)) {
-    novel.vector <- PreprocessingSteps()$lda.format#window.one()$lda.format 
+    novel.vector <- PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format 
    # novel.vector <- ExtractContentTXT()$lda.format #novel.list
-    num.documents <- length(PreprocessingSteps()$lda.format)#window.one()$lda.format)
+    num.documents <- length(PreprocessingSteps()[6])#PreprocessingSteps()$lda.format)#window.one()$lda.format)
     file.names <- input$file.article.txt$name  
   }
   
@@ -1740,11 +1256,11 @@ LdaAnalysis <- reactive({
   if((is.null(input$lda)) || (input$lda=="NULL")) { return() }
   set.seed(2013)
   remove.words.file <- stopWordsTxt()
-  cutoff.lower=input$cutoff_lower
-  cutoff.high=input$cutoff_high
+  cutoff.lower=0#input$cutoff_lower
+  #cutoff.high=input$cutoff_high
   if(!is.null(input$file.article)) {
-    corpus.lda <-  PreprocessingSteps()$lda.format#window.one()$lda.format
-    num.documents <- length(PreprocessingSteps()$lda.format)#window.one()$lda.format)
+    corpus.lda <-  PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
+    num.documents <- length(PreprocessingSteps()[6])#PreprocessingSteps()$lda.format)#window.one()$lda.format)
     n.docs <- as.numeric(length(input$file.article$name))  
   }
   if(!is.null(input$file.article.txt)) {
@@ -1819,7 +1335,7 @@ stmAnalysis <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
   if((is.null(input$stm)) || (input$stm=="NULL")) { return() }
   remove.words.file <- stopWordsTxt()
-  novel.vector <- PreprocessingSteps()$lda.format#window.one()$lda.format
+  novel.vector <- PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
   corpus <- Corpus(VectorSource(novel.vector))
   corpus <- tm_map(corpus,removeWords,remove.words.file)
   corpus <-tm_map(corpus,removeWords,input$remove_words)
@@ -1846,7 +1362,7 @@ output$association <- renderPlot ({
                  }
                })
   stmmodel<-  stmAnalysis()
-  novel.vector <-PreprocessingSteps()$lda.format#window.one()$lda.format
+  novel.vector <-PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
   K=input$num
 #par(mfrow = c(3, 3),mar = c(.5, .5, 1, .5))
 for (i in 1:K){
@@ -1972,7 +1488,7 @@ output$choose_cluster <- renderUI({
 cluster <-reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
   if ((is.null(input$cluster)) || (input$cluster=="NULL")){ return() }
-    novel.list <-PreprocessingSteps()$novel.list#window.one()$novel.list
+    novel.list <-PreprocessingSteps()[2]#$novel.list#window.one()$novel.list
   novel.dataframe <- mapply(data.frame, ID=seq_along(novel.list), 
                             novel.list, SIMPLIFY = FALSE, 
                             MoreArgs = list(stringsAsFactors=FALSE))  
@@ -2142,7 +1658,7 @@ output$choose_punctuation <- renderUI({
 punctuation <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
   if ((is.null(input$punctuation)) || (input$punctuation=="NULL")) { return() }
-  text <-PreprocessingSteps()$text.extract#window.one()$text.extract
+  text <-PreprocessingSteps()[3]#$text.extract#window.one()$text.extract
   data.del <- gsub("[A-Za-z0-9]"," \\1", text) # only punctuation is left with space
   data.punct <-  gsub("\\s+","",data.del)
   punctuation <- unlist(strsplit(data.punct, ""))
@@ -2167,7 +1683,7 @@ return(plot)
 output$heatmap_punct <- renderPlot({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
   if ((is.null(input$punctuation)) || (input$punctuation=="NULL")){ return() }
-  text <-PreprocessingSteps()$text.extract#window.one()$text.extract
+  text <-PreprocessingSteps()[3]#$text.extract#window.one()$text.extract
   data.del <- gsub("[A-Za-z0-9]"," \\1", text) # only punctuation is left with space
   data.punct <-  gsub("\\s+","",data.del)
   s.col <- gsub("[\\.!?]",1,data.punct) # red
