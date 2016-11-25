@@ -25,7 +25,7 @@ for (i in 1:num) {
     author <- tempPDF$meta$author
     des <- tempPDF$meta$datetimestamp
     y <- strsplit(as.character(des), "-")
-    #datetime <- y[[1]][1]
+    datetime <- y[[1]][1]
   }
   if (length(title)<1) {
     title <- "NA"

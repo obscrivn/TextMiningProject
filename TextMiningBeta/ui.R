@@ -91,15 +91,6 @@ shinyUI(
                      abstract='Abstract'), 
                    'Full Text'
                  )
-               #  checkboxInput('article_content', 'Abstract', FALSE)
-                 # output$choose_article_content <- renderUI({
-                 #   names <- c("Full Text","Abstract")
-                 #   selectizeInput("article_content", label = "Select Abstract",
-                 #                  choices = names,
-                 #                  selected="Full Text",
-                 #                  multiple = FALSE)   
-                 # }) 
-                 # uiOutput("choose_article_content")
                )
              ),
              fluidRow(
@@ -117,7 +108,8 @@ shinyUI(
           ) 
       ),
       tabPanel(strong("ZOTERO"), "Under development"),
-      tabPanel(strong("JSON"), "Under development")
+      tabPanel(strong("JSON"), "Under development"),
+      tabPanel(strong("POS-Tagged Text"), "tm package - readTagged")
       ),     
       tabPanel(strong("Data Preparation"),
          tabsetPanel(type = "tabs", 
@@ -188,7 +180,7 @@ shinyUI(
                      div(id = "text", verbatimTextOutput("print_stopwords"))
                   ),
                   column(4,tags$h4("Manual Removal"),tags$hr(),
-                    checkboxInput('remove_manual','Apply Manual',FALSE),
+                   # checkboxInput('remove_manual','Apply Manual',FALSE),
                     helpText("Type words to be removed and click add"),
                     uiOutput("choose_remove"),
                     div(id = "text", uiOutput("printWords"))
@@ -197,7 +189,7 @@ shinyUI(
                     tags$hr(),
                     radioButtons('stopwords', 'Apply Stopwords or None (no changes)',
                                  c(apply='Apply Stopwords',
-                                   none='No Changes'), 'No Changes'),
+                                   none='None'), 'None'),
                     #checkboxInput('stopwords','Apply Stopwords',FALSE),
                     div(id = "text", uiOutput("print_apply_stops"))
                     # selectizeInput("cutoff_lower", label = "Select or Type Lower Cutoff",choices = c(0,1,2,3,4),options = list(create = TRUE),selected = 0,multiple = FALSE),
@@ -263,7 +255,19 @@ shinyUI(
              tags$hr(),
              tags$h5("Upload Metadata from csv file (left panel): Id, Year, Title(name), Author, Category"),
              fileInput('file.metadata', 'Choose CSV File', multiple=FALSE, accept=c('text/csv','text/comma-separated-values,text/plain','.csv')),
-             uiOutput("load_metadata_csv"), 
+             #uiOutput("load_metadata_csv"),
+             checkboxInput('header', 'Header', TRUE),
+             radioButtons('sep', 'Separator',
+                          c(Comma=',',
+                            Semicolon=';',
+                            Tab='\t'),
+                          ','),
+             tags$hr(),
+             radioButtons('metadata_csv', 'Read Metadata from CSV',
+                          c(none='None',
+                            upload='Load'), 'None'),
+
+             tags$hr(),
              dataTableOutput("print_metadata_csv")
           )
         )
@@ -284,10 +288,15 @@ shinyUI(
                     # checkboxInput('show_freq','Frequency',FALSE),
                       dataTableOutput("freq")
                    ),
-                   column(5, p("Zipf plot - tm package"),
-                     plotOutput("zipf"),
-                     p("Heaps plot - tm package"),
-                     plotOutput("heaps")
+                   column(5, 
+                      tags$h5("Frequency Law"),
+                      tags$hr(),
+                      p("\"Zipf's law is an empirical law in linguistics describing commonly 
+                      observed characteristics of term frequency distributions in corpora\" (tm Package)"),
+                        #  p("Zipf plot - tm package"),
+                     plotOutput("zipf")
+                    # p("Heaps plot - tm package"),
+                     #plotOutput("heaps")
                   )
                )
              )
@@ -297,7 +306,7 @@ shinyUI(
             fluidPage(
               fluidRow(
                 column(8, 
-                  uiOutput("choose_cloud"),
+                 # uiOutput("choose_cloud"),
                   uiOutput("choose_top"),
                        
                  plotOutput("word_count")),
