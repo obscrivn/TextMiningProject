@@ -220,14 +220,38 @@ shinyUI(
       fluidPage(
         fluidRow(
           column(4, 
+             tags$h4("Stems - tm package"),
              tags$hr(), 
-             tags$h5("Replacing words with Stems"),
-             checkboxInput('choose_stem','Stem',FALSE)
+             
+            # checkboxInput('choose_stem','Stem',FALSE),
+             radioButtons('language', 'Choose Language',
+                          c(none='none',
+                            English='english',
+                            Spanish='spanish',
+                            Danish="danish",
+                            Dutch="dutch",
+                            Finnish="finnish",
+                            French="french",
+                            German="german",   
+                            Hungarian= "hungarian",
+                            Italian="italian",
+                            Norwegian="norwegian",
+                            Porter="porter" #     "portuguese" "romanian"  
+                           # [13] "russian"    "spanish"    "swedish"    "turkish"
+                            ), 'none'),
+             tags$hr()
           ),
           column(6, 
+             tags$h4("Manual Stems"),
              tags$hr(),
-             tags$h5("Adding more Stems")
+             "Under development"
              # p("Add manually additional stems:")
+          )
+        ),
+        fluidRow(
+          column(12, tags$h4("Stem Viewer"),
+            tags$hr(),
+            div(id = "text", uiOutput("print_stemmer"))
           )
         )
       )
@@ -283,7 +307,7 @@ shinyUI(
              fluidPage(
                fluidRow(
                   column(6, 
-                     tags$h5("Frequency"),
+                     tags$h4("Raw Frequency"),
                      tags$hr(),
                     # checkboxInput('show_freq','Frequency',FALSE),
                       dataTableOutput("freq")
@@ -300,40 +324,68 @@ shinyUI(
                   )
                )
              )
-            ),
-          tabPanel(tags$h4("Word Clouds"),
+         ),
+         tabPanel(tags$h4("Word Clouds"),
             br(),
-            fluidPage(
+           fluidPage(
               fluidRow(
-                column(8, 
-                 # uiOutput("choose_cloud"),
+                column(5, 
+                  radioButtons('corpus', 'Select Corpus Type',
+                      c(raw='raw',
+                      preprocessed='preprocessed'),
+                                    'raw'),
+                   tags$hr()
+                ),
+                # plotOutput("word_count")),
+                column(5, 
+                       # uiOutput("choose_cloud"),
                   uiOutput("choose_top"),
-                       
-                 plotOutput("word_count")),
+                  tags$hr()
+                  )
+               ),
+               fluidRow(
+                  column(12,
+                    #tags$h5("Frequency Bar Plot"),
+                    plotOutput("word_count")
+                  )
+                ),
                 #hr(),
-                column(5,
+                fluidRow(
+                   column(5,
                        p("Set the minimum frequency for your cloud visualization"),
-                       uiOutput("choose_min_frequency")),
-                column(5,p("Set the maximum words per plot"),
-                       uiOutput("choose_max_words")),
-                column(12, plotOutput("print_cloud"))#,
+                       uiOutput("choose_min_frequency")
+                   ),
+                   column(5,p("Set the maximum words per plot"),
+                       uiOutput("choose_max_words")
+                   )
+                ),
+                fluidRow(
+                   column(12, 
+                       
+                     plotOutput("print_cloud")
+                   )
+                )#,
               )
-            )
-          ),
-        tabPanel(tags$h4("Length"),
+         ),
+         tabPanel(tags$h4("Length"),
            br(),
            fluidPage( p("qdap package: word_length and sentSplit"),
              fluidRow( p("Default sentence split is based on qdap sentSplit (? ! . |)"),
                 column(4, 
+                   tags$h4("Select Length Type"),
                   tags$hr(),
                    radioButtons('show_word', 'Select Word or Sentence Length',
                       c(none='None',
                         word='Word Length',
                         sentence='Sentence Length'), 'None'),
-                       uiOutput("show_word")
+                        tags$hr()
+                      # uiOutput("show_word")
                  ),
-                 column(4, tags$hr(),
-                   uiOutput("choose_text")
+                 column(4, tags$h4("Select Text"),
+                        tags$hr(),
+                   uiOutput("choose_text"),
+                   uiOutput("choose_bin"),
+                   tags$hr()
                  )
             ),
           fluidRow( 
@@ -347,18 +399,106 @@ shinyUI(
           )
          )
         ),
-          # fluidRow( p("For more information about collocations, see Stefan Gries"),
-          #   column(4, uiOutput("show_collocation"),
-          #      # hr(),
-          #   plotOutput("collocation")),
-          #   column(4, p("Under construction")
-          #  ))    
-          # )))),          
-
-        tabPanel(tags$h4("KWIC"))
+        tabPanel(tags$h4("KWIC"),
+          br(),
+          p("Key Word in Context Analysis"),
+          fluidPage(
+            fluidRow(
+              column(5, 
+                tags$h4("Select key word"),
+                uiOutput("choose_term"),
+                tags$hr()
+              ),
+              column(7, 
+                tags$h4("Select the length of the context (left/right)"),
+                uiOutput("choose_length"),
+                tags$hr()
+              )
+            ),
+           fluidRow(
+              column(12, 
+                uiOutput("term_print"),
+                tags$hr(),
+                div(id = "text", uiOutput("print_kwic"))
+              )
+            )
+          )
+        ),
+        tabPanel(tags$h4("Punctuation"),
+        fluidPage(                        
+          p("This section is based on the punctuation analysis by Adam Calhoun's ",tags$a(href="https://medium.com/@neuroecology/punctuation-in-novels-8f316d542ec4","Blog"),". 
+            In his heatmap visualization, periods and question marks and exclamation marks are red.
+            Commas and quotation marks are green. 
+            Semicolons and colons are blue"),
+         # uiOutput("choose_punctuation"),
+          fluidRow(
+            column(4,
+              tags$h4("Punctuation Frequency"),
+              hr(),
+              plotOutput("type_punctuation")
+            ),
+            column(4,
+              tags$h4("Punctuation Map"),
+              tags$hr(),
+              plotOutput("heatmap_punct")
+            )
+          )
+         )
+        )
        )
       ),
-      tabPanel("Cluster Analysis", "Under development"),
+      tabPanel("Cluster Analysis",
+         p("Cluster Analysis (Descriptive Statistics) examines 
+            how variables or individuals are grouped. The visual 
+            representation is often referred to as a dendrogram,  
+            as groups are clustered into tree branches"),
+         fluidPage(
+           fluidRow(
+             column(4,
+                tags$h4("Agglomeration Methods"),
+                tags$hr(),
+                radioButtons('method', 'Select method for cluster groups',
+                             c(ward.D='ward.D',
+                               single='single',
+                               complete='complete',
+                               average="ave",
+                               median="median",
+                               centroid="cen"), 'ward.D'),
+                tags$hr()
+             ),
+             column(4,
+               tags$h4("Distance Measure"),
+               tags$hr(),
+               radioButtons('distance', 'Select measure type',
+                            c(euclidean='euclidean',
+                              maximum='maximum',
+                              manhattan='manhattan',
+                              minkowski="minkowski",
+                              canberra="canberra",
+                              binary="binary"
+                              ), 'euclidean'),
+                tags$hr()
+             ),
+             column(4,
+               tags$h4("Select Groups"),
+               tags$hr(),
+               radioButtons('color', 'Select color for cluster groups',
+                 c(none="none",
+                   red='red',
+                 blue='blue',
+                 green='green',
+                 black="black"), 'red'),
+               uiOutput("cuttree"),
+               tags$hr()
+             )
+          ),
+          fluidRow(
+            column(12,
+              plotOutput("cluster_plot")
+            )
+          )
+        )
+      ),
       tabPanel("Topic Analysis", "Under development")
    )
   )

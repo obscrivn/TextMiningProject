@@ -7,6 +7,7 @@ source("extractMetadata.R")
 source("abstract.R")
 source("words.R")
 source("preprocess.R")
+source("kwic.R")
 library(tm)
 library(qdap)
 library(qdapRegex)
@@ -29,6 +30,7 @@ library(RcppArmadillo)
 library(tidyr)
 library(ggplot2)
 library(RTextTools)
+library(SnowballC)
 #library(topicmodels)
 shinyServer(function(input, output) {
   
@@ -56,16 +58,8 @@ output$print_length_txt <- renderUI({
   
   output$choose_term <- renderUI({
     if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-    if (input$article_content!="By Term"){ return() }
-    withProgress(message = 'Loading Term List',
-                 value = 0, {
-                   for (i in 1:15) {
-                     incProgress(1/15)
-                     Sys.sleep(0.25)
-                   }
-                 })
     word <- ListTerms()$d[[2]]#[1:x]
-    selectizeInput("choose_term", label = "Select term(s)", 
+    selectizeInput("choose_term", label = "Select term", 
                    choices = word,
                    options = list(create = TRUE),
                    selected = NULL,
@@ -74,8 +68,6 @@ output$print_length_txt <- renderUI({
 
   output$choose_length <- renderUI({
     if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-    if (input$article_content!="By Term"){ return() }
-    
     d <- ListTerms()$d
     sliderInput("len",
                 "Context Length:",
@@ -274,17 +266,6 @@ PreprocessingSteps <- reactive ({
  return(mylist)
   })
 
-
-# }
-#   if ((input$stem=="NULL") || (is.null(input$stem))) {
-#     text.punct <- text.punct
-#   }
-#   else if (input$stem=="Stem") {
-#     text.split <- unlist(strsplit(text.punct, " "))
-#     text.punct <- paste(wordStem(text.split, language = "english"),collapse = " ")
-#   }
-
-
 ##### STOP WORDS #######
 
 stopWordsTxt <- reactive ({
@@ -319,6 +300,8 @@ RemoveWordsStepOne <-reactive({
   mycorpus <- PreprocessingSteps()[6]
   if  (input$stops=="None") {
     corpus.paste <-paste(mycorpus, sep=" ")
+    corpus.paste <- str_c(corpus.paste)
+    corpus.paste<- str_trim(corpus.paste)
     corpus.list <- strsplit(corpus.paste, "\\s+")
     terms <- table(unlist(corpus.list))
     terms.sorted <- sort(terms, decreasing = TRUE)
@@ -335,6 +318,7 @@ RemoveWordsStepOne <-reactive({
     doc.vect <- VectorSource(mycorpus)
     corpus.tm <-Corpus(doc.vect)
     corpus.tm <- tm_map(corpus.tm,removeWords,stopWordsTxt())
+    corpus.tm <- tm_map(corpus.tm, stripWhitespace)
     corpus <- list()
     for (i in 1:length(corpus.tm)) {
       doc <-corpus.tm[[i]]$content
@@ -342,6 +326,8 @@ RemoveWordsStepOne <-reactive({
     }
     corpus <-unlist(corpus)
     corpus.paste <-paste(mycorpus, sep=" ")
+    corpus.paste <- str_c(corpus.paste)
+    corpus.paste<- str_trim(corpus.paste)
     corpus.list <- strsplit(corpus.paste, "\\s+")
     terms <- table(unlist(corpus.list))
      remove_word <- stopWordsTxt()
@@ -372,6 +358,7 @@ RemoveWordsStepTwo <-reactive({
     corpus.tm <-Corpus(doc.vect)
    # corpus.tm <- removeWords(corpus.tm, c(input$remove_words))
     corpus.tm <- tm_map(corpus.tm,removeWords,c(input$remove_words))
+    corpus.tm <- tm_map(corpus.tm, stripWhitespace)
     corpus <- list()
     for (i in 1:length(corpus.tm)) {
       doc <-corpus.tm[[i]]$content
@@ -379,6 +366,8 @@ RemoveWordsStepTwo <-reactive({
     }
     corpus <-unlist(corpus)
     corpus.paste <-paste(corpus, sep=" ")
+    corpus.paste <- str_c(corpus.paste)
+    corpus.paste<- str_trim(corpus.paste)
     corpus.list <- strsplit(corpus.paste, "\\s+")
     terms <- table(unlist(corpus.list))
     terms.sorted <- sort(terms, decreasing = TRUE)
@@ -398,14 +387,28 @@ RemoveWordsStepTwo <-reactive({
 
 RemoveWordsStepThree <-reactive({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  
-  if(input$stopwords=="None") {
-    corpus <-RemoveWordsStepOne()$corpus
-    d <-RemoveWordsStepOne()$d
+  corpus <- stemming()
+ # if(input$stopwords=="None") {
+  #  corpus <-RemoveWordsStepOne()$corpus
+  corpus.paste <-paste(corpus, sep=" ")
+  corpus.paste <- str_c(corpus.paste)
+  corpus.paste<- str_trim(corpus.paste)
+  corpus.list <- strsplit(corpus.paste, "\\s+")
+  terms <- table(unlist(corpus.list))
+  terms.sorted <- sort(terms, decreasing = TRUE)
+  # remove_word <- stopWordsTxt()
+  # del <- names(terms) %in% remove_word #| terms < cutoff.lower
+  # terms <- terms[!del]
+  terms.matrix<-as.matrix(terms)
+  d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
+  d$word <- row.names(d)
+  agg_freq <- aggregate(frequency ~ word, data = d, sum)
+  d <- d[order(d$frequency, decreasing = T), ]
+  #  d <-RemoveWordsStepOne()$d
     
    # words.list <-RemoveWordsStepOne()$words.list
-  }
-  else if(input$stopwords=="Apply Stopwords") {
+#  }
+ # else if(input$stopwords=="Apply Stopwords") {
    # if ((input$stops=="None") && (input$remove==FALSE))  {
   #    corpus <-RemoveWordsStepOne()$corpus
    #   d <-RemoveWordsStepOne()$d
@@ -413,11 +416,11 @@ RemoveWordsStepThree <-reactive({
       
    # }
    # else {
-      corpus <-RemoveWordsStepTwo()$corpus
-      d <-RemoveWordsStepTwo()$d
+ #     corpus <-RemoveWordsStepTwo()$corpus
+ #     d <-RemoveWordsStepTwo()$d
      # words.list <-RemoveWordsStepTwo()$words.list
    # }
-  }
+ # }
   info <- list(d=d,corpus=corpus)
   return(info)
 })
@@ -428,6 +431,54 @@ output$print_apply_stops <- renderUI({
     HTML(paste0(RemoveWordsStepThree()$corpus))
   }
 })
+
+stemming <- reactive ({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if(input$stopwords=="None") {
+    corpus <-RemoveWordsStepOne()$corpus
+   # d <-RemoveWordsStepOne()$d
+  }
+  else if(input$stopwords=="Apply Stopwords") {
+    corpus <-RemoveWordsStepTwo()$corpus
+ #   d <-RemoveWordsStepTwo()$d
+  }
+  
+  if (input$language=="none") {
+    corpus <-RemoveWordsStepTwo()$corpus
+   # text.punct="Select language"
+    }
+  else {
+   doc.vect <- VectorSource(corpus)
+    docs <-Corpus(doc.vect)
+    corpus <- list()
+    for (i in 1:length(docs)) {
+      doc <-docs[[i]]$content
+      text.split <- unlist(strsplit(doc, " "))
+      text.stem <- paste(wordStem(text.split, language = input$language),collapse = " ")
+      text.stem <- str_c(text.stem)
+      text.stem<- str_trim(text.stem)
+      corpus[[i]] <- text.stem
+    }
+    corpus <-unlist(corpus)
+    # corpus.tm <- removeWords(corpus.tm, c(input$remove_words))
+   # docs <- tm_map(docs,stemDocument(docs,language = input$language))
+   # docs <- tm_map(docs, stripWhitespace)
+   # corpus.paste <-paste(corpus, sep=" ")
+   # corpus.paste <- str_c(corpus.paste)
+   # corpus.paste<- str_trim(corpus.paste)
+      #   corpus.paste <-paste(corpus, sep=" ")
+       #  text.split <- unlist(strsplit(corpus.paste, " "))
+      #   text.punct <- paste(wordStem(text.split, language = input$language),collapse = " ")
+  }
+  return(corpus)
+})
+
+output$print_stemmer <- renderUI({
+    if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+    # if (is.null(input$remove_manual)) { return() }
+    HTML(paste0(stemming()))
+    # HTML(paste0(RemoveWordsStepTwo()$words.list))#PreprocessingSteps()$lda.format))# RemoveWordsNew()$corpus.lda))
+  })
 #########
 rawFrequency <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
@@ -465,6 +516,7 @@ output$zipf <- renderPlot ({
 
 
 output$choose_text <- renderUI({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
   if (!is.null(input$file.article)) {
     names <- input$file.article$name
   }
@@ -480,16 +532,17 @@ output$choose_text <- renderUI({
 
 LengthWord <- reactive ({
   if (input$show_word=="None") {return()}
-  if ((input$show_text=="NULL")|| (is.null(input$show_text))) {return()}
   i <- input$show_text
+if(!is.null(input$file.article.txt)) {
+  names <- input$file.article.txt$name
+  n <- which(names==i)
+  vec <- ExtractRawContentTXT()[[n]]
+}
   if (!is.null(input$file.article)) {
     names <- input$file.article$name
+    n <- which(names==i)
+    vec <- ExtractRawContentPDF()[[n]]
   }
-  if (!is.null(input$file.article.txt)) {
-    names <- input$file.article.txt$name
-  }
-  n <- which(names==i)
-  vec <- ExtractContent()[[n]]
   corpus <- Corpus(VectorSource(vec))
   dtm <- DocumentTermMatrix(corpus)
   m <- as.matrix(Terms(dtm),Docs(dtm))
@@ -503,12 +556,12 @@ LengthWord <- reactive ({
   return(newtab)
 })
 output$length_table <- renderPrint ({
-  if ((input$show_word=="NULL")|| (is.null(input$show_word))) {return()} 
+  if (input$show_word=="None") {return()} 
 tab <- LengthSent()
 return(tab)
 })
 output$length_word_table <- renderTable ({
-  if (input$show_word=="None") {"Length analysis is not selected"} 
+  if (input$show_word=="None") {return()} 
 
   if (input$show_word=="Word Length") {
    tab <- LengthWord()
@@ -525,31 +578,42 @@ output$length_word_table <- renderTable ({
                })
   return(tab)
   })
-
+output$choose_bin <-renderUI({
+    # bins <- seq(min(barPlot()[[1]]), max(barPlot()[[1]]), length.out = input$bins + 1)
+    #  bw <- diff(barPlot()[[1]]) / (2 * IQR(barPlot()[[1]]) / length(barPlot()[[1]])^(1/3))
+  selectizeInput("breaks",
+                label = "Number of bins in histogram:",
+               choices = c(10, 20, 35, 50,60,70,80,90,100),
+                selected = 30)
+}) 
 output$words <- renderPlot ({
-  if (input$show_word=="None") {"Select Word or Sentence Length"}
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if (input$show_word=="None") {return()}
   if (input$show_word=="Word Length") {
   newtab <- LengthWord()
   plots <- ggplot(newtab, aes(x=word_length,y=proportion)) + geom_line() + ggtitle(input$show_text)
   }
   if (input$show_word=="Sentence Length") {
+    breaks=input$breaks
     counts <- LengthSent()$counts
-    plots <- hist(counts,main="Histogram of Sentence Length", col="grey",freq=TRUE)
+    plots <- hist(counts,main="Histogram of Sentence Length", col="grey",freq=TRUE,as.numeric(breaks))
   }
   return(plots)
 })
 
 LengthSent <- reactive ({
-  if (input$show_text=="None") {return()}
+ # if (input$show_text=="None") {return()}
   i <- input$show_text
+  if(!is.null(input$file.article.txt)) {
+    names <- input$file.article.txt$name
+    n <- which(names==i)
+    data <- ExtractRawContentTXT()[[n]]
+  }
   if (!is.null(input$file.article)) {
     names <- input$file.article$name
+    n <- which(names==i)
+    data <- ExtractRawContentPDF()[[n]]
   }
-  if (!is.null(input$file.article.txt)) {
-    names <- input$file.article.txt$name
-  }
-  n <- which(names==i)
-  data <- ExtractContent()[[n]]
   data.punct <- gsub("([.?!;:])|[[:punct:]]","\\1",data)
   data.punct <- gsub("\\s+"," ",data.punct)
   vec <- as.data.frame(data.punct)
@@ -579,10 +643,7 @@ ExtractRawContentTXT <- reactive ({
 #   #  text1 <- sub(".*(Abstract|ABSTRACT|abstract)","",text)
 #     text.punct<-sub("(1.)?.?Introduction.*","",text1)    
 #     text.punct<- rm_white(text.punct)
-# else if (input$stem=="Stem") {
-#   text.split <- unlist(strsplit(text.punct, " "))
-#   text.punct <- paste(wordStem(text.split, language = "english"),collapse = " ")
-# }
+
 #      if ((!is.null(input$speaker_name)) && (input$speaker_name!="NULL")) {
 #       name.speaker <- input$speaker_name
 #       name.interviewer <- input$interviewer_name
@@ -595,29 +656,7 @@ ExtractRawContentTXT <- reactive ({
 #       text.punct <- paste(text.sub, collapse = " ")
 #      }
 
-# RemoveWords <- reactive({
-#   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-#   corpus.lda <- PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format 
-# # if(!is.null(input$file.article)) {
-#  #  corpus.lda <- ExtractContentPDF()$lda.format
-# # }
-#  #if(!is.null(input$file.article.txt)) {
-#   # corpus.lda <- ExtractContentTXT()$lda.format 
-#  #}
-#   corpus <- Corpus(VectorSource(corpus.lda))
-#   tdm <- TermDocumentMatrix(corpus)
-#   terms.matrix <- as.matrix(tdm)
-#   d <- data.frame(frequency = sort(rowSums(terms.matrix), decreasing = TRUE))
-#   d$word <- row.names(d)
-#   agg_freq <- aggregate(frequency ~ word, data = d, sum)
-#   d <- d[order(d$frequency, decreasing = T), ] 
-#   info <- list(d=d,corpus.lda=corpus.lda,tdm=tdm)
-#   return(info)
-# })
-
 output$choose_top <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
- # if ((is.null(input$choose_cloud)) || (input$choose_cloud=="NULL")) { return() }
   selectizeInput("top", label = "Select a number for top frequent words (ex. 10 top frequent words)", 
                  choices = c(10,20,30,40,50,60,70,80,90,100),
                  options = list(create = TRUE),
@@ -627,8 +666,6 @@ output$choose_top <- renderUI({
 
 output$choose_remove <- renderUI({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
- # if (is.null(input$remove_manual)) {"No manual selection is applied"}
-  #if (input$remove_manual=="Apply Manual") {
   word <- RemoveWordsStepOne()$d[[2]]
   selectizeInput("remove_words", label = "Select words to be removed", 
                  choices = word,
@@ -636,7 +673,6 @@ output$choose_remove <- renderUI({
                  selected = NULL,
                  multiple = TRUE) 
  # }
-
   })
 
 output$printWords <- renderUI({
@@ -668,6 +704,7 @@ output$choose_min_frequency <- renderUI({
               max = max(d$freq),
               value = min(d$freq)+2)             
 })
+
 output$choose_max_words <- renderUI({
   if ((is.null(input$file.article)) & (is.null(input$file.article.txt))) { return() }
   #if ((is.null(input$choose_cloud)) || (input$choose_cloud=="NULL")) { return() }
@@ -682,7 +719,7 @@ output$choose_max_words <- renderUI({
 
 output$print_cloud <-renderPlot({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if ((is.null(input$choose_cloud)) || (input$choose_cloud=="NULL")) { return() }
+ # if ((is.null(input$choose_cloud)) || (input$choose_cloud=="NULL")) { return() }
   # withProgress(message = 'Plotting in progress',
   #              detail = 'This may take a while...', value = 0, {
   #                for (i in 1:15) {
@@ -705,6 +742,29 @@ output$print_cloud <-renderPlot({
  # random.order = FALSE,rot.per=.5,vfont=c("sans serif","plain"),colors=palette())
 })
 
+kwicAnalysis <- reactive({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  len <- input$len
+  term <- input$choose_term
+  if(!is.null(input$file.article)) {
+    corpus.lda <- ExtractRawContentPDF()
+    num <-length(input$file.article$name)
+    
+  }
+  if(!is.null(input$file.article.txt))  {
+    corpus.lda <- ExtractRawContentTXT()
+    num <-length(input$file.article.txt$name)
+  }
+  kwic(len,term,corpus.lda,num)
+})
+
+output$print_kwic <- renderUI({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if (is.null(input$choose_term)) { return() }
+    lines <- kwicAnalysis()
+
+  HTML(paste("<br/>", lines, sep="<br/>"))
+}) 
 ##### LDA Analysis
 output$choose_topic_num <- renderUI({
   selectizeInput("num", label = "Select or Type Number of Topics", 
@@ -1166,103 +1226,60 @@ output$printCoordinates <-renderPlot({
   return(p)
 })
 
-### CLUSTER
 ### CLUSTER ANALYSIS
-output$choose_cluster <- renderUI({
-  punct <- c("NULL", "Cluster")
-  selectizeInput("cluster", label = "Select Cluster for cluster analysis", 
-                 choices = punct,
-                 selected = FALSE,
-                 multiple = FALSE) 
-})
 
 cluster <-reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if ((is.null(input$cluster)) || (input$cluster=="NULL")){ return() }
-    novel.list <-PreprocessingSteps()[2]#$novel.list#window.one()$novel.list
-  novel.dataframe <- mapply(data.frame, ID=seq_along(novel.list), 
-                            novel.list, SIMPLIFY = FALSE, 
-                            MoreArgs = list(stringsAsFactors=FALSE))  
-  novel.df <- do.call(rbind,novel.dataframe)
-  result <- xtabs(Freq ~ ID+text.split, data=novel.df)
-  final.m <- apply(result, 2, as.numeric)
-  smaller.corpus <- final.m[,apply(final.m,2,mean)>=.25]
-  documents <- dist(smaller.corpus)
-  fit <- hclust(documents,method="ward.D")
- if ((!is.null(input$metadata_pdf))&& (is.null(input$metadata_csv))) {
-   fit$labels<-names(novel.list)
- }
- else if (!is.null(input$metadata_pdf)) {
-   file.names <- newData()[[3]]
-   fit$labels <- file.names
- }
- else if (!is.null(input$metadata_csv)) {
-   file.names <- newData()[[3]]
-   fit$labels <- file.names
- }
+  method=input$method
+  distance = input$distance
+  dtm <-ListTerms()$dtm
+  m <- as.matrix(dtm)
+  d<-dist(m,distance)
+  fit <-hclust(d,method)
+ 
+ # if ((!is.null(input$metadata_pdf))&& (is.null(input$metadata_csv))) {
+ #   fit$labels<-names(novel.list)
+ # }
+ # else if (!is.null(input$metadata_pdf)) {
+ #   file.names <- newData()[[3]]
+ #   fit$labels <- file.names
+ # }
+ # else if (!is.null(input$metadata_csv)) {
+ #   file.names <- newData()[[3]]
+ #   fit$labels <- file.names
+ # }
   # if ((is.null(input$cuttree))|| (input$cuttree=="NULL")) {
-  p<-  plot(fit)
-  # p <- rect.hclust(fit,k=3, border="red")
-  # }
-  #  else {
-  #   n=as.numeric(as.character(input$cuttree))
-  #   color = input$color
-  #   p <- rect.hclust(fit,k=n, border=color)
-  # }
-  return(p)
-})
-output$cluster_plot <- renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if ((is.null(input$cluster)) || (input$cluster=="NULL")){ return() }
-  withProgress(message = 'Plotting in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
-  par(cex=1.2,mar=c(5, 4, 4, 2))
-  fit <- cluster()
+ # p<-  plot(fit)
+
   return(fit)
 })
 
-output$color <-renderUI({
-  if ((is.null(input$cluster)) || (input$cluster=="NULL")){ return() }
-  punct <- c("red", "blue","green","black")
-  selectizeInput("color", label = "Select color for cluster groups", 
-                 choices = punct,
-                 selected = "red",
-                 multiple = FALSE) 
+output$cluster_plot <- renderPlot({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  par(cex=1.2,mar=c(5, 4, 4, 2))
+  color=input$color
+  k=as.numeric(input$cuttree)
+  fit <- cluster()
+  p<-  plot(fit)
+  if (input$cuttree==0)
+    p<-  plot(fit)
+  else {
+    p<-  plot(fit)
+  rect.hclust(fit,k, border=color)
+  }
+ # fit <- cluster()
+  #return(fit)
 })
+
+
 output$cuttree <-renderUI({
-  if ((is.null(input$cluster)) || (input$cluster=="NULL")){ return() }
-  punct <- c("NULL","2","3","4","5","6","7","8","9")
+  punct <- c(0,2,3,4,5,6,7,8,9)
   selectizeInput("cuttree", label = "Select number of groups", 
                  choices = punct,
-                 selected = FALSE,
+                 selected = 0,
                  multiple = FALSE) 
 })
  
-
-# Words <- reactive({
-#   if (is.null(input$file.transcript.txt)) { return() }
-#   if(is.null(input$remove_html)) { return() }
-#   if(input$remove_html=="NULL") { return() }
-#   corpus <- TranscriptHTML()
-#   #corpus.lda <- removeWords(corpus.lda, remove.words)
-#   corpus <- Corpus(VectorSource(corpus))#ExtractContentTxt()$lda.format))
-#   tdm <- TermDocumentMatrix(corpus)
-#   m <- as.matrix(tdm)
-#   d <- data.frame(freq = sort(rowSums(m), decreasing = TRUE))
-#   d$word <- row.names(d)
-#   agg_freq <- aggregate(freq ~ word, data = d, sum)
-#   d <- d[order(d$freq, decreasing = T), ] 
-#   # info <- list(d=d,corpus.lda=corpus.lda)
-#   return(d)
-# })
-
-
-
 
 # output$print_doc_cloud_dh <- renderPlot({
 #   if (is.null(input$file.novel)) { return() }
@@ -1348,7 +1365,6 @@ output$choose_punctuation <- renderUI({
 
 punctuation <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if ((is.null(input$punctuation)) || (input$punctuation=="NULL")) { return() }
   text <-PreprocessingSteps()[3]#$text.extract#window.one()$text.extract
   data.del <- gsub("[A-Za-z0-9]"," \\1", text) # only punctuation is left with space
   data.punct <-  gsub("\\s+","",data.del)
@@ -1359,7 +1375,6 @@ punctuation <- reactive ({
 })
 output$type_punctuation <-renderPlot({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if ((is.null(input$punctuation)) || (input$punctuation=="NULL")) { return() }
   d<-punctuation()
      plot <- ggplot(d, aes(x=d[[1]], y=d[[2]])) +
        geom_bar(stat='identity') +
@@ -1373,7 +1388,6 @@ return(plot)
 
 output$heatmap_punct <- renderPlot({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if ((is.null(input$punctuation)) || (input$punctuation=="NULL")){ return() }
   text <-PreprocessingSteps()[3]#$text.extract#window.one()$text.extract
   data.del <- gsub("[A-Za-z0-9]"," \\1", text) # only punctuation is left with space
   data.punct <-  gsub("\\s+","",data.del)
@@ -1394,74 +1408,6 @@ output$heatmap_punct <- renderPlot({
   myImagePlot(matr, title="Punctuation Analysis")#,zlim=c(1,3))
   
 }) 
-
-WindowSelect <- reactive({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  extraction <- vector()
-  doc<-vector()
-  if(!is.null(input$file.article)) {
-    corpus.lda <- Selection()$text.extract
-    num <-length(input$file.article$name)
-  }
-  if(!is.null(input$file.article.txt))  {
-    corpus.lda <- ExtractContent() 
-    num <-length(input$file.article.txt$name)
-  }
-  
-  if (input$article_content=="Full Text") {
-    for (i in 1:num) { # documents number
-      lda.list <- corpus.lda[[i]]
-      #doc[y] <- lda.list
-      extraction[i] <- lda.list
-    }
-  }
-  else if (input$article_content=="By Term") {
-    for (i in 1:num) {
-      len <- input$len
-      term <- input$choose_term
-      for (i in 1:num) { # documents number
-        lda.list <- unlist(strsplit(corpus.lda[[i]], "\\s+"))
-        # loop over all requested terms
-        #   for (z in 1:m){
-        #    one.term <- list.terms[[z]]
-        # }
-        loc<- grep(term, lda.list)
-        # loc<- grep(one.term, lda.list)
-        for (y in 1:length(loc)) { # one term indexes
-          ext <-  lda.list[(loc[y]-len):(loc[y]+len)] 
-          ext.collapse <- paste(ext,collapse=" ")
-          doc[y] <- ext.collapse
-        }
-        
-        doc.collapse <-paste(doc, collapse=" ")
-        #ext <-  lda.list[(loc-len):(loc+len)]   # EXTRACTING SECTIONS 
-        # ext.collapse <- paste(ext,collapse=" ")
-        extraction[i] <- doc.collapse
-      }
-    }
-  }
-  else if (input$article_content=="Abstract") {
-    intro <- input$choose_intro
-    for (i in 1:num) {
-      lda.list <- unlist(strsplit(corpus.lda[[i]], "\\s+"))
-      loc.a<- grep("Abstract|ABSTRACT", lda.list)
-      loc.b <- grep(intro[1],lda.list)#grep("Introduction|INTRODUCTION",x)
-      doc <-  lda.list[(loc.a+1):(loc.b-1)]
-      doc.collapse <- paste(doc,collapse=" ")
-      extraction[i] <- doc.collapse
-      # lines =  x[(loc.a[1]+1):(loc.b-1)]   # EXTRACTING SECTIONS   
-    }
-  }
-  else if (input$article_content=="By Speaker") {
-    for (i in 1:num) {
-      #  lda.list <- unlist(strsplit(corpus.lda[[i]], "\\s+"))
-      extraction[i] <-corpus.lda[[i]]
-      # lines <-x
-    }
-  }
-  return(extraction)
-})
-
 
 output$choose_speaker <- renderUI({
   if ((is.null(input$file.article)) || (is.null(input$file.article.txt))) { return() }
