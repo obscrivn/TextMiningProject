@@ -88,5 +88,4 @@ tokenize <- function(x,y,remove_urls,remove_references,remove_punctuation,
       }
 list(data=data,novel.list=novel.list,text.extraction=text.extraction,punct.list=punct.list,novel.lda=novel.lda,lda.format=lda.format,data=data)
 }
-novel.list[1]
 
