@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "date": 2016,
+    "title": "JSON Developer's Guide",
+	"author": "Bug's Bunny",
+    "category": "book",
+    "location": "California",
+    "topic": "XML"
+  },
+  {
+    "id": 2,
+    "date": 2003,
+    "title": "Lectures on McCarthyism",
+	"author": "Marge Frantz",
+    "category": "book",
+    "location": "Stanford",
+    "topic": "U.S. History"
+  },
+  {
+    "id": 3,
+    "date": 2003,
+    "title": "Latent Dirichlet Allocation",
+	"author": "David Blei",
+    "category": "article",
+    "location": "Berkeley",
+    "topic": "Natural Language Processing"
+  }
+]

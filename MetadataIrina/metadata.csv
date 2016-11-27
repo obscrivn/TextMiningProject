@@ -1,0 +1,4 @@
+id,date,title,author,category,location,topic
+1,2016,XML Developer's Guide,Matthew Gambardella,book,California,XML
+2,2003,Lectures on McCarthyism,Marge Frantz,book,Stanford,U.S. History
+3,2003,Latent Dirichlet Allocation,David Blei,article,Berkeley,Natural Language Processing

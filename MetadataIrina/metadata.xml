@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<catalog>
+	<document1>
+		<id>1</id>
+		<date>2016</date>
+		<title>XML Developer's Guide</title>
+		<author>Matthew Gambardella</author>
+		<category>book</category>
+		<location>California</location>
+		<topic>XML</topic>
+	</document1>
+	<document2>
+		<id>2</id>
+		<date>2003</date>
+		<title>Lectures on McCarthyism</title>
+		<author>Marge Frantz</author>
+		<category>book</category>
+		<location>Stanford</location>
+		<topic>U.S. History</topic>
+	</document2>
+	<document3>
+		<id>3</id>
+		<date>2003</date>
+		<title>Latent Dirichlet Allocation</title>
+		<author>David Blei</author>
+		<category>article</category>
+		<location>Berkeley</location>
+		<topic>Natural Language Processing</topic>
+	</document3>
+	
+</catalog>
