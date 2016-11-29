@@ -31,6 +31,9 @@ library(tidyr)
 library(ggplot2)
 library(RTextTools)
 library(SnowballC)
+library(jsonlite)
+library(rjson)
+library(XML)
 #library(topicmodels)
 shinyServer(function(input, output) {
   
@@ -111,13 +114,58 @@ output$print_length_txt <- renderUI({
 
 ## Reading Metadata File from csv
 
-fileData <- reactive({
-  inFile <- input$file.metadata    
-  my_data <- read.csv(inFile$datapath, header=input$header, sep=input$sep, 
-                      quote=input$quote)
-  dat <- my_data 
-  return(dat)
-})
+  output$place_for_file_browser <- renderUI({
+    if( input$metadata_source == "PDF ") {
+      metadata_file_name = NULL;
+      return()
+    }
+    switch (input$metadata_source,
+            "CSV" = column(6,
+                           checkboxInput('header', 'Header', TRUE),
+                           radioButtons('sep', 'Separator',
+                                        c(Comma=',',
+                                          Semicolon=';',
+                                          Tab='\t'),
+                                        ','),
+                           fileInput('csv_file_name', 'Choose CSV File', multiple=FALSE, accept=c('text/csv','text/comma-separated-values,text/plain','.csv'))
+            ),
+            "JSON"= fileInput('json_file_name', 'Choose JSON File', multiple=FALSE, accept=c('application/json',',JSON')),
+            "XML" = fileInput('xml_file_name', 'Choose XML File', multiple=FALSE, accept=c('application/xml','text/xml','.xml'))
+    )
+  })
+  ## Reading Metadata File from csv
+  fileData <- reactive({ # loading data
+    my_data = NULL
+    if( !is.null(input$csv_file_name) ) {
+      my_data <- read.csv(input$csv_file_name$datapath, header=input$header, sep=input$sep, quote=input$quote)
+    }
+    else if( !is.null(input$json_file_name) ) {
+      my_data <- fromJSON(input$json_file_name$datapath, flatten = TRUE)
+    }
+    else if( !is.null(input$xml_file_name) ) {
+      print(input$xml_file_name$datapath)
+      my_data <- xmlToDataFrame(input$xml_file_name$datapath)
+    }
+    else if( !is.null(input$file.article)) {
+     # my_data <- data.frame(metadataPdf()$metapdf)
+    }
+    return(my_data)
+  })
+  ### Display Metadata from CSV
+  output$place_for_metadata_table <- renderDataTable({
+    data_from_metadata_file = fileData()
+    if ( is.null(data_from_metadata_file) )  { return() }
+    data_from_metadata_file
+  }) 
+  
+  
+# fileData <- reactive({
+#   inFile <- input$file.metadata    
+#   my_data <- read.csv(inFile$datapath, header=input$header, sep=input$sep, 
+#                       quote=input$quote)
+#   dat <- my_data 
+#   return(dat)
+# })
 
 ### Display Metadata from CSV
 output$print_metadata_csv <- renderDataTable({
@@ -1355,13 +1403,6 @@ output$cuttree <-renderUI({
 #                  multiple = FALSE) 
 # })
 #### PUNCTUATION ANALYSIS
-output$choose_punctuation <- renderUI({
-    punct <- c("NULL", "Punctuation")
-    selectizeInput("punctuation", label = "Select Punctuation for punctuation analysis", 
-                   choices = punct,
-                   selected = FALSE,
-                   multiple = FALSE) 
-})
 
 punctuation <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
@@ -1386,26 +1427,50 @@ output$type_punctuation <-renderPlot({
 return(plot)
 })
 
+output$chunks <- renderPlot({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if (is.null(input$choose_term)){ return() }
+  if(!is.null(input$file.article)) {
+    text <- ExtractRawContentPDF()#Selection()#$text.extract
+  }
+  if(!is.null(input$file.article.txt))  {
+    text <- ExtractRawContentTXT()#extractContent(input$file.article.txt) 
+  }
+  term <- input$choose_term
+  split_chunks(text,term)
+})
+
+
 output$heatmap_punct <- renderPlot({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  text <-PreprocessingSteps()[3]#$text.extract#window.one()$text.extract
-  data.del <- gsub("[A-Za-z0-9]"," \\1", text) # only punctuation is left with space
-  data.punct <-  gsub("\\s+","",data.del)
-  s.col <- gsub("[\\.!?]",1,data.punct) # red
-  s.col <- gsub("[,\"\'\\(\\)]",3,s.col) # green
-  s.col <- gsub("[:;-\\*]",2,s.col) # blue
-  s.col <- gsub("[[:punct:]]","",s.col)
-  s.split <- strsplit(s.col,"")
-  matr1 <-matrix(s.split[[1]])
-  n<-length(matr1)
-  f <- factorize(n)
-  divide <-f[1]
-  if (min(f)<4) {
-    divide <- f[2]
+  if(!is.null(input$file.article)) {
+    text <- ExtractRawContentPDF()#Selection()#$text.extract
   }
-  matr <- matrix(s.split[[1]],ncol=divide,byrow = FALSE)
-  class(matr) <- "numeric" 
-  myImagePlot(matr, title="Punctuation Analysis")#,zlim=c(1,3))
+  if(!is.null(input$file.article.txt))  {
+    text <- ExtractRawContentTXT()#extractContent(input$file.article.txt) 
+  }
+  heatmap(text)
+  
+ #  text <-PreprocessingSteps()[3]#$text.extract#window.one()$text.extract
+ #  data.del <- gsub("[A-Za-z0-9]"," \\1", text) # only punctuation is left with space
+ #  data.punct <-  gsub("\\s+","",data.del)
+ #  data.num <- gsub("[0-9]+","", data.punct)
+ #  s.col <- gsub("[!?]",1,data.num) # red
+ #  s.col <- gsub("[,\"\'\\(\\)]",3,s.col) # green
+ #  s.col <- gsub("[\\.:;-\\*]",2,s.col) # blue
+ #  s.col <- gsub("[^[1:3] ]", "", s.col)
+ # # s.col <- gsub("[[:punct:]]","",s.col)
+ #  s.split <- strsplit(s.col,"")
+ #  matr1 <-matrix(s.split[[1]])
+ #  n<-length(matr1)
+ #  f <- factorize(n)
+ #  divide <-f[1]
+ #  if (min(f)<4) {
+ #    divide <- f[2]
+ #  }
+ #  matr <- matrix(s.split[[1]],ncol=divide,byrow = FALSE)
+ #  class(matr) <- "numeric" 
+ #  myImagePlot(matr, title="Punctuation Analysis")#,zlim=c(1,3))
   
 }) 
 

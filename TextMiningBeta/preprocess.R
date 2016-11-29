@@ -45,11 +45,6 @@ tokenize <- function(x,y,remove_urls,remove_references,remove_punctuation,
     } else {text.punct <- text.punct}
     
     if (remove_punctuation==TRUE) {
-     # if (exceptions=="No exceptions") {
-     #   text.punct <- gsub("[^[:alnum:] ]", "", text.punct)
-       # text.punct <- str_replace_all(text.punct, "[^[:alnum:]]", " ")#gsub('[[:punct:]]', '', text.punct) 
-     # } #else {text.punct <- text.punct}
-     # else 
         if (exceptions=="Keep apostrophe") {
         text.punct <- gsub("-", " ", text.punct) 
         text.punct <- strip(text.punct, char.keep="~~",digit.remove = FALSE, apostrophe.remove = FALSE,

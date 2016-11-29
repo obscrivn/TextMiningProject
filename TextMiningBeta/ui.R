@@ -1,10 +1,10 @@
-#source("itms_tabs.R")
 library(shiny)
 
 shinyUI(
   fluidPage(
     list(
       tags$head(
+        tags$title("Interactive Text Mining Suite"),
         tags$link(rel="stylesheet",href="app.css")
       )
     ),
@@ -264,38 +264,57 @@ shinyUI(
         You can upload your metadata in csv format (see a template). 
         If your pdf files contain matadata - it will be printed here."
       ),
+     
       fluidPage(
         fluidRow( 
-          column(6, 
+          column(4, 
              tags$hr(),
-             tags$h5("Select"),
-             radioButtons('metadata', 'Metadata from pdf files',
-                          c(none='None',
-                            metadata='Load'), 'None'),
-            # checkboxInput('metadata','Load',FALSE),
-             tableOutput("print_metadata_pdf")
+              radioButtons('metadata_source', 'Choose metadata source',
+                 c("None" = "None",
+                   "From metadata of each uploaded PDF"="PDF",
+                    "From separate CSV file"="CSV",
+                     "From separate JSON file"="JSON",
+                     "From separate XML file"="XML"),
+                      "None"),
+                 uiOutput("place_for_file_browser")                                                              
           ),
           column(6, 
-             tags$hr(),
-             tags$h5("Upload Metadata from csv file (left panel): Id, Year, Title(name), Author, Category"),
-             fileInput('file.metadata', 'Choose CSV File', multiple=FALSE, accept=c('text/csv','text/comma-separated-values,text/plain','.csv')),
-             #uiOutput("load_metadata_csv"),
-             checkboxInput('header', 'Header', TRUE),
-             radioButtons('sep', 'Separator',
-                          c(Comma=',',
-                            Semicolon=';',
-                            Tab='\t'),
-                          ','),
-             tags$hr(),
-             radioButtons('metadata_csv', 'Read Metadata from CSV',
-                          c(none='None',
-                            upload='Load'), 'None'),
-
-             tags$hr(),
-             dataTableOutput("print_metadata_csv")
+             dataTableOutput("place_for_metadata_table")
           )
         )
       )
+      #  fluidPage(
+      #   fluidRow( 
+      #     column(6, 
+      #        tags$hr(),
+      #        tags$h5("Select"),
+      #        radioButtons('metadata', 'Metadata from pdf files',
+      #                     c(none='None',
+      #                       metadata='Load'), 'None'),
+      #       # checkboxInput('metadata','Load',FALSE),
+      #        tableOutput("print_metadata_pdf")
+      #     ),
+      #     column(6, 
+      #        tags$hr(),
+      #        tags$h5("Upload Metadata from csv file (left panel): Id, Year, Title(name), Author, Category"),
+      #        fileInput('file.metadata', 'Choose CSV File', multiple=FALSE, accept=c('text/csv','text/comma-separated-values,text/plain','.csv')),
+      #        #uiOutput("load_metadata_csv"),
+      #        checkboxInput('header', 'Header', TRUE),
+      #        radioButtons('sep', 'Separator',
+      #                     c(Comma=',',
+      #                       Semicolon=';',
+      #                       Tab='\t'),
+      #                     ','),
+      #        tags$hr(),
+      #        radioButtons('metadata_csv', 'Read Metadata from CSV',
+      #                     c(none='None',
+      #                       upload='Load'), 'None'),
+      # 
+      #        tags$hr(),
+      #        dataTableOutput("print_metadata_csv")
+      #     )
+      #   )
+      # )
      )
     )
    ),
@@ -416,10 +435,13 @@ shinyUI(
               )
             ),
            fluidRow(
-              column(12, 
+              column(6, 
                 uiOutput("term_print"),
                 tags$hr(),
                 div(id = "text", uiOutput("print_kwic"))
+              ),
+              column(6,
+                plotOutput("chunks")   
               )
             )
           )
@@ -427,10 +449,9 @@ shinyUI(
         tabPanel(tags$h4("Punctuation"),
         fluidPage(                        
           p("This section is based on the punctuation analysis by Adam Calhoun's ",tags$a(href="https://medium.com/@neuroecology/punctuation-in-novels-8f316d542ec4","Blog"),". 
-            In his heatmap visualization, periods and question marks and exclamation marks are red.
-            Commas and quotation marks are green. 
-            Semicolons and colons are blue"),
-         # uiOutput("choose_punctuation"),
+            In his heatmap visualization, question marks and exclamation marks are red.
+            Quotation marks, hyphens and parenthesis are green. 
+            Semicolons, colons, commas, periods are blue"),
           fluidRow(
             column(4,
               tags$h4("Punctuation Frequency"),
