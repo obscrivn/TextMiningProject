@@ -5,6 +5,7 @@ shinyUI(
   fluidPage(
     list(
       tags$head(
+        tags$title("Interactive Text Mining Suite"),
         tags$link(rel="stylesheet",href="app.css")
       )
     ),
