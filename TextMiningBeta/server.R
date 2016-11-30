@@ -34,7 +34,7 @@ library(SnowballC)
 library(jsonlite)
 library(rjson)
 library(XML)
-#library(topicmodels)
+library(ggthemes)
 shinyServer(function(input, output) {
   
   output$print_name_article <- renderPrint({
@@ -61,8 +61,9 @@ output$print_length_txt <- renderUI({
   
   output$choose_term <- renderUI({
     if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-    word <- ListTerms()$d[[2]]#[1:x]
-    selectizeInput("choose_term", label = "Select term", 
+   # word <- ListTerms()$d[[2]]#[1:x]
+    word <- RemoveWordsStepOne()$d[[2]]
+    selectizeInput("choose_term", label = "Type term", 
                    choices = word,
                    options = list(create = TRUE),
                    selected = NULL,
@@ -115,9 +116,9 @@ output$print_length_txt <- renderUI({
 ## Reading Metadata File from csv
 
   output$place_for_file_browser <- renderUI({
-    if( input$metadata_source == "PDF ") {
-      metadata_file_name = NULL;
-      return()
+  #  if( input$metadata_source == "None") {return()}
+    if( input$metadata_source == "PDF") {
+      metadata_file_name = input$file.article.name#NULL;
     }
     switch (input$metadata_source,
             "CSV" = column(6,
@@ -131,7 +132,8 @@ output$print_length_txt <- renderUI({
             ),
             "JSON"= fileInput('json_file_name', 'Choose JSON File', multiple=FALSE, accept=c('application/json',',JSON')),
             "XML" = fileInput('xml_file_name', 'Choose XML File', multiple=FALSE, accept=c('application/xml','text/xml','.xml'))
-    )
+   
+       )
   })
   ## Reading Metadata File from csv
   fileData <- reactive({ # loading data
@@ -147,6 +149,10 @@ output$print_length_txt <- renderUI({
       my_data <- xmlToDataFrame(input$xml_file_name$datapath)
     }
     else if( !is.null(input$file.article)) {
+      a <- metadataPdf()$authors
+      t <- metadataPdf()$titles
+      dt <- metadataPdf()$datetimes
+      my_data <- data.frame(date=dt, title=t, author = a)
      # my_data <- data.frame(metadataPdf()$metapdf)
     }
     return(my_data)
@@ -155,47 +161,9 @@ output$print_length_txt <- renderUI({
   output$place_for_metadata_table <- renderDataTable({
     data_from_metadata_file = fileData()
     if ( is.null(data_from_metadata_file) )  { return() }
+    if (input$metadata_source=="None")  { return() }
     data_from_metadata_file
   }) 
-  
-  
-# fileData <- reactive({
-#   inFile <- input$file.metadata    
-#   my_data <- read.csv(inFile$datapath, header=input$header, sep=input$sep, 
-#                       quote=input$quote)
-#   dat <- my_data 
-#   return(dat)
-# })
-
-### Display Metadata from CSV
-output$print_metadata_csv <- renderDataTable({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if (input$metadata_csv=="Load") {
-    d<-fileData()
-  }
-  else {"You need to select Upload"}
-  
-})
-
-output$print_metadata_pdf <- renderTable({
-  if (is.null(input$file.article)) { return() }
-  if (input$metadata=="Load") {
-   a <- metadataPdf()$authors
-   t <- metadataPdf()$titles
-   dt <- metadataPdf()$datetimes
-   withProgress(message = 'Loading Metadata',
-               value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
-  d <- data.frame(date=dt, title=t, author = a)
-  }
-  else if (input$metadata=="None"){
-    d <- "You need to select metadata"
-  }
-})
 
 output$print_content_txt <- renderUI({
   if (is.null(input$file.article.txt))  { return() }
@@ -250,41 +218,12 @@ output$print_preprocessed <- renderUI({
                    }
                  })
       pdf.lines <- PreprocessingSteps()[6]#$lda.format#window.one()$lda.format
+      pdf.lines <- unlist(pdf.lines)
     }
   HTML(paste("<br/>", "Document: ",pdf.lines, sep="<br/>"))
 }) 
 
-### END OF DATA PREPARATION ###########
 
-output$remove_html_symbol <- renderUI({
-  names <- c("NULL","\\","/","(",")")
-  selectizeInput("remove_html_symbol", label = "Select or Type HTML/xml tags to remove", 
-                 choices = names,
-                 options = list(create = TRUE),
-                 selected = NULL,
-                 multiple = TRUE) 
-  
-})
-
-output$replace_what <- renderUI({
-  names <- c("NULL","\\","/","(",")")
-  selectizeInput("remove_what", label = "Type Character or String to be REPLACED", 
-                 choices = names,
-                 options = list(create = TRUE),
-                 selected = NULL,
-                 multiple = FALSE) 
-  
-})
-
-output$replace_by <- renderUI({
-  names <- c("NULL","\\","/","(",")")
-  selectizeInput("remove_by", label = "Type Character or String for REPLACEMENT", 
-                 choices = names,
-                 options = list(create = TRUE),
-                 selected = NULL,
-                 multiple = FALSE) 
-  
-})
 ########
 ### Pre-Processing
 PreprocessingSteps <- reactive ({
@@ -346,8 +285,20 @@ RemoveWordsStepOne <-reactive({
   #cutoff.lower=0#input$cutoff_lower
   #cutoff.high=input$cutoff_high
   mycorpus <- PreprocessingSteps()[6]
-  if  (input$stops=="None") {
+  if  (input$stops=="None") {    
+    doc.vect <- VectorSource(mycorpus)
+  corpus.tm <-Corpus(doc.vect)
+  corpus.tm <- tm_map(corpus.tm, stripWhitespace)
+    corpus <- list()
+    for (i in 1:length(corpus.tm)) {
+      doc <-corpus.tm[[i]]$content
+      corpus[[i]] <- doc
+    }
+    lda.corpus <- corpus
+   # corpus <- mycorpus
+    corpus <- unlist(corpus)
     corpus.paste <-paste(mycorpus, sep=" ")
+    corpus.paste <-paste(corpus, sep=" ")
     corpus.paste <- str_c(corpus.paste)
     corpus.paste<- str_trim(corpus.paste)
     corpus.list <- strsplit(corpus.paste, "\\s+")
@@ -359,7 +310,7 @@ RemoveWordsStepOne <-reactive({
     agg_freq <- aggregate(frequency ~ word, data = d, sum)
     d <- d[order(d$frequency, decreasing = T), ]
    # words.list <- as.list(d$word)
-    corpus <- mycorpus
+
   }
   else if  ((input$stops=="Default")||(input$stops=="Upload")) {
     remove_word <- stopWordsTxt()
@@ -372,8 +323,10 @@ RemoveWordsStepOne <-reactive({
       doc <-corpus.tm[[i]]$content
       corpus[[i]] <- doc
     }
+    lda.corpus <- corpus
     corpus <-unlist(corpus)
-    corpus.paste <-paste(mycorpus, sep=" ")
+   # corpus.paste <-paste(mycorpus, sep=" ")
+    corpus.paste <-paste(corpus, sep=" ")
     corpus.paste <- str_c(corpus.paste)
     corpus.paste<- str_trim(corpus.paste)
     corpus.list <- strsplit(corpus.paste, "\\s+")
@@ -389,7 +342,7 @@ RemoveWordsStepOne <-reactive({
     d <- d[order(d$frequency, decreasing = T), ]
    # words.list <- as.list(d$word)
   }
-  info <- list(corpus=corpus,d=d)
+  info <- list(corpus=corpus,d=d,lda.corpus=lda.corpus)
   return(info)
 })
 
@@ -397,6 +350,7 @@ RemoveWordsStepTwo <-reactive({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
   if (is.null(input$remove_words)) {
     corpus <-RemoveWordsStepOne()$corpus
+    lda.corpus<-RemoveWordsStepOne()$lda.corpus
     d <-RemoveWordsStepOne()$d
    # words.list <-RemoveWordsStepOne()$words.list
   }
@@ -412,7 +366,7 @@ RemoveWordsStepTwo <-reactive({
       doc <-corpus.tm[[i]]$content
       corpus[[i]] <- doc
     }
-    corpus <-unlist(corpus)
+   # corpus <-unlist(corpus)
     corpus.paste <-paste(corpus, sep=" ")
     corpus.paste <- str_c(corpus.paste)
     corpus.paste<- str_trim(corpus.paste)
@@ -813,6 +767,7 @@ output$print_kwic <- renderUI({
 
   HTML(paste("<br/>", lines, sep="<br/>"))
 }) 
+
 ##### LDA Analysis
 output$choose_topic_num <- renderUI({
   selectizeInput("num", label = "Select or Type Number of Topics", 
@@ -829,20 +784,7 @@ output$choose_word_num <- renderUI({
                  selected=3,
                  multiple = FALSE) 
 }) 
-output$choose_lda <- renderUI({
-  names <- c("NULL","RUN")
-  selectizeInput("lda", label = "Select RUN to run an LDA analysis", 
-                 choices = names,
-                 selected=FALSE,
-                 multiple = FALSE) 
-}) 
-output$choose_stm <- renderUI({
-  names <- c("NULL","RUN")
-  selectizeInput("stm", label = "Select RUN to run an STM analysis", 
-                 choices = names,
-                 selected=FALSE,
-                 multiple = FALSE) 
-}) 
+
 output$iter <- renderUI({
   names <- c(500,1000)
   selectizeInput("iter", label = "Select or Type a number for iterations", 
@@ -868,17 +810,10 @@ output$eta <- renderUI({
                  multiple = FALSE) 
 }) 
 
-output$choose_chronology <- renderUI({
-  names <- c("NULL","RUN")
-  selectizeInput("chronology", label = "Select RUN", 
-                 choices = names,
-                 selected=FALSE,
-                 multiple = FALSE) 
-}) 
 
 chronology <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$chronology)) ||(input$chronology=="NULL")) { return() }
+  if((is.null(input$chronology)) ||(input$chronology=="None")) { return() }
   remove.words.file <- stopWordsTxt()
   corpus.lda <- PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format 
   corpus.lda <- removeWords(corpus.lda, remove.words.file)
@@ -924,26 +859,12 @@ chronology <- reactive ({
 
 output$chronology_top <- renderPrint ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((input$chronology=="NULL") || (is.null(input$chronology))) { return() }
-  withProgress(message = 'Calculation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
+  if((input$chronology=="None") || (is.null(input$chronology))) { return() }
    chronology()$term
 })
 output$chronology_plot <- renderPlot ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((input$chronology=="NULL") || (is.null(input$chronology))) { return() }
-  withProgress(message = 'Plotting in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
+  if((input$chronology=="None") || (is.null(input$chronology))) { return() }
   dft<-chronology()$M
 #  terms <- chronology()$term
   g <- ggplot(dft,aes(x= dft[,2],y=dft[,4],color=dft[,3]))+xlab("Time Period") + ylab("Posterior") + geom_point(aes(size = dft[,4]))+ geom_density2d(alpha=.2) #+ geom_text(aes(label=terms))
@@ -954,13 +875,6 @@ output$chronology_plot <- renderPlot ({
 output$chronology_table <- renderTable ({
   if ((is.null(input$file.article)) & (is.null(input$file.article.txt))) { return() }
   if((input$chronology=="NULL") || (is.null(input$chronology))) { return() }
-  withProgress(message = 'Calculation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
   dft<-chronology()$M
  # g <- ggplot(dft,aes(x= dft[,2],y=dft[,3]),color=dft[,1])+geom_point()  + geom_density2d(alpha=.2)
  # p <- MyPlot(M[2:3],grouped.by=M[1])
@@ -998,7 +912,7 @@ BestK <- reactive ({
   novel.vector <- removeWords(novel.vector, remove.words.file)
   novel.vector <- removeWords(novel.vector, c(input$remove_words))
   pdf.corpus <- lexicalize(novel.vector, lower=TRUE)
-  pdf.corpus$vocab <- wordStem(pdf.corpus$vocab, language = "english")
+  pdf.corpus$vocab <- wordStem(pdf.corpus$vocab, language = input$language)
   wc <- word.counts(pdf.corpus$documents)
   to.remove <- as.numeric(names(wc)[wc<=cutoff.lower])
   pdf.corpus$documents <- filter.words(pdf.corpus$documents , to.remove)
@@ -1052,34 +966,39 @@ output$best_k_plot <- renderPlot ({
 
 LdaAnalysis <- reactive({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$lda)) || (input$lda=="NULL")) { return() }
+  if((is.null(input$lda)) || (input$lda=="None")) { return() }
   set.seed(2013)
   remove.words.file <- stopWordsTxt()
   cutoff.lower=0#input$cutoff_lower
   #cutoff.high=input$cutoff_high
   if(!is.null(input$file.article)) {
-    corpus.lda <-  PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
-    num.documents <- length(PreprocessingSteps()[6])#PreprocessingSteps()$lda.format)#window.one()$lda.format)
+    corpus.lda <-  RemoveWordsStepOne()$corpus #PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
+ #   num.documents <- length(RemoveWordsStepOne()$lda.corpus)#PreprocessingSteps()[6])#PreprocessingSteps()$lda.format)#window.one()$lda.format)
     n.docs <- as.numeric(length(input$file.article$name))  
   }
   if(!is.null(input$file.article.txt)) {
-    corpus.lda <-  window.one()$lda.format
-    num.documents <- length(window.one()$lda.format)
+    corpus.lda <-  RemoveWordsStepOne()$corpus
+   # num.documents <- length(RemoveWordsStepOne()$lda.corpus)
+    #corpus.lda <-  window.one()$lda.format
+   # num.documents <- length(window.one()$lda.format)
     n.docs <- as.numeric(length(input$file.article.txt$name))
   }
   corpus.lda <- removeWords(corpus.lda, remove.words.file)
   corpus.lda <- removeWords(corpus.lda, c(input$remove_words))
+  corpus.lda <- gsub("\\s+"," ",corpus.lda)
+  corpus.lda <- str_c(corpus.lda)
+  corpus.lda<- str_trim(corpus.lda)
   empty.string <- lapply(corpus.lda, function(x) gsub(" +", " ", x))
   pdf.corpus <- lexicalize(empty.string, lower=TRUE)
 
- # corpus <- Corpus(VectorSource(corpus.lda))
-  #  corpus <- Corpus(VectorSource(novel.vector))
- # corpus <- tm_map(corpus,removeWords,remove.words.file)
+  corpus <- Corpus(VectorSource(corpus.lda))
+    corpus <- Corpus(VectorSource(novel.vector))
+  corpus <- tm_map(corpus,removeWords,remove.words.file)
  # newtext <-tm_map(corpus,removeWords,input$remove_words)
-  
+
  # pdf.corpus <- lexicalize(newtext, lower=TRUE)
- # pdf.corpus <- lexicalize(corpus.lda, lower=TRUE)
- # pdf.corpus$vocab <- wordStem(pdf.corpus$vocab, language = "english")
+  pdf.corpus <- lexicalize(corpus.lda, lower=TRUE)
+  pdf.corpus$vocab <- wordStem(pdf.corpus$vocab, language = "english")
   wc <- word.counts(pdf.corpus$documents)
   to.remove <- as.numeric(names(wc)[wc<=cutoff.lower])
    pdf.corpus$documents <- filter.words(pdf.corpus$documents , to.remove)
@@ -1096,30 +1015,62 @@ LdaAnalysis <- reactive({
   pdf.lda <-
     lda.collapsed.gibbs.sampler(pdf.corpus$documents,K,pdf.corpus$vocab,iterK, alpha=alphaK, eta=etaK, compute.log.likelihood=TRUE)
   topics <- top.topic.words(pdf.lda$topics, num.words, by.score = T)
-  docs <- top.topic.documents(pdf.lda$document_sums, num.documents)
+  docs <- top.topic.documents(pdf.lda$document_sums,n.docs)# num.documents)
   p_topic <- as.vector(pdf.lda$topic_sums / sum(pdf.lda$topic_sums))
   lda.coordinates <- mat.or.vec(n.docs,K)
-  for (i in 1:n.docs){
-    for (j in 1:K){
-      lda.coordinates[i,j] <-
-        sum(pdf.lda$assignments[[i]]==(j-1))/length(pdf.lda$assignments[[i]])
-    }
-  }
+  # for (i in 1:n.docs){
+  #   for (j in 1:K){
+  #     lda.coordinates[i,j] <-
+  #       sum(pdf.lda$assignments[[i]]==(j-1))/length(pdf.lda$assignments[[i]])
+  #   }
+  # }
   info<-list(p_topic=p_topic,topics=topics, docs=docs,lda.coordinates=lda.coordinates)
   return(info)
 })
 
 output$topics <- renderTable({ #renderUI({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$lda)) || (input$lda=="NULL")) { return() }
-  withProgress(message = 'Calculation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
+  if((is.null(input$lda)) || (input$lda=="None")) { return() }
   LdaAnalysis()$topics
+})
+
+output$docs <- renderPrint({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if((is.null(input$lda)) || (input$lda=="None")) { return() }
+  LdaAnalysis()$docs
+})
+
+output$docsNames <- renderUI({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if((is.null(input$lda)) ||  (input$lda=="None")) { return() }
+  if (!is.null(input$file.article.txt)) {
+    k <- length(input$file.article.txt$name)
+    n <- as.list(rep(1:k,1))
+    HTML(paste("Document ",n, ":", input$file.article.txt$name, sep=" ", collapse="<br/>"))
+  }
+  else if (!is.null(input$file.article)) {
+    k <- length(input$file.article$name)
+    n <- as.list(rep(1:k,1))
+    HTML(paste("Document ",n, ":", input$file.article$name,  metadataPdf()$titles, sep=" ", collapse="<br/>"))
+  }
+})
+
+output$printCoordinates <-renderPlot({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if((is.null(input$lda)) || (input$lda=="None")) { return() }
+  
+  distance <- LdaAnalysis()$lda.coordinates
+  d<-dist(distance)
+  # euclidean distances between the rows
+  fit <- cmdscale(d,eig=TRUE, k=2) # k is the number of dim
+  # fit # view results
+  # plot solution 
+  x <- fit$points[,1]
+  y <- fit$points[,2]
+  p <- plot(x, y, xlab="Coordinate 1", ylab="Coordinate 2", 
+            main="Metric  MDS",	type="n")
+  text(x, y,  cex=.9)  
+  return(p)
 })
 
 output$best_topic_num <-renderUI({
@@ -1132,12 +1083,15 @@ output$best_topic_num <-renderUI({
 
 stmAnalysis <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$stm)) || (input$stm=="NULL")) { return() }
-  remove.words.file <- stopWordsTxt()
-  novel.vector <- PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
+ # if((is.null(input$stm)) || (input$stm=="None")) { return() }
+#  remove.words.file <- stopWordsTxt()
+  novel.vector <-PreprocessingSteps()$novel.list
+ # novel.vector <- PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
+ # novel.vector <-  RemoveWordsStepThree()$corpus
+  #novel.vector <- as.list(novel.vector)
   corpus <- Corpus(VectorSource(novel.vector))
-  corpus <- tm_map(corpus,removeWords,remove.words.file)
-  corpus <-tm_map(corpus,removeWords,input$remove_words)
+ # corpus <- tm_map(corpus,removeWords,remove.words.file)
+ # corpus <-tm_map(corpus,removeWords,input$remove_words)
   tdm <-DocumentTermMatrix(corpus)   
   out <- readCorpus(tdm, type="dtm")
   documents <- out$documents
@@ -1152,16 +1106,9 @@ return(stmmodel)
 #Example of documents associated with topics
 output$association <- renderPlot ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$stm)) || (input$stm=="NULL")) { return() }
-  withProgress(message = 'Calculation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
+  if((is.null(input$stm)) || (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
-  novel.vector <-PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
+  novel.vector <-RemoveWordsStepThree()$corpus#PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
   K=input$num
 #par(mfrow = c(3, 3),mar = c(.5, .5, 1, .5))
 for (i in 1:K){
@@ -1175,15 +1122,8 @@ for (i in 1:K){
 # Expected Topic Proportion
 output$proportion <- renderPlot ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$stm))|| (input$stm=="NULL")) { return() }
+  if((is.null(input$stm))|| (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
-  withProgress(message = 'Calculation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
 #par(mfrow=c(1,1),mar=c(5,5,5,5))
 plot.STM(stmmodel, type = "summary", xlim = c(0, .9))
 })
@@ -1191,37 +1131,25 @@ plot.STM(stmmodel, type = "summary", xlim = c(0, .9))
 #####
 output$perspectives <- renderPlot ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$stm))|| (input$stm=="NULL")) { return() }
+  if((is.null(input$stm))|| (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
   K=as.integer(input$num)
   par(mfrow=c(1,1),mar=c(1,1,1,1))
-  withProgress(message = 'Calculation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
 plot.STM(stmmodel, type = "labels")#, xlim = c(0, .9))#,xlim = c(1, 5))
 })
+
 output$cloud_stm <- renderPlot({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$stm))|| (input$stm=="NULL")) { return() }
-  withProgress(message = 'Calculation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
+  if((is.null(input$stm))|| (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
   K=as.integer(input$num)
 cloud(stmmodel, topic = K, scale = c(5,.25))
 })
+
 ### graphical display of topic correlation
 output$corelation <-renderPlot({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$stm)) || (input$stm=="NULL")) { return() }
+  if((is.null(input$stm)) || (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
   modoutcorr <- topicCorr(stmmodel)
 #modoutcorr$cor
@@ -1230,49 +1158,15 @@ output$corelation <-renderPlot({
 
 output$topics_stm <- renderPrint({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$stm)) || (input$stm=="NULL")) { return() }
+  if((is.null(input$stm)) || (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
 #labelTopics(stmmodel)
   stmAnalysis$documents
 })
 
-output$docs <- renderPrint({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$lda)) || (input$lda=="NULL")) { return() }
-  LdaAnalysis()$docs
-})
 
-output$docsNames <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$lda)) ||  (input$lda=="NULL")) { return() }
-  if (!is.null(input$file.article.txt)) {
-   k <- length(input$file.article.txt$name)
-   n <- as.list(rep(1:k,1))
-   HTML(paste("Document ",n, ":", input$file.article.txt$name, sep=" ", collapse="<br/>"))
- }
- else if (!is.null(input$file.article)) {
-  k <- length(input$file.article$name)
-  n <- as.list(rep(1:k,1))
-  HTML(paste("Document ",n, ":", input$file.article$name,  metadataPdf()$titles, sep=" ", collapse="<br/>"))
- }
-})
 
-output$printCoordinates <-renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  if((is.null(input$lda)) || (input$lda=="NULL")) { return() }
-  distance <- LdaAnalysis()$lda.coordinates
-  d<-dist(distance)
-  # euclidean distances between the rows
-  fit <- cmdscale(d,eig=TRUE, k=2) # k is the number of dim
- # fit # view results
- # plot solution 
- x <- fit$points[,1]
- y <- fit$points[,2]
- p <- plot(x, y, xlab="Coordinate 1", ylab="Coordinate 2", 
-      main="Metric  MDS",	type="n")
- text(x, y,  cex=.9)  
-  return(p)
-})
+
 
 ### CLUSTER ANALYSIS
 
@@ -1288,14 +1182,17 @@ cluster <-reactive ({
  # if ((!is.null(input$metadata_pdf))&& (is.null(input$metadata_csv))) {
  #   fit$labels<-names(novel.list)
  # }
- # else if (!is.null(input$metadata_pdf)) {
- #   file.names <- newData()[[3]]
- #   fit$labels <- file.names
- # }
- # else if (!is.null(input$metadata_csv)) {
- #   file.names <- newData()[[3]]
- #   fit$labels <- file.names
- # }
+
+  if (!is.null(input$metadata_source)) {
+   file.names <- fileData()$title
+  }
+  else if (!is.null(input$file.article.txt)) {
+    file.names <- input$file.article.txt$name
+  }
+  else if (!is.null(input$file.article)){
+    file.names <- input$file.article$name
+  }
+  fit$labels <- file.names
   # if ((is.null(input$cuttree))|| (input$cuttree=="NULL")) {
  # p<-  plot(fit)
 
@@ -1308,6 +1205,17 @@ output$cluster_plot <- renderPlot({
   color=input$color
   k=as.numeric(input$cuttree)
   fit <- cluster()
+  fit$labels <- input$file.article.txt$name
+  if (!is.null(input$metadata_source)) {
+    file.names <- fileData()$title
+  }
+  else if (!is.null(input$file.article.txt)) {
+    file.names <- input$file.article.txt$name
+  }
+  else if (!is.null(input$file.article)){
+    file.names <- input$file.article$name
+  }
+  fit$labels <- file.names
   p<-  plot(fit)
   if (input$cuttree==0)
     p<-  plot(fit)
@@ -1502,7 +1410,37 @@ output$choose_interviewer <- renderUI({
   }
 }) 
 
+### END OF DATA PREPARATION ###########
 
+output$remove_html_symbol <- renderUI({
+  names <- c("NULL","\\","/","(",")")
+  selectizeInput("remove_html_symbol", label = "Select or Type HTML/xml tags to remove", 
+                 choices = names,
+                 options = list(create = TRUE),
+                 selected = NULL,
+                 multiple = TRUE) 
+  
+})
+
+output$replace_what <- renderUI({
+  names <- c("NULL","\\","/","(",")")
+  selectizeInput("remove_what", label = "Type Character or String to be REPLACED", 
+                 choices = names,
+                 options = list(create = TRUE),
+                 selected = NULL,
+                 multiple = FALSE) 
+  
+})
+
+output$replace_by <- renderUI({
+  names <- c("NULL","\\","/","(",")")
+  selectizeInput("remove_by", label = "Type Character or String for REPLACEMENT", 
+                 choices = names,
+                 options = list(create = TRUE),
+                 selected = NULL,
+                 multiple = FALSE) 
+  
+})
 
 
 })

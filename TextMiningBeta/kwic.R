@@ -89,3 +89,81 @@ matr <- matrix(s.split[[1]],ncol=divide,byrow = FALSE)
 class(matr) <- "numeric" 
 myImagePlot(matr, title="Punctuation Analysis")#,zlim=c(1,3))
 }
+
+# num.documents <- length(text.extract)
+# text.extract <- unlist(text.extract)
+# #corpus.lda <-  window.one()$lda.format
+# # num.documents <- length(window.one()$lda.format)
+# n.docs <- num.documents#as.numeric(length(num.documents))
+# 
+# # corpus.lda <- removeWords(corpus.lda, remove.words.file)
+# # corpus.lda <- removeWords(corpus.lda, c(input$remove_words))
+# empty.string <- lapply(text.extract, function(x) gsub(" +", " ", x))
+# pdf.corpus <- lexicalize(empty.string, lower=TRUE)
+# 
+# # corpus <- Corpus(VectorSource(corpus.lda))
+# #  corpus <- Corpus(VectorSource(novel.vector))
+# # corpus <- tm_map(corpus,removeWords,remove.words.file)
+# # newtext <-tm_map(corpus,removeWords,input$remove_words)
+# 
+# # pdf.corpus <- lexicalize(newtext, lower=TRUE)
+# # pdf.corpus <- lexicalize(corpus.lda, lower=TRUE)
+# # pdf.corpus$vocab <- wordStem(pdf.corpus$vocab, language = "english")
+# K=3
+# alphaK=0.02
+# etaK=0.02
+# iterK=500
+# num.words=3
+# wc <- word.counts(pdf.corpus$documents)
+# cutoff.lower=0
+# to.remove <- as.numeric(names(wc)[wc<=cutoff.lower])
+# pdf.corpus$documents <- filter.words(pdf.corpus$documents , to.remove)
+# get.terms <- function(x) {
+#   index <- match(x, vocab)
+#   index <- index[!is.na(index)]
+#   rbind(as.integer(index - 1), as.integer(rep(1, length(index))))
+# }
+# K <- as.numeric(input$num)
+# alphaK <-as.numeric(input$alpha)
+# etaK<-as.numeric(input$eta)
+# num.words <- as.numeric(input$word)
+# iterK <-as.numeric(input$iter)
+# pdf.lda <-
+#   lda.collapsed.gibbs.sampler(pdf.corpus$documents,K,pdf.corpus$vocab,iterK, alpha=alphaK, eta=etaK, compute.log.likelihood=TRUE)
+# topics <- top.topic.words(pdf.lda$topics, num.words, by.score = T)
+# docs <- top.topic.documents(pdf.lda$document_sums, num.documents)
+# p_topic <- as.vector(pdf.lda$topic_sums / sum(pdf.lda$topic_sums))
+# lda.coordinates <- mat.or.vec(n.docs,K)
+# for (i in 1:n.docs){
+#   for (j in 1:K){
+#     lda.coordinates[i,j] <-
+#       sum(pdf.lda$assignments[[i]]==(j-1))/length(pdf.lda$assignments[[i]])
+#   }
+# }
+# distance <- lda.coordinates#LdaAnalysis()$lda.coordinates
+# class(distance)
+# d<-dist(distance)
+# # euclidean distances between the rows
+# fit <- cmdscale(distance)#,eig=TRUE,k=3)#, k=2) # k is the number of dim
+# # fit # view results
+# # plot solution 
+# x <- fit$points[,1]
+# y <- fit$points[,2]
+# p <- plot(x, y, xlab="Coordinate 1", ylab="Coordinate 2", 
+#           main="Metric  MDS",	type="n")
+# text(x, y,  cex=.9)  
+
+# n.topics=3
+# novel.vector = text.extract
+# corpus <- Corpus(VectorSource(novel.vector))
+# # corpus <- tm_map(corpus,removeWords,remove.words.file)
+# # corpus <-tm_map(corpus,removeWords,input$remove_words)
+# tdm <-DocumentTermMatrix(corpus)   
+# out <- readCorpus(tdm, type="dtm")
+# documents <- out$documents
+# head(documents)
+# class (documents)
+# vocab <- out$vocab
+# n.topics <- as.numeric(input$num)
+# stmmodel <- stm(documents, vocab, n.topics, verbose=FALSE)
+

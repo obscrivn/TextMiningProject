@@ -283,38 +283,6 @@ shinyUI(
           )
         )
       )
-      #  fluidPage(
-      #   fluidRow( 
-      #     column(6, 
-      #        tags$hr(),
-      #        tags$h5("Select"),
-      #        radioButtons('metadata', 'Metadata from pdf files',
-      #                     c(none='None',
-      #                       metadata='Load'), 'None'),
-      #       # checkboxInput('metadata','Load',FALSE),
-      #        tableOutput("print_metadata_pdf")
-      #     ),
-      #     column(6, 
-      #        tags$hr(),
-      #        tags$h5("Upload Metadata from csv file (left panel): Id, Year, Title(name), Author, Category"),
-      #        fileInput('file.metadata', 'Choose CSV File', multiple=FALSE, accept=c('text/csv','text/comma-separated-values,text/plain','.csv')),
-      #        #uiOutput("load_metadata_csv"),
-      #        checkboxInput('header', 'Header', TRUE),
-      #        radioButtons('sep', 'Separator',
-      #                     c(Comma=',',
-      #                       Semicolon=';',
-      #                       Tab='\t'),
-      #                     ','),
-      #        tags$hr(),
-      #        radioButtons('metadata_csv', 'Read Metadata from CSV',
-      #                     c(none='None',
-      #                       upload='Load'), 'None'),
-      # 
-      #        tags$hr(),
-      #        dataTableOutput("print_metadata_csv")
-      #     )
-      #   )
-      # )
      )
     )
    ),
@@ -520,8 +488,118 @@ shinyUI(
           )
         )
       ),
-      tabPanel("Topic Analysis", "Under development")
+      tabPanel("Topic Analysis",
+          tabPanel("Topic Modeling",
+             tabsetPanel(type = "tabs", 
+                tabPanel("Model Creation", 
+                   p("This analysis is based on lda, topicmodels  and stm packages. For lda package - collapsed.gibbs.sampler is used, 
+                   where the number of topics, iteration, alpha and eta values can be adjusted. By default, num of topics = 3; iteration = 500, alpha = 0.02, eta = 0.02",
+                    tags$a("http://search.r-project.org/library/lda/html/rtm.collapsed.gibbs.sampler.html","lda package")),
+                      fluidPage(
+                         fluidRow(
+                            column(5,
+                              h5("Topic Selection:"),
+                              tags$hr(), 
+                              helpText("Select number of topics - an integer representing the number of topics in the model. Default is 3."),
+                              uiOutput("choose_topic_num"),
+                              helpText("Select the top number of words associated with a given topic. Default is 3."),
+                              uiOutput("choose_word_num")
+                            ),   
+                            column(5,
+                              helpText("The number of sweeps of Gibbs sampling over the entire corpus to make. Default is 500"),
+                              uiOutput("iter"),
+                              helpText("Select alpha. Default is 0.02"),
+                              uiOutput("alpha"),
+                              helpText("Select eta. Default is 0.02"),
+                              uiOutput("eta")
+                           ),       
+                           column(12,         
+                              p("To determine the best number of topics, run Best Topic Number analysis based on Likelihood Log. set.seed(2013)"),
+                              p("It may take a while to run this analysis depending 
+                              on the number of documents and their size. Meanwhile you make explore 
+                              your articles with frequency and cluster analyses."),#,tags$a("http://search.r-project.org/library/lda/html/rtm.collapsed.gibbs.sampler.html","lda package"),"set.seed(2013)"),
+                              tags$h5("Best Topic Number:"),
+                              tags$hr(), 
+                              helpText("Run this analysis to determine the 
+                              best number of topics to use."),
+                              uiOutput("best_topic_num"),
+                              tableOutput("best_k"),
+                              plotOutput("best_k_plot")
+                           )                                                                                                        
+                        )
+                      )
+                    ),
+                    tabPanel("LDA visualization",                                                         
+                       fluidPage(                                     
+                          fluidRow( #uiOutput("choose_lda"),
+                           column(7, br(),
+                             radioButtons('lda', 'Run LDA Analysis',
+                               c(none='None',
+                                 run='RUN'),
+                                  'None'),
+                             helpText("Selected Topics LDA (lda.collapsed.gibbs.sampler from lda package)"),
+                             tableOutput("topics")#,
+                            # helpText("Plotting Documents and Topics Relations"),
+                            # plotOutput("printCoordinates")
+                           ),
+                          column(5, br(),
+                             uiOutput("docsNames"),
+                             verbatimTextOutput("docs")
+                          )
+                        )
+                      )
+                    ),
+                   tabPanel("STM Visualization",
+                      fluidPage(
+                        fluidRow( #p("STM is a structural topic modeling."),
+                           column(8,  tags$h4("Structural Topic Modeling"),
+                           #  uiOutput("choose_stm"),
+                              radioButtons('stm', 'Run LDA Analysis',
+                               c(none='None',
+                                run='RUN'),
+                                 'None'),
+                                tags$hr(),
+                                #verbatimTextOutput("docs"),
+                                helpText("Structural Topics STM"),
+                                plotOutput("perspectives")
+                             ),
+                           column(12,
+                             tags$hr(), 
+                             tags$h5("Structural Topic Modeling"),
+                             helpText("package stm with init LDA"),
+                             verbatimTextOutput("topics_stm"),
+                             tags$h5("Proportion of Topics in Documents"),
+                             plotOutput("proportion"),
+                             tags$h5("Most Common Topic Terms"),
+                             plotOutput("cloud_stm"),
+                             #plotOutput("perspectives"),
+                             tags$h5("Correlation Plot"),
+                             plotOutput("corelation")
+                           )  
+                        )
+                      )
+                    ), 
+                   tabPanel("Metadata Topic Visualization",
+                      fluidPage( p("This analysis requires metadata - please load or extract metadata in Data Preparation Panel."),
+                        fluidRow(
+                           column(12,
+                             tags$h5("Topic Modeling with topicmodels package:"),
+                             uiOutput("choose_chronology"),
+                             radioButtons('chronology', 'Run LDA Analysis',
+                               c(none='None',
+                                run='RUN'),
+                                'None'),
+                             tableOutput("chronology_table"),
+                             verbatimTextOutput("chronology_top"),
+                             plotOutput("chronology_plot")
+                            )
+                        )
+                      )
+                  )
+               )
+            )               
+        )
+     )
    )
-  )
  )
 )

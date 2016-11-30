@@ -1,5 +1,6 @@
 # function to extract text content (without processing from a txt document)
 #uris.name <- "A context-based model for Sentiment Analysis in Twitter.txt"
+#uris.name <- "Beyond Twitter Text: A Preliminary Study on Twitter Hyperlink and its Application.txt"
 #x<-file.choose()
 #num=1
 #y <-extractContentTxt(x)
