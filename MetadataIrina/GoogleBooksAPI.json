@@ -1,0 +1,722 @@
+{
+ "kind": "books#volumes",
+ "totalItems": 10,
+ "items": [
+  {
+   "kind": "books#volume",
+   "id": "UaUCjgaV3y4C",
+   "etag": "+apxv9FgCqc",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/UaUCjgaV3y4C",
+   "volumeInfo": {
+    "title": "Mavo",
+    "subtitle": "Japanese Artists and the Avant-garde, 1905-1931",
+    "authors": [
+     "Gennifer Stacy Weisenfeld"
+    ],
+    "publisher": "Univ of California Press",
+    "publishedDate": "2002",
+    "description": "MAVO is the first book-length study in English that critically evaluates the Japanese artistic avant-garde (1905-1931) and its relationship to broader developments in modernism worldwide.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "0520223381"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9780520223387"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 368,
+    "printType": "BOOK",
+    "categories": [
+     "Art"
+    ],
+    "averageRating": 5.0,
+    "ratingsCount": 1,
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.1",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=UaUCjgaV3y4C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=UaUCjgaV3y4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=UaUCjgaV3y4C&pg=RA2-PT22&dq=isbn0520223381&hl=&cd=1&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=UaUCjgaV3y4C&dq=isbn0520223381&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo.html?hl=&id=UaUCjgaV3y4C"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=UaUCjgaV3y4C&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "-XskDQAAQBAJ",
+   "etag": "Ti2GgWUrJ/4",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/-XskDQAAQBAJ",
+   "volumeInfo": {
+    "title": "MAVO",
+    "subtitle": "Japanese Artists and the Avant-Garde, 1905-1931",
+    "authors": [
+     "Gennifer Weisenfeld"
+    ],
+    "publisher": "Univ of California Press",
+    "publishedDate": "2002-02-25",
+    "description": "MAVO is the first book-length study in English that critically evaluates the Japanese artistic avant-garde (1905-1931) and its relationship to broader developments in modernism worldwide.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_13",
+      "identifier": "9780520223387"
+     },
+     {
+      "type": "ISBN_10",
+      "identifier": "0520223381"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 368,
+    "printType": "BOOK",
+    "categories": [
+     "Art"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=-XskDQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=-XskDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=-XskDQAAQBAJ&printsec=frontcover&dq=isbn0520223381&hl=&cd=2&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=-XskDQAAQBAJ&dq=isbn0520223381&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/MAVO.html?hl=&id=-XskDQAAQBAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=-XskDQAAQBAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "MAVO is the first book-length study in English that critically evaluates the Japanese artistic avant-garde (1905-1931) and its relationship to broader developments in modernism worldwide."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "OrUl4ev6MSsC",
+   "etag": "GLAP+c9eFTA",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/OrUl4ev6MSsC",
+   "volumeInfo": {
+    "title": "Mavo",
+    "subtitle": "Japanese Artists and the Avant-garde, 1905-1931",
+    "authors": [
+     "Gennifer Stacy Weisenfeld"
+    ],
+    "publisher": "ICON Group International",
+    "publishedDate": "2002",
+    "description": "MAVO is the first book-length study in English that critically evaluates the Japanese artistic avant-garde (1905-1931) and its relationship to broader developments in modernism worldwide.",
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 368,
+    "printType": "BOOK",
+    "categories": [
+     "Art"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=OrUl4ev6MSsC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=OrUl4ev6MSsC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=OrUl4ev6MSsC&dq=isbn0520223381&hl=&cd=3&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=OrUl4ev6MSsC&dq=isbn0520223381&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo.html?hl=&id=OrUl4ev6MSsC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=OrUl4ev6MSsC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "MAVO is the first book-length study in English that critically evaluates the Japanese artistic avant-garde (1905-1931) and its relationship to broader developments in modernism worldwide."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "VvxVe06GQtgC",
+   "etag": "BmdmKB9xutM",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/VvxVe06GQtgC",
+   "volumeInfo": {
+    "title": "The Gun Digest Book of Firearms Assembly/Disassembly Part IV - Centerfire Rifles",
+    "authors": [
+     "J B Wood"
+    ],
+    "publisher": "Krause Publications",
+    "publishedDate": "2003-12-15",
+    "description": "New Edition, Revised & expanded to include the 72 most often disassembled pistol designs (plus 250 variations) and 1,800 photos - all in 592 pages. &break;&break; Pistol disassembly/reassembly has never been easier &break;Clean and maintain your autoloading pistols - yourself. This book makes it simple, thanks to author Wood's expertise, step-by-step instructions and crisp photography. &break;&break; Detailed Photos show field-stripping and detailed disassembly step in proper order and clearly illustrate the parts involved and then (simple) tools used. &break;&break; Easy to understand text describing each step guides everyone - novice or expert - through the disassembly and reassembly of 72 different pistol models - plus some 250 closely related models. &break;&break;No other book provides this kind of photo-illustrated information.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_13",
+      "identifier": "9780873496315"
+     },
+     {
+      "type": "ISBN_10",
+      "identifier": "0873496310"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 576,
+    "printType": "BOOK",
+    "categories": [
+     "Sports & Recreation"
+    ],
+    "averageRating": 5.0,
+    "ratingsCount": 2,
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": true,
+    "contentVersion": "0.1.0.0.preview.1",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=VvxVe06GQtgC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=VvxVe06GQtgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=VvxVe06GQtgC&printsec=frontcover&dq=isbn0520223381&hl=&cd=4&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=VvxVe06GQtgC&dq=isbn0520223381&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/The_Gun_Digest_Book_of_Firearms_Assembly.html?hl=&id=VvxVe06GQtgC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": true,
+     "acsTokenLink": "http://books.google.com/books/download/The_Gun_Digest_Book_of_Firearms_Assembly-sample-pdf.acsm?id=VvxVe06GQtgC&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=VvxVe06GQtgC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "This book makes it simple, thanks to author Wood&#39;s expertise, step-by-step instructions and crisp photography. &amp;break;&amp;break; Detailed Photos show field-stripping and detailed disassembly step in proper order and clearly illustrate the ..."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "eHSZQwAACAAJ",
+   "etag": "jjgtYCwL9P4",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/eHSZQwAACAAJ",
+   "volumeInfo": {
+    "title": "The golden age of advertising - the 70s",
+    "authors": [
+     "Jim Heimann",
+     "Steve Heller"
+    ],
+    "publisher": "Taschen America Llc",
+    "publishedDate": "2006",
+    "description": "Provides a pictorial tour of advertisements from the 1970s, including categories such as automobiles, travel, interiors, entertainment, fashion, alcohol, business, consumer products, and food and beverages.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "3822850810"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9783822850817"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 351,
+    "printType": "BOOK",
+    "categories": [
+     "Art"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=eHSZQwAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=eHSZQwAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=eHSZQwAACAAJ&dq=isbn0520223381&hl=&cd=5&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=eHSZQwAACAAJ&dq=isbn0520223381&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/The_golden_age_of_advertising_the_70s.html?hl=&id=eHSZQwAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=eHSZQwAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "Provides a pictorial tour of advertisements from the 1970s, including categories such as automobiles, travel, interiors, entertainment, fashion, alcohol, business, consumer products, and food and beverages."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "GcjME0wiMVsC",
+   "etag": "8iNaEUMkir4",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/GcjME0wiMVsC",
+   "volumeInfo": {
+    "title": "Solvent Recovery Handbook",
+    "authors": [
+     "Ian McN. Smallwood"
+    ],
+    "publisher": "CRC Press",
+    "publishedDate": "2002",
+    "description": "The pressure is on to cut plant emissions while still maintaining a cost-effective operation. Choosing the best solvent, being aware of potential problems, and the recovery of solvents has never been so important. Traditionally, solvents had been chosen on the basis of whether they can do the job effectively and economically. However, with regulations on exposure to solvent vapors becoming more stringent, selecting the solvent that meets regulatory, efficiency, and economical criteria as early as possible in the process has become paramount. Solvent Recovery Handbook, Second Edition sets out the physical properties of the fifty most commonly used solvents. The book supplies information on their behavior during and after use, health and fire hazards, the photochemical ozone creation potential (POCP), and recovery processes including practical aspects of the design and operation of batch stills. It delivers state-of-the art coverage of every available recovery and disposal technology - including removing solvents from gas, water, and residues, separating used solvents, and drying solvents. What's more, you'll find fact-filled sections on the latest equipment, safe effective operating procedures, choosing solvents with recovery in mind, and much more. Updated and expanded, Ian Smallwood's Solvent Recovery Handbook, Second Edition hands you all the practical tools you need to efficiently and cost-effectively process harmful organic solvents after re-capture.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "0849316022"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9780849316029"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 424,
+    "printType": "BOOK",
+    "categories": [
+     "Technology & Engineering"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.1.0.0.preview.1",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=GcjME0wiMVsC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=GcjME0wiMVsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=GcjME0wiMVsC&printsec=frontcover&dq=isbn0520223381&hl=&cd=6&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=GcjME0wiMVsC&dq=isbn0520223381&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Solvent_Recovery_Handbook.html?hl=&id=GcjME0wiMVsC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=GcjME0wiMVsC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "The book supplies information on their behavior during and after use, health and fire hazards, the photochemical ozone creation potential (POCP), and recovery processes including practical aspects of the design and operation of batch stills ..."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "dKK-QgAACAAJ",
+   "etag": "tjn3gTzfiFA",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/dKK-QgAACAAJ",
+   "volumeInfo": {
+    "title": "Experimental Organic Chemistry",
+    "subtitle": "Principles and Practice",
+    "authors": [
+     "Laurence M. Harwood",
+     "Christopher J. Moody"
+    ],
+    "publisher": "Wiley-Blackwell",
+    "publishedDate": "1989",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "0632020172"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9780632020171"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 778,
+    "printType": "BOOK",
+    "categories": [
+     "Chemistry, Organic"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=dKK-QgAACAAJ&dq=isbn0520223381&hl=&cd=7&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=dKK-QgAACAAJ&dq=isbn0520223381&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Experimental_Organic_Chemistry.html?hl=&id=dKK-QgAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=dKK-QgAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "jsRRAAAAMAAJ",
+   "etag": "v11+gKwDV04",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/jsRRAAAAMAAJ",
+   "volumeInfo": {
+    "title": "Structural design of multi-storeyed buildings",
+    "authors": [
+     "U. H. Varyani"
+    ],
+    "publishedDate": "2002-01-01",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "8170032601"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9788170032601"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 384,
+    "printType": "BOOK",
+    "categories": [
+     "Technology & Engineering"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.1.1.0.preview.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=jsRRAAAAMAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=jsRRAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=jsRRAAAAMAAJ&q=isbn0520223381&dq=isbn0520223381&hl=&cd=8&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=jsRRAAAAMAAJ&dq=isbn0520223381&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Structural_design_of_multi_storeyed_buil.html?hl=&id=jsRRAAAAMAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=jsRRAAAAMAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "61CKqZl8gd4C",
+   "etag": "iCQU7X0jIVU",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/61CKqZl8gd4C",
+   "volumeInfo": {
+    "title": "Public Relations",
+    "subtitle": "A Practical Guide to the Basics",
+    "authors": [
+     "Philip Henslowe"
+    ],
+    "publisher": "Kogan Page Publishers",
+    "publishedDate": "2003",
+    "description": "This straightforward and practical guide takes the reader step-by-step through a PR campaign. It provides a valuable overview of the main areas of work involved, including: ethics and the law; working with photographers; working with printers; working with publishers and the media; working with designers; crisis management; and new developments in technology. This completely updated second edition includes new information on professional advisers, spin doctors, PR in local government and financial PR.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "0749440724"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9780749440725"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 152,
+    "printType": "BOOK",
+    "categories": [
+     "Business & Economics"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.1",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=61CKqZl8gd4C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=61CKqZl8gd4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=61CKqZl8gd4C&printsec=frontcover&dq=isbn0520223381&hl=&cd=9&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=61CKqZl8gd4C&dq=isbn0520223381&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Public_Relations.html?hl=&id=61CKqZl8gd4C"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=61CKqZl8gd4C&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "In this practical guide, Philip Henslowe, a public relations expert, takes the reader through the process of creating a PR campaign."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "7VxDAAAAQBAJ",
+   "etag": "LYUb42CUrzA",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/7VxDAAAAQBAJ",
+   "volumeInfo": {
+    "title": "Handbook of Industrial Chemistry and Biotechnology",
+    "authors": [
+     "James A. Kent"
+    ],
+    "publisher": "Springer Science & Business Media",
+    "publishedDate": "2013-01-13",
+    "description": "Substantially revising and updating the classic reference in the field, this handbook offers a valuable overview and myriad details on current chemical processes, products, and practices. No other source offers as much data on the chemistry, engineering, economics, and infrastructure of the industry. The Handbook serves a spectrum of individuals, from those who are directly involved in the chemical industry to others in related industries and activities. It provides not only the underlying science and technology for important industry sectors, but also broad coverage of critical supporting topics. Industrial processes and products can be much enhanced through observing the tenets and applying the methodologies found in chapters on Green Engineering and Chemistry (specifically, biomass conversion), Practical Catalysis, and Environmental Measurements; as well as expanded treatment of Safety, chemistry plant security, and Emergency Preparedness. Understanding these factors allows them to be part of the total process and helps achieve optimum results in, for example, process development, review, and modification. Important topics in the energy field, namely nuclear, coal, natural gas, and petroleum, are covered in individual chapters. Other new chapters include energy conversion, energy storage, emerging nanoscience and technology. Updated sections include more material on biomass conversion, as well as three chapters covering biotechnology topics, namely, Industrial Biotechnology, Industrial Enzymes, and Industrial Production of Therapeutic Proteins.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_13",
+      "identifier": "9781461442592"
+     },
+     {
+      "type": "ISBN_10",
+      "identifier": "1461442591"
+     }
+    ],
+    "readingModes": {
+     "text": true,
+     "image": true
+    },
+    "pageCount": 1562,
+    "printType": "BOOK",
+    "categories": [
+     "Science"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.8.8.0.preview.3",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=7VxDAAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=7VxDAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=7VxDAAAAQBAJ&printsec=frontcover&dq=isbn0520223381&hl=&cd=10&source=gbs_api",
+    "infoLink": "https://play.google.com/store/books/details?id=7VxDAAAAQBAJ&source=gbs_api",
+    "canonicalVolumeLink": "https://market.android.com/details?id=book-7VxDAAAAQBAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "FOR_SALE_AND_RENTAL",
+    "isEbook": true,
+    "listPrice": {
+     "amount": 559.0,
+     "currencyCode": "USD"
+    },
+    "retailPrice": {
+     "amount": 447.2,
+     "currencyCode": "USD"
+    },
+    "buyLink": "https://play.google.com/store/books/details?id=7VxDAAAAQBAJ&rdid=book-7VxDAAAAQBAJ&rdot=1&source=gbs_api",
+    "offers": [
+     {
+      "finskyOfferType": 1,
+      "listPrice": {
+       "amountInMicros": 5.59E8,
+       "currencyCode": "USD"
+      },
+      "retailPrice": {
+       "amountInMicros": 4.472E8,
+       "currencyCode": "USD"
+      },
+      "giftable": true
+     },
+     {
+      "finskyOfferType": 3,
+      "listPrice": {
+       "amountInMicros": 1.9565E8,
+       "currencyCode": "USD"
+      },
+      "retailPrice": {
+       "amountInMicros": 1.7022E8,
+       "currencyCode": "USD"
+      },
+      "rentalDuration": {
+       "unit": "DAY",
+       "count": 90.0
+      }
+     }
+    ]
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+    "epub": {
+     "isAvailable": true,
+     "acsTokenLink": "http://books.google.com/books/download/Handbook_of_Industrial_Chemistry_and_Bio-sample-epub.acsm?id=7VxDAAAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+    },
+    "pdf": {
+     "isAvailable": true,
+     "acsTokenLink": "http://books.google.com/books/download/Handbook_of_Industrial_Chemistry_and_Bio-sample-pdf.acsm?id=7VxDAAAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=7VxDAAAAQBAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "Substantially revising and updating the classic reference in the field, this handbook offers a valuable overview and myriad details on current chemical processes, products, and practices."
+   }
+  }
+ ]
+}

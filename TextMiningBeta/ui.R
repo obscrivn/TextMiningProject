@@ -108,7 +108,24 @@ shinyUI(
           ) 
       ),
       tabPanel(strong("ZOTERO"), "Under development"),
-      tabPanel(strong("JSON"), "Under development"),
+      tabPanel(strong("Structured Data"),
+               fluidPage(
+                 fluidRow( 
+                   column(6, 
+                          tags$hr(),
+                          radioButtons('structured_data_file_source', 'Choose file format',
+                                       c("JSON"="JSON",
+                                         "XML"="XML"),
+                                       "JSON"),
+                          uiOutput("place_for_structured_data_browser")
+                   ),
+                   column(6, 
+                          dataTableOutput("place_for_structured_data")
+                   )
+                 )
+               )
+ 
+      ),
       tabPanel(strong("POS-Tagged Text"), "tm package - readTagged")
       ),     
       tabPanel(strong("Data Preparation"),

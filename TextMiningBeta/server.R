@@ -45,15 +45,41 @@ shinyServer(function(input, output) {
     if (is.null(input$file.article.txt)) { return()}
     paste(input$file.article.txt$name, sep="\n")
   }) 
-output$print_length_pdf <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-  HTML(paste("Corpus Size Total: ", ListTerms()$len, sep=" ", collapse="<br/>"))
-})
-output$print_length_txt <- renderUI({
-  if  (is.null(input$file.article.txt)) { return() }
-  HTML(paste("Corpus Size Total: ", ListTerms()$len, sep=" ", collapse="<br/>"))
-})
- 
+  output$print_length_pdf <- renderUI({
+    if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+    HTML(paste("Corpus Size Total: ", ListTerms()$len, sep=" ", collapse="<br/>"))
+  })
+  output$print_length_txt <- renderUI({
+    if  (is.null(input$file.article.txt)) { return() }
+    HTML(paste("Corpus Size Total: ", ListTerms()$len, sep=" ", collapse="<br/>"))
+  })
+  
+  output$place_for_structured_data_browser <- renderUI ({
+    switch (input$structured_data_file_source,
+            "JSON"= fileInput('structured_data_file_json', 'Choose JSON File', multiple=FALSE, accept=c('application/json',',JSON')),
+            "XML" = fileInput('structured_data_file_xml', 'Choose XML File', multiple=FALSE, accept=c('application/xml','text/xml','.xml'))
+    )
+  })
+  
+  ## Reading Structured Data
+  structured_data <- reactive({ # loading data
+    my_data = NULL
+    if( !is.null(input$structured_data_file_json) ) {
+      my_data <- fromJSON(input$structured_data_file_json$datapath, flatten = TRUE)
+    }
+    else if( !is.null(input$structured_data_file_xml) ) {
+      my_data <- xmlToDataFrame(input$structured_data_file_xml$datapath)
+    }
+    return(my_data)
+  })
+  
+  ### Display Structured Data
+  output$place_for_structured_data <- renderDataTable({
+    my_data = structured_data()
+    if ( is.null(my_data) )  { return() }
+    my_data
+  }) 
+  
   ExtractRawContentPDF <- reactive ({
     if (is.null(input$file.article)) { return() }
    extractContentPdf(input$file.article)

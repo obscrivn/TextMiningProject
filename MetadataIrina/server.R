@@ -32,6 +32,7 @@ shinyServer(function(input, output) {
     }
     else if( !is.null(input$json_file_name) ) {
       my_data <- fromJSON(input$json_file_name$datapath, flatten = TRUE)
+      
     }
     else if( !is.null(input$xml_file_name) ) {
       print(input$xml_file_name$datapath)
