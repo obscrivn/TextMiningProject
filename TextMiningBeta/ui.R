@@ -5,7 +5,9 @@ shinyUI(
     list(
       tags$head(
         tags$title("Interactive Text Mining Suite"),
-        tags$link(rel="stylesheet",href="app.css")
+        tags$link(rel="stylesheet",href="app.css"),
+        tags$script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"),
+        tags$script(src="app.js")
       )
     ),
     navbarPage(
