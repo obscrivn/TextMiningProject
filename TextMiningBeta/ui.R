@@ -545,24 +545,35 @@ shinyUI(
                    p("This analysis is based on lda, topicmodels  and stm packages. For lda package - collapsed.gibbs.sampler is used, 
                    where the number of topics, iteration, alpha and eta values can be adjusted. By default, num of topics = 3; iteration = 500, alpha = 0.02, eta = 0.02",
                     tags$a("http://search.r-project.org/library/lda/html/rtm.collapsed.gibbs.sampler.html","lda package")),
-                      fluidPage(
-                         fluidRow(
-                            column(5,
-                              h5("Topic Selection:"),
-                              tags$hr(), 
+                   hr(),
+
+                   tags$fieldset(class="ITMS-border",
+                    tags$legend(class="ITMS-border", "Topic selection"),
+                    fluidPage(
+                      fluidRow(
+                            column(6,
+                              #h5("Topic Selection:"),
+                              #tags$hr(), 
                               helpText("Select number of topics - an integer representing the number of topics in the model. Default is 3."),
                               uiOutput("choose_topic_num"),
                               helpText("Select the top number of words associated with a given topic. Default is 3."),
                               uiOutput("choose_word_num")
                             ),   
-                            column(5,
+                            column(6,
                               helpText("The number of sweeps of Gibbs sampling over the entire corpus to make. Default is 500"),
                               uiOutput("iter"),
                               helpText("Select alpha. Default is 0.02"),
                               uiOutput("alpha"),
                               helpText("Select eta. Default is 0.02"),
                               uiOutput("eta")
-                           ),       
+                           )
+                      )
+                    )                          
+                   ),
+
+                      fluidPage(
+                         fluidRow(
+     
                            column(12,         
                               p("To determine the best number of topics, run Best Topic Number analysis based on Likelihood Log. set.seed(2013)"),
                               p("It may take a while to run this analysis depending 
