@@ -5,7 +5,9 @@ shinyUI(
     list(
       tags$head(
         tags$title("Interactive Text Mining Suite"),
-        tags$link(rel="stylesheet",href="app.css")
+        tags$link(rel="stylesheet",href="app.css"),
+        tags$script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"),
+        tags$script(src="app.js")        
       )
     ),
     navbarPage(
@@ -45,12 +47,16 @@ shinyUI(
      p("We welcome comments, suggestions, notes on any errors or problems encountered by users. Please contact Dr. Olga Scrivner (obscrivn AT indiana DOT edu)"),
      div(style="margin-bottom:20px",a(href="http://cl.indiana.edu/~obscrivn/", target="_blank", "Dr. Olga Scrivner"))
     ),
-    navbarMenu(title = "File Uploads",
-       tabPanel(strong("Text Files"),
-          fluidPage(
-            shiny::tags$head(shiny::tags$style(shiny::HTML(
+    tabPanel(strong("File Uploads"),
+      fluidPage(
+        navlistPanel(
+          widths = c(2, 10),  
+
+          tabPanel(strong("Text Files"),
+            fluidPage(
+              shiny::tags$head(shiny::tags$style(shiny::HTML(
               "#text { font-size: 15px; height: 300px; overflow: auto; }"
-             ))),
+              ))),
               fluidRow( 
                 column(5,
                   tags$h4("Format - txt"),
@@ -69,31 +75,31 @@ shinyUI(
                 )
               )
             ) 
-           ),
-      tabPanel(strong("PDF Files"),
-          fluidPage(
-             shiny::tags$head(shiny::tags$style(shiny::HTML(
+          ),
+          tabPanel(strong("PDF Files"),
+            fluidPage(
+              shiny::tags$head(shiny::tags$style(shiny::HTML(
                "#text { font-size: 15px; height: 300px; overflow: auto; }"
               ))),
-             fluidRow( 
+              fluidRow( 
                 column(5,
                   tags$h4("Format - pdf"),
                   fileInput('file.article', 'Choose File(s) in PDF format',multiple=TRUE, accept=c('pdf')),
                   uiOutput("print_name_article"),
                   uiOutput("print_length_pdf")
                 ),
-               column(6,
+                column(6,
                  tags$h4("Extract Abstracts"),
-                 radioButtons(
+                  radioButtons(
                    'article_content', 
                    'Select Abstract',
                    c(none = 'Full Text',
                      abstract='Abstract'), 
                    'Full Text'
-                 )
-               )
-             ),
-             fluidRow(
+                  )
+                )
+              ),
+              fluidRow(
                 column(8,
                   tags$hr(),
                   tags$h5("Full Text Viewer"),
@@ -104,34 +110,39 @@ shinyUI(
                   tags$h5("Abstract Viewer"),
                    div(id = "text", uiOutput("print_abstract"))
                 )
-             )
-          ) 
-      ),
-      tabPanel(strong("ZOTERO"), "Under development"),
-      tabPanel(strong("Structured Data"),
-               fluidPage(
-                 fluidRow( 
-                   column(6, 
-                          tags$hr(),
+              )
+            ) 
+          ),
+          tabPanel(strong("ZOTERO"), "Under development"),
+          tabPanel(strong("Structured Data"),
+            fluidPage(
+              fluidRow( 
+                column(6, 
+                          #tags$hr(),
                           radioButtons('structured_data_file_source', 'Choose file format',
                                        c("JSON"="JSON",
                                          "XML"="XML"),
                                        "JSON"),
                           uiOutput("place_for_structured_data_browser")
-                   ),
-                   column(6, 
+                ),
+                column(6, 
                           dataTableOutput("place_for_structured_data")
-                   )
-                 )
-               )
-      ),
-      tabPanel(strong("POS-Tagged Text"), "tm package - readTagged")
-      ),     
+                )
+              )
+            )
+          ),
+          tabPanel(strong("POS-Tagged Text"), "tm package - readTagged")
+          
+        )
+      )        
+    ),  
+
       tabPanel(strong("Data Preparation"),
-         tabsetPanel(type = "tabs", 
-           tabPanel(
-             tags$h4("Data Cleaning"),
-             br(),
+        fluidPage(
+          navlistPanel(
+            widths = c(2, 10),
+            tabPanel("Data Cleaning", 
+
               fluidPage(
                   shiny::tags$head(shiny::tags$style(shiny::HTML(
                   "#text { font-size: 15px; height: 300px; overflow: auto; }"
@@ -174,9 +185,10 @@ shinyUI(
                    )
                   )
                 )
-            ), 
-           tabPanel(tags$h4("Stopwords"),
-              br(),
+
+            ),
+            tabPanel("Stopwords",
+
               fluidPage(
                  fluidRow( 
                    column(4, tags$h4("Select Stopwords"),
@@ -212,7 +224,7 @@ shinyUI(
                     #  selectizeInput("cutoff_high", label = "Select or Type Upper Cutoff",choices = c(300,200,100),options = list(create = TRUE),selected = NULL,multiple = FALSE) 
                  )
               ),
-            fluidRow(
+              fluidRow(
                column(12,
                  p("List of stopwords: 1)", tags$a(href="http://www.ranks.nl/stopwords",
                                          "http://www.ranks.nl/stopwords"), "2) ",
@@ -226,87 +238,91 @@ shinyUI(
                  Words must be one per line."),
                  br(),
                  tags$hr()  
-               )
-            )
-        )
-    ),
-    tabPanel(
-      tags$h4("Stemming"),
-      br(),
-      fluidPage(
-        fluidRow(
-          column(4, 
-             tags$h4("Stems - tm package"),
-             tags$hr(), 
+                  )
+                )
+              )
+
+            ),
+            tabPanel("Stemming", 
+
+              fluidPage(
+                fluidRow(
+                  column(4, 
+                     tags$h4("Stems - tm package"),
+                     tags$hr(), 
+                     
+                    # checkboxInput('choose_stem','Stem',FALSE),
+                     radioButtons('language', 'Choose Language',
+                                  c(none='none',
+                                    English='english',
+                                    Spanish='spanish',
+                                    Danish="danish",
+                                    Dutch="dutch",
+                                    Finnish="finnish",
+                                    French="french",
+                                    German="german",   
+                                    Hungarian= "hungarian",
+                                    Italian="italian",
+                                    Norwegian="norwegian",
+                                    Porter="porter" #     "portuguese" "romanian"  
+                                   # [13] "russian"    "spanish"    "swedish"    "turkish"
+                                    ), 'none'),
+                     tags$hr()
+                  ),
+                  column(6, 
+                     tags$h4("Manual Stems"),
+                     tags$hr(),
+                     "Under development"
+                     # p("Add manually additional stems:")
+                  )
+                ),
+                fluidRow(
+                  column(12, tags$h4("Stem Viewer"),
+                    tags$hr(),
+                    div(id = "text", uiOutput("print_stemmer"))
+                  )
+                )
+              )
+
+            ),
+            tabPanel("Metadata",
+
+              p(
+                "Metadata consists of Ids, Year, Title, Author, Category, Location. 
+                You can upload your metadata in csv format (see a template). 
+                If your pdf files contain matadata - it will be printed here."
+              ),
              
-            # checkboxInput('choose_stem','Stem',FALSE),
-             radioButtons('language', 'Choose Language',
-                          c(none='none',
-                            English='english',
-                            Spanish='spanish',
-                            Danish="danish",
-                            Dutch="dutch",
-                            Finnish="finnish",
-                            French="french",
-                            German="german",   
-                            Hungarian= "hungarian",
-                            Italian="italian",
-                            Norwegian="norwegian",
-                            Porter="porter" #     "portuguese" "romanian"  
-                           # [13] "russian"    "spanish"    "swedish"    "turkish"
-                            ), 'none'),
-             tags$hr()
-          ),
-          column(6, 
-             tags$h4("Manual Stems"),
-             tags$hr(),
-             "Under development"
-             # p("Add manually additional stems:")
-          )
-        ),
-        fluidRow(
-          column(12, tags$h4("Stem Viewer"),
-            tags$hr(),
-            div(id = "text", uiOutput("print_stemmer"))
+              fluidPage(
+                fluidRow( 
+                  column(4, 
+                     tags$hr(),
+                      radioButtons('metadata_source', 'Choose metadata source',
+                         c("None" = "None",
+                           "From metadata of each uploaded PDF"="PDF",
+                            "From separate CSV file"="CSV",
+                             "From separate JSON file"="JSON",
+                             "From separate XML file"="XML"),
+                              "None"),
+                         uiOutput("place_for_file_browser")                                                              
+                  ),
+                  column(6, 
+                     dataTableOutput("place_for_metadata_table")
+                  )
+                )
+              )
+
+            )
           )
         )
-      )
-    ),
-    tabPanel(
-      tags$h4("Metadata"),
-      br(),
-      p(
-        "Metadata consists of Ids, Year, Title, Author, Category, Location. 
-        You can upload your metadata in csv format (see a template). 
-        If your pdf files contain matadata - it will be printed here."
-      ),
-     
-      fluidPage(
-        fluidRow( 
-          column(4, 
-             tags$hr(),
-              radioButtons('metadata_source', 'Choose metadata source',
-                 c("None" = "None",
-                   "From metadata of each uploaded PDF"="PDF",
-                    "From separate CSV file"="CSV",
-                     "From separate JSON file"="JSON",
-                     "From separate XML file"="XML"),
-                      "None"),
-                 uiOutput("place_for_file_browser")                                                              
-          ),
-          column(6, 
-             dataTableOutput("place_for_metadata_table")
-          )
-        )
-      )
-     )
-    )
-   ),
+      ),    
+
    navbarMenu(title = "Data Visualization",
-      tabPanel("Word Frequency",
-         tabsetPanel(type = "tabs", 
-            tabPanel(tags$h4("Frequency Table"),
-             br(),
+    tabPanel("Word Frequency",
+      fluidPage(
+        navlistPanel(
+          widths = c(2, 10),
+          tabPanel("Frequency Table",
              fluidPage(
                fluidRow(
                   column(6, 
@@ -327,10 +343,10 @@ shinyUI(
                   )
                )
              )
-         ),
-         tabPanel(tags$h4("Word Clouds"),
-            br(),
-           fluidPage(
+          ),
+          tabPanel("Word Clouds",
+
+            fluidPage(
               fluidRow(
                 column(4, 
                   radioButtons('pal', 'Select Color Palette',
@@ -376,7 +392,7 @@ shinyUI(
                        # uiOutput("choose_cloud"),
                   uiOutput("choose_top"),
                   tags$hr()
-                  )
+                )
                ),
                fluidRow(
                   column(8,
@@ -385,90 +401,90 @@ shinyUI(
                   )
                 )
               )
-         ),
-         tabPanel(tags$h4("Length"),
-           br(),
-           fluidPage( p("qdap package: word_length and sentSplit"),
-             fluidRow( p("Default sentence split is based on qdap sentSplit (? ! . |)"),
+
+          ),
+          tabPanel("Length",
+            fluidPage( p("qdap package: word_length and sentSplit"),
+              fluidRow( p("Default sentence split is based on qdap sentSplit (? ! . |)"),
                 column(4, 
-                   tags$h4("Select Length Type"),
-                  tags$hr(),
-                   radioButtons('show_word', 'Select Word or Sentence Length',
-                      c(none='None',
-                        word='Word Length',
-                        sentence='Sentence Length'), 'None'),
-                        tags$hr()
-                      # uiOutput("show_word")
-                 ),
-                 column(4, tags$h4("Select Text"),
+                     tags$h4("Select Length Type"),
+                    tags$hr(),
+                     radioButtons('show_word', 'Select Word or Sentence Length',
+                        c(none='None',
+                          word='Word Length',
+                          sentence='Sentence Length'), 'None'),
+                          tags$hr()
+                        # uiOutput("show_word")
+                ),
+                column(4, tags$h4("Select Text"),
                         tags$hr(),
                    uiOutput("choose_text"),
                    uiOutput("choose_bin"),
                    tags$hr()
-                 )
-            ),
-          fluidRow( 
-              column(3,   #verbatimTextOutput("length_table"),     
-                 tableOutput("length_word_table")
+                )
               ),
-             column(9, #uiOutput("show_sentence"),
-                                                 # plotOutput("sentences")
-               plotOutput("words")
+              fluidRow( 
+                  column(3,   #verbatimTextOutput("length_table"),     
+                     tableOutput("length_word_table")
+                  ),
+                  column(9, #uiOutput("show_sentence"),
+                   # plotOutput("sentences")
+                   plotOutput("words")
+                 )
+              )
+            )
+          ),
+          tabPanel("KWIC",
+            p("Key Word in Context Analysis"),
+            fluidPage(
+              fluidRow(
+                column(5, 
+                  tags$h4("Select key word"),
+                  uiOutput("choose_term"),
+                  tags$hr()
+                ),
+                column(7, 
+                  tags$h4("Select the length of the context (left/right)"),
+                  uiOutput("choose_length"),
+                  tags$hr()
+                )
+              ),
+             fluidRow(
+                column(6, 
+                  uiOutput("term_print"),
+                  tags$hr(),
+                  div(id = "text", uiOutput("print_kwic"))
+                ),
+                column(6,
+                  plotOutput("chunks")   
+                )
+              )
+            )
+          ),
+          tabPanel("Punctuation",
+            fluidPage(                        
+              p("This section is based on the punctuation analysis by Adam Calhoun's ",tags$a(href="https://medium.com/@neuroecology/punctuation-in-novels-8f316d542ec4","Blog"),". 
+                In his heatmap visualization, question marks and exclamation marks are red.
+                Quotation marks, hyphens and parenthesis are green. 
+                Semicolons, colons, commas, periods are blue"),
+              fluidRow(
+                column(4,
+                  tags$h4("Punctuation Frequency"),
+                  hr(),
+                  plotOutput("type_punctuation")
+                ),
+                column(4,
+                  tags$h4("Punctuation Map"),
+                  tags$hr(),
+                  plotOutput("heatmap_punct")
+                )
+              )
              )
           )
-         )
-        ),
-        tabPanel(tags$h4("KWIC"),
-          br(),
-          p("Key Word in Context Analysis"),
-          fluidPage(
-            fluidRow(
-              column(5, 
-                tags$h4("Select key word"),
-                uiOutput("choose_term"),
-                tags$hr()
-              ),
-              column(7, 
-                tags$h4("Select the length of the context (left/right)"),
-                uiOutput("choose_length"),
-                tags$hr()
-              )
-            ),
-           fluidRow(
-              column(6, 
-                uiOutput("term_print"),
-                tags$hr(),
-                div(id = "text", uiOutput("print_kwic"))
-              ),
-              column(6,
-                plotOutput("chunks")   
-              )
-            )
-          )
-        ),
-        tabPanel(tags$h4("Punctuation"),
-        fluidPage(                        
-          p("This section is based on the punctuation analysis by Adam Calhoun's ",tags$a(href="https://medium.com/@neuroecology/punctuation-in-novels-8f316d542ec4","Blog"),". 
-            In his heatmap visualization, question marks and exclamation marks are red.
-            Quotation marks, hyphens and parenthesis are green. 
-            Semicolons, colons, commas, periods are blue"),
-          fluidRow(
-            column(4,
-              tags$h4("Punctuation Frequency"),
-              hr(),
-              plotOutput("type_punctuation")
-            ),
-            column(4,
-              tags$h4("Punctuation Map"),
-              tags$hr(),
-              plotOutput("heatmap_punct")
-            )
-          )
-         )
         )
-       )
-      ),
-      tabPanel("Cluster Analysis",
+      )
+    ),
+    tabPanel("Cluster Analysis",
          p("Cluster Analysis (Descriptive Statistics) examines 
             how variables or individuals are grouped. The visual 
             representation is often referred to as a dendrogram,  
@@ -518,12 +534,14 @@ shinyUI(
               plotOutput("cluster_plot")
             )
           )
-        )
-      ),
-      tabPanel("Topic Analysis",
-          tabPanel("Topic Modeling",
-             tabsetPanel(type = "tabs", 
-                tabPanel("Model Creation", 
+        )      
+    ),
+    tabPanel("Topic Analysis",
+      fluidPage(
+        navlistPanel(
+          widths = c(2, 10),
+          tabPanel("Model Creation",
+
                    p("This analysis is based on lda, topicmodels  and stm packages. For lda package - collapsed.gibbs.sampler is used, 
                    where the number of topics, iteration, alpha and eta values can be adjusted. By default, num of topics = 3; iteration = 500, alpha = 0.02, eta = 0.02",
                     tags$a("http://search.r-project.org/library/lda/html/rtm.collapsed.gibbs.sampler.html","lda package")),
@@ -560,8 +578,10 @@ shinyUI(
                            )                                                                                                        
                         )
                       )
-                    ),
-                    tabPanel("LDA visualization",                                                         
+
+          ),
+          tabPanel("LDA Visualization",
+
                        fluidPage(                                     
                           fluidRow( #uiOutput("choose_lda"),
                            column(7, br(),
@@ -580,8 +600,10 @@ shinyUI(
                           )
                         )
                       )
-                    ),
-                   tabPanel("STM Visualization",
+
+          ),
+          tabPanel("STM Visualization",
+
                       fluidPage(
                         fluidRow( #p("STM is a structural topic modeling."),
                            column(8,  tags$h4("Structural Topic Modeling"),
@@ -610,8 +632,10 @@ shinyUI(
                            )  
                         )
                       )
-                    ), 
-                   tabPanel("Metadata Topic Visualization",
+
+          ),
+          tabPanel("Metadata Topic Visualization",
+
                       fluidPage( p("This analysis requires metadata - please load or extract metadata in Data Preparation Panel."),
                         fluidRow(
                            column(12,
@@ -627,11 +651,14 @@ shinyUI(
                             )
                         )
                       )
-                  )
-               )
-            )               
-        )
-     )
+
+          )                              
+
+        )      
+      )
+    )    
+   )
+
    )
  )
 )
