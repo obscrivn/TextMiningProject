@@ -881,9 +881,16 @@ output$eta <- renderUI({
 
 chronology <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  if( input$metadata_source == "None") {return()}
   if((is.null(input$chronology)) ||(input$chronology=="None")) { return() }
   remove.words.file <- stopWordsTxt()
   corpus.lda <- PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format 
+  if(!is.null(input$file.article)) {
+    corpus.lda <-  RemoveWordsStepOne()$corpus #PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
+  }
+  if(!is.null(input$file.article.txt)) {
+    corpus.lda <-  RemoveWordsStepOne()$corpus
+  }
   corpus.lda <- removeWords(corpus.lda, remove.words.file)
   corpus.lda <- removeWords(corpus.lda, c(input$remove_words))
   corpus.lda <- gsub("\\s+"," ",corpus.lda)
@@ -891,26 +898,21 @@ chronology <- reactive ({
   corpus.lda<- str_trim(corpus.lda)
   set.seed(2013)
   my.corpus <- Corpus(VectorSource(corpus.lda))
-  my.corpus <- tm_map(my.corpus,removeWords,stopwords("english"))
+ # my.corpus <- tm_map(my.corpus,removeWords,stopwords("english"))
+  language=input$language
   dtm <- DocumentTermMatrix(my.corpus)
-  if (!is.null(input$metadata_pdf)) {
-    dates <- metadataPdf()$datetimes
-  }
-  if (!is.null(input$metadata_csv)) {
-    dates <- newData()[[2]]
-  }
+ # if (!is.null(input$metadata_pdf)) {
+  dates<-  fileData()$date
+   # dates <- metadataPdf()$datetimes
+ # }
+  #if (!is.null(input$metadata_csv)) {
+  #  dates <- newData()[[2]]
+ # }
   for (i in 1:length(my.corpus)){
     meta(my.corpus[[i]], tag = "datetimestamp") <- dates[i]
   }
   dtm <- DocumentTermMatrix(my.corpus)
   n.topics <- as.numeric(input$num)
-  withProgress(message = 'Calculation in progress',
-               detail = 'This may take a while...', value = 0, {
-                 for (i in 1:15) {
-                   incProgress(1/15)
-                   Sys.sleep(0.25)
-                 }
-               })
   lda.model <- LDA(dtm, n.topics,method="Gibbs")
   n.words <- as.numeric(input$word)
   term <- terms(lda.model,n.words)  
@@ -980,7 +982,12 @@ BestK <- reactive ({
   novel.vector <- removeWords(novel.vector, remove.words.file)
   novel.vector <- removeWords(novel.vector, c(input$remove_words))
   pdf.corpus <- lexicalize(novel.vector, lower=TRUE)
+  if (input$language=="None") {
+    pdf.corpus$vocab <- pdf.corpus$vocab
+  }
+  else {
   pdf.corpus$vocab <- wordStem(pdf.corpus$vocab, language = input$language)
+  }
   wc <- word.counts(pdf.corpus$documents)
   to.remove <- as.numeric(names(wc)[wc<=cutoff.lower])
   pdf.corpus$documents <- filter.words(pdf.corpus$documents , to.remove)
@@ -1056,17 +1063,23 @@ LdaAnalysis <- reactive({
   corpus.lda <- gsub("\\s+"," ",corpus.lda)
   corpus.lda <- str_c(corpus.lda)
   corpus.lda<- str_trim(corpus.lda)
-  empty.string <- lapply(corpus.lda, function(x) gsub(" +", " ", x))
-  pdf.corpus <- lexicalize(empty.string, lower=TRUE)
+ # empty.string <- lapply(corpus.lda, function(x) gsub(" +", " ", x))
+ # pdf.corpus <- lexicalize(empty.string, lower=TRUE)
 
-  corpus <- Corpus(VectorSource(corpus.lda))
-    corpus <- Corpus(VectorSource(novel.vector))
-  corpus <- tm_map(corpus,removeWords,remove.words.file)
+ # corpus <- Corpus(VectorSource(corpus.lda))
+ # corpus <- tm_map(corpus,removeWords,remove.words.file)
  # newtext <-tm_map(corpus,removeWords,input$remove_words)
 
  # pdf.corpus <- lexicalize(newtext, lower=TRUE)
   pdf.corpus <- lexicalize(corpus.lda, lower=TRUE)
-  pdf.corpus$vocab <- wordStem(pdf.corpus$vocab, language = "english")
+  
+  if (input$language=="none") {
+    pdf.corpus$vocab <- pdf.corpus$vocab
+  }
+  else {
+    language=input$language
+  pdf.corpus$vocab <- wordStem(pdf.corpus$vocab, language)# = "english")
+  }
   wc <- word.counts(pdf.corpus$documents)
   to.remove <- as.numeric(names(wc)[wc<=cutoff.lower])
    pdf.corpus$documents <- filter.words(pdf.corpus$documents , to.remove)
@@ -1246,23 +1259,6 @@ cluster <-reactive ({
   m <- as.matrix(dtm)
   d<-dist(m,distance)
   fit <-hclust(d,method)
- 
- # if ((!is.null(input$metadata_pdf))&& (is.null(input$metadata_csv))) {
- #   fit$labels<-names(novel.list)
- # }
-
-  if (!is.null(input$metadata_source)) {
-   file.names <- fileData()$title
-  }
-  else if (!is.null(input$file.article.txt)) {
-    file.names <- input$file.article.txt$name
-  }
-  else if (!is.null(input$file.article)){
-    file.names <- input$file.article$name
-  }
-  fit$labels <- file.names
-  # if ((is.null(input$cuttree))|| (input$cuttree=="NULL")) {
- # p<-  plot(fit)
 
   return(fit)
 })
@@ -1273,22 +1269,24 @@ output$cluster_plot <- renderPlot({
   color=input$color
   k=as.numeric(input$cuttree)
   fit <- cluster()
-  fit$labels <- input$file.article.txt$name
-  if (!is.null(input$metadata_source)) {
-    file.names <- fileData()$title
-  }
-  else if (!is.null(input$file.article.txt)) {
+ # fit$labels <- input$file.article.txt$name
+ # if (!is.null(input$metadata_source)) {
+ #   file.names <- fileData()$title
+ # }
+   if (!is.null(input$file.article.txt)) {
     file.names <- input$file.article.txt$name
   }
   else if (!is.null(input$file.article)){
     file.names <- input$file.article$name
   }
-  fit$labels <- file.names
+ # fit$labels <- file.names
   p<-  plot(fit)
   if (input$cuttree==0)
-    p<-  plot(fit)
+  #  p<-  plot(fit)
+  p<- plot(fit,horiz=T,labels=file.names)
   else {
-    p<-  plot(fit)
+  #  p<-  plot(fit)
+  p<-  plot(fit,horiz=T,labels=file.names)
   rect.hclust(fit,k, border=color)
   }
  # fit <- cluster()
