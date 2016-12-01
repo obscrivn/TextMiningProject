@@ -45,41 +45,40 @@ shinyServer(function(input, output) {
     if (is.null(input$file.article.txt)) { return()}
     paste(input$file.article.txt$name, sep="\n")
   }) 
-  output$print_length_pdf <- renderUI({
-    if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
-    HTML(paste("Corpus Size Total: ", ListTerms()$len, sep=" ", collapse="<br/>"))
-  })
-  output$print_length_txt <- renderUI({
-    if  (is.null(input$file.article.txt)) { return() }
-    HTML(paste("Corpus Size Total: ", ListTerms()$len, sep=" ", collapse="<br/>"))
-  })
-  
-  output$place_for_structured_data_browser <- renderUI ({
-    switch (input$structured_data_file_source,
-            "JSON"= fileInput('structured_data_file_json', 'Choose JSON File', multiple=FALSE, accept=c('application/json',',JSON')),
-            "XML" = fileInput('structured_data_file_xml', 'Choose XML File', multiple=FALSE, accept=c('application/xml','text/xml','.xml'))
-    )
-  })
-  
-  ## Reading Structured Data
-  structured_data <- reactive({ # loading data
-    my_data = NULL
-    if( !is.null(input$structured_data_file_json) ) {
-      my_data <- fromJSON(input$structured_data_file_json$datapath, flatten = TRUE)
-    }
-    else if( !is.null(input$structured_data_file_xml) ) {
-      my_data <- xmlToDataFrame(input$structured_data_file_xml$datapath)
-    }
-    return(my_data)
-  })
-  
-  ### Display Structured Data
-  output$place_for_structured_data <- renderDataTable({
-    my_data = structured_data()
-    if ( is.null(my_data) )  { return() }
-    my_data
-  }) 
-  
+output$print_length_pdf <- renderUI({
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
+  HTML(paste("Corpus Size Total: ", ListTerms()$len, sep=" ", collapse="<br/>"))
+})
+output$print_length_txt <- renderUI({
+  if  (is.null(input$file.article.txt)) { return() }
+  HTML(paste("Corpus Size Total: ", ListTerms()$len, sep=" ", collapse="<br/>"))
+})
+
+output$place_for_structured_data_browser <- renderUI ({
+  switch (input$structured_data_file_source,
+          "JSON"= fileInput('structured_data_file_json', 'Choose JSON File', multiple=FALSE, accept=c('application/json',',JSON')),
+          "XML" = fileInput('structured_data_file_xml', 'Choose XML File', multiple=FALSE, accept=c('application/xml','text/xml','.xml'))
+  )
+})
+
+## Reading Structured Data
+structured_data <- reactive({ # loading data
+  my_data = NULL
+  if( !is.null(input$structured_data_file_json) ) {
+    my_data <- fromJSON(input$structured_data_file_json$datapath, flatten = TRUE)
+  }
+  else if( !is.null(input$structured_data_file_xml) ) {
+    my_data <- xmlToDataFrame(input$structured_data_file_xml$datapath)
+  }
+  return(my_data)
+})
+
+### Display Structured Data
+output$place_for_structured_data <- renderDataTable({
+  my_data = structured_data()
+  if ( is.null(my_data) )  { return() }
+  my_data
+}) 
   ExtractRawContentPDF <- reactive ({
     if (is.null(input$file.article)) { return() }
    extractContentPdf(input$file.article)
@@ -416,6 +415,17 @@ RemoveWordsStepTwo <-reactive({
 RemoveWordsStepThree <-reactive({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt))) { return() }
   corpus <- stemming()
+  doc.vect <- VectorSource(corpus)
+  docs <-Corpus(doc.vect)
+  tdm <- TermDocumentMatrix(docs)
+  term.matrix <- as.matrix(tdm)
+  if(!is.null(input$file.article)) {
+    file.names <-input$file.article$name
+  }
+  if(!is.null(input$file.article.txt))  {
+    file.names <-input$file.article.txt$name
+  }
+  colnames(term.matrix) <- file.names
  # if(input$stopwords=="None") {
   #  corpus <-RemoveWordsStepOne()$corpus
   corpus.paste <-paste(corpus, sep=" ")
@@ -449,7 +459,7 @@ RemoveWordsStepThree <-reactive({
      # words.list <-RemoveWordsStepTwo()$words.list
    # }
  # }
-  info <- list(d=d,corpus=corpus)
+  info <- list(d=d,corpus=corpus,tdm=tdm,term.matrix=term.matrix)
   return(info)
 })
 
@@ -756,15 +766,47 @@ output$print_cloud <-renderPlot({
   #                }
   #              })
   wordcloud_rep <- repeatable(wordcloud)
-  d <- RemoveWordsStepThree()$d
-  wordcloud_rep(d$word, d$freq, scale=c(8,0.2),ordered.colors=T,
+   font <- input$font
+
+  if (input$pal=="black"){
+    pal="black"
+  } else if (input$pal=="green"){
+  pal <- brewer.pal(9, "BuGn")
+  pal <- pal[-(1:2)]
+  } else if (input$pal=="multi") {
+  
+    pal <- brewer.pal(8,"Dark2")
+  }
+   if (input$multicloud=="Word Cloud") {
+   d <- RemoveWordsStepThree()$d
+  wordcloud_rep(d$word, d$freq, scale=c(8,0.2),ordered.colors=F,#ordered.colors=T,
                 rot.per=.15,#c(8,0.3),
                 min.freq = input$min,# 
-                vfont=c("sans serif","plain"),
+                #vfont=c("sans serif","plain"),
+                #vfont=c("script","plain"),
+                vfont=c(font,"plain"),
                random.order=FALSE,
                 max.words=input$max,#100,#input$freq, max.words=input$max,
                #colors=brewer.pal(6, "Dark2"))
-                colors="black")
+                colors=pal )#"black")
+   }
+   else if (input$multicloud=="Commonality Cloud") {
+     d <- RemoveWordsStepThree()$term.matrix
+     commonality.cloud(d, max.words=40,random.order=FALSE,ordered.colors=F,#ordered.colors=T,
+                   rot.per=.15,#c(8,0.3),
+                 #  min.freq = input$min,# 
+                   #vfont=c("sans serif","plain"),
+                   #vfont=c("script","plain"),
+                   vfont=c(font,"plain"),
+                 #  random.order=FALSE,
+                 #  max.words=input$max,#100,#input$freq, max.words=input$max,
+                   #colors=brewer.pal(6, "Dark2"))
+                   colors=pal )#"black")
+   }
+   else if (input$multicloud=="Comparison Cloud") {
+     d <- RemoveWordsStepThree()$term.matrix
+     comparison.cloud(d,max.words=40,random.order=FALSE)
+   }
  # wordcloud(d$word, d$freq)
 #  max.words =100,min.freq=3,scale=c(4,.5), 
  # random.order = FALSE,rot.per=.5,vfont=c("sans serif","plain"),colors=palette())
