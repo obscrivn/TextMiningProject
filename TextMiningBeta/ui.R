@@ -5,9 +5,7 @@ shinyUI(
     list(
       tags$head(
         tags$title("Interactive Text Mining Suite"),
-        tags$link(rel="stylesheet",href="app.css"),
-        tags$script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"),
-        tags$script(src="app.js")
+        tags$link(rel="stylesheet",href="app.css")
       )
     ),
     navbarPage(
@@ -126,7 +124,6 @@ shinyUI(
                    )
                  )
                )
- 
       ),
       tabPanel(strong("POS-Tagged Text"), "tm package - readTagged")
       ),     
@@ -335,42 +332,58 @@ shinyUI(
             br(),
            fluidPage(
               fluidRow(
-                column(5, 
-                  radioButtons('corpus', 'Select Corpus Type',
-                      c(raw='raw',
-                      preprocessed='preprocessed'),
-                                    'raw'),
+                column(4, 
+                  radioButtons('pal', 'Select Color Palette',
+                      c(black='black',
+                        green='green',
+                        multi='multi'),
+                        'green'),
                    tags$hr()
                 ),
+                column(4, 
+                       radioButtons('font', 'Select Font',
+                           c('Sans Serif'='sans serif',
+                            'Script'='script',
+                            'Gothic'='gothic english'),
+                             'sans serif'),
+                       tags$hr()
+                ),
+                column(4, 
+                       radioButtons('multicloud', 'Cloud Type',
+                           c('Word Cloud'='Word Cloud',
+                            'Commonality Cloud'='Commonality Cloud',
+                             'Comparison'='Comparison Cloud'),
+                              'Word Cloud'),
+                       tags$hr()
+                ),
+                fluidRow(
+                  column(5,
+                         p("Set the minimum frequency for your cloud visualization"),
+                         uiOutput("choose_min_frequency")
+                  ),
+                  column(5,p("Set the maximum words per plot"),
+                         uiOutput("choose_max_words")
+                  )
+                ),
+                fluidRow(
+                  column(12, 
+                         
+                         plotOutput("print_cloud")
+                  )
+                ),
                 # plotOutput("word_count")),
-                column(5, 
+                column(4, 
                        # uiOutput("choose_cloud"),
                   uiOutput("choose_top"),
                   tags$hr()
                   )
                ),
                fluidRow(
-                  column(12,
+                  column(8,
                     #tags$h5("Frequency Bar Plot"),
                     plotOutput("word_count")
                   )
-                ),
-                #hr(),
-                fluidRow(
-                   column(5,
-                       p("Set the minimum frequency for your cloud visualization"),
-                       uiOutput("choose_min_frequency")
-                   ),
-                   column(5,p("Set the maximum words per plot"),
-                       uiOutput("choose_max_words")
-                   )
-                ),
-                fluidRow(
-                   column(12, 
-                       
-                     plotOutput("print_cloud")
-                   )
-                )#,
+                )
               )
          ),
          tabPanel(tags$h4("Length"),
