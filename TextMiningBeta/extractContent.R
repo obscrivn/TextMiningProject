@@ -38,3 +38,29 @@ for (i in 1:num) {
 }
 return(text.extract)
 }
+
+# extractZotero <- function(x) {
+#   
+# }
+# uris.name <- file.choose()
+# 
+# pattern <- "sentiment"
+# tempPDF <- readPDF(control = list(text = "-layout"))(elem = list(uri = uris.name),language="en",id="id1")
+# texts <- enc2utf8(read.file)
+# read.file <- tempPDF$content
+# texts <- enc2utf8(read.file)
+# 
+# text.extract <- vector()
+# if (grepl("Twitter", texts)) {
+#   text.collapse <- paste(texts, collapse=" ")
+#   text.collapse <- enc2utf8(text.collapse)
+#   text.hyphen <- gsub("-\\s+", "", text.collapse)
+#   text.space <- gsub("\\s\\s+", " ", text.hyphen) 
+#   text.extract[i] <- text.space
+# }
+# 
+# reg <- regexpr(pattern, text, ignore.case = TRUE)
+# 
+# reg <- grepl(text, pattern,ignore.case = TRUE)
+# if reg==TRUE
+

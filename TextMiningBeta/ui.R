@@ -209,7 +209,7 @@ shinyUI(
                   ),
                   column(4,tags$h4("Manual Removal"),tags$hr(),
                    # checkboxInput('remove_manual','Apply Manual',FALSE),
-                    helpText("Type words to be removed and click add"),
+                    helpText("Select one or multiple words (hold shift key down)"),
                     uiOutput("choose_remove"),
                     div(id = "text", uiOutput("printWords"))
                   ),
@@ -264,8 +264,13 @@ shinyUI(
                                     Hungarian= "hungarian",
                                     Italian="italian",
                                     Norwegian="norwegian",
-                                    Porter="porter" #     "portuguese" "romanian"  
-                                   # [13] "russian"    "spanish"    "swedish"    "turkish"
+                                    Porter="porter",     
+                                    Portuguese="portuguese",
+                                    Romanian="romanian", 
+                                    Russian='russian',   
+                                    Spanish='spanish' ,   
+                                    Swedish="swedish"  ,  
+                                    Turkish="turkish"
                                     ), 'none'),
                      tags$hr()
                   ),
@@ -353,7 +358,7 @@ shinyUI(
                       c(black='black',
                         green='green',
                         multi='multi'),
-                        'green'),
+                        'multi'),
                    tags$hr()
                 ),
                 column(4, 
@@ -368,7 +373,7 @@ shinyUI(
                        radioButtons('multicloud', 'Cloud Type',
                            c('Word Cloud'='Word Cloud',
                             'Commonality Cloud'='Commonality Cloud',
-                             'Comparison'='Comparison Cloud'),
+                             'Comparison of two or more docs'='Comparison Cloud'),
                               'Word Cloud'),
                        tags$hr()
                 ),
@@ -635,8 +640,8 @@ shinyUI(
                              verbatimTextOutput("topics_stm"),
                              tags$h5("Proportion of Topics in Documents"),
                              plotOutput("proportion"),
-                             tags$h5("Most Common Topic Terms"),
-                             plotOutput("cloud_stm"),
+                            # tags$h5("Most Common Topic Terms"),
+                            # plotOutput("cloud_stm"),
                              #plotOutput("perspectives"),
                              tags$h5("Correlation Plot"),
                              plotOutput("corelation")

@@ -1,21 +1,23 @@
 #corpus=text.extract
 #len=3
 #term="tweet"
-kwic <- function(len,term,corpus,num) {
-  len=len
-  term=term
-  corpus=corpus
-  num=num
+kwic <- function(x,w,z,y) {
+  len=as.numeric(x)
+  term=w
+  corpus=z
+  num=as.numeric(y)
   extraction <- list()
   doc<-list()
   for (i in 1:num) { # documents number
-    lda.list <- unlist(strsplit(corpus[[i]], "\\s+"))
+    corpus.collapse<-paste(corpus,collapse=" ")
+    lda.list <- unlist(strsplit(corpus.collapse[[i]], "\\s+"))
     loc<- grep(term, lda.list,perl=TRUE)
-    for (y in 1:length(loc)) { # one term indexes
-      ext <-  lda.list[(loc[y]-len):(loc[y]+len)] 
+    for (k in 1:length(loc)) { # one term indexes
+    #  ext <-  lda.list[(loc[y]-len):(loc[y]+len)] 
+      ext <-  lda.list[(loc[k]-len):(loc[k]+len)] 
       ext.collapse <- paste(ext,collapse=" ")
       ext.sub <-gsub(term,paste("<b>",term,"</b>",sep=""),ext.collapse)
-      doc[[y]] <- ext.sub
+      doc[[k]] <- ext.sub
     }
     doc<-unlist(doc)
     extraction[[i]] <- doc
@@ -166,4 +168,5 @@ myImagePlot(matr, title="Punctuation Analysis")#,zlim=c(1,3))
 # vocab <- out$vocab
 # n.topics <- as.numeric(input$num)
 # stmmodel <- stm(documents, vocab, n.topics, verbose=FALSE)
+
 
