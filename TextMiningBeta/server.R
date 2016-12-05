@@ -66,7 +66,7 @@ output$place_for_structured_data_browser <- renderUI ({
 structured_data <- reactive({ # loading data
   my_data = NULL
   if( !is.null(input$structured_data_file_json) ) {
-    my_data <- fromJSON(input$structured_data_file_json$datapath, flatten = TRUE)
+    my_data <- fromJSON(input$structured_data_file_json$datapath)
   }
   else if( !is.null(input$structured_data_file_xml) ) {
     my_data <- xmlToDataFrame(input$structured_data_file_xml$datapath)
@@ -265,21 +265,21 @@ PreprocessingSteps <- reactive ({
   if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
   if(!is.null(input$file.article)) {
    if(input$article_content=="Full Text"){
-    x <-ExtractRawContentPDF()
+    x <- ExtractRawContentPDF()
     }
    else if(input$article_content=="Abstract"){
-      x <-Abstract()
+      x <- Abstract()
     } 
-    y <-input$file.article
+    y <- input$file.article
   }
   if(!is.null(input$file.article.txt)) {
-   x<- ExtractRawContentTXT()
-   y <-input$file.article.txt
+   x <- ExtractRawContentTXT()
+   y <- input$file.article.txt
   }
   if(!is.null(input$structured_data_file_json)) {
     parsed_json = parseJSON(structured_data())
     x <- parsed_json$corpus
-    y <- parsed_json$titles
+    y <- list(name = parsed_json$titles, size = 0, type = "", datapath = "")
   }
 #  num<-length(file.names)
  # file.names <-x
