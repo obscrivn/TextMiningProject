@@ -47,7 +47,7 @@ shinyServer(function(input, output) {
     paste(input$file.article.txt$name, sep="\n")
   }) 
 output$print_length_pdf <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml)))   { return() } 
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data())))   { return() } 
   HTML(paste("Corpus Size Total: ", ListTerms()$len, sep=" ", collapse="<br/>"))
 })
 output$print_length_txt <- renderUI({
@@ -57,8 +57,9 @@ output$print_length_txt <- renderUI({
 
 output$place_for_structured_data_browser <- renderUI ({
   switch (input$structured_data_file_source,
+          "XML" = fileInput('structured_data_file_xml', 'Choose XML File', multiple=FALSE, accept=c('application/xml','text/xml','.xml')),
           "JSON"= fileInput('structured_data_file_json', 'Choose JSON File', multiple=FALSE, accept=c('application/json',',JSON')),
-          "XML" = fileInput('structured_data_file_xml', 'Choose XML File', multiple=FALSE, accept=c('application/xml','text/xml','.xml'))
+          "GoogleAPI" = list( textInput('Google_keywords', "Enter your search terms for Google Books, separated by spaces", placeholder = "e.g., data mining"), actionButton("Google_submit", "Submit") )
   )
 })
 
@@ -69,9 +70,19 @@ structured_data <- reactive({ # loading data
     my_data <- fromJSON(input$structured_data_file_json$datapath)
   }
   else if( !is.null(input$structured_data_file_xml) ) {
-    my_data <- xmlToDataFrame(input$structured_data_file_xml$datapath)
+    #my_data <- xmlToDataFrame(input$structured_data_file_xml$datapath)
+    my_data <- xmlTreeParse("input$structured_data_file_xml$datapath", useInternalNodes=TRUE)
+  }
+  else if (!is.null( Google_keywords_submitted() ) ) {
+    query <- gsub("\\s+", "+", Google_keywords_submitted())
+    u <- URLencode( paste("https://www.googleapis.com/books/v1/volumes?q=", query, sep = "") )
+    my_data <- fromJSON( getURL(u) )
   }
   return(my_data)
+})
+
+Google_keywords_submitted <- eventReactive(input$Google_submit, {
+  input$Google_keywords
 })
 
 ### Display Structured Data
@@ -87,7 +98,7 @@ output$place_for_structured_data <- renderDataTable({
   })
   
   output$choose_term <- renderUI({
-    if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml)))   { return() } 
+    if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data())))   { return() } 
    # word <- ListTerms()$d[[2]]#[1:x]
     word <- RemoveWordsStepOne()$d[[2]]
     selectizeInput("choose_term", label = "Type term", 
@@ -98,7 +109,7 @@ output$place_for_structured_data <- renderDataTable({
   })   
 
   output$choose_length <- renderUI({
-   # if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml)))   { return() } 
+   # if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data())))   { return() } 
    # d <- ListTerms()$d
     selectizeInput("len",
                 "Context Length:",
@@ -112,7 +123,7 @@ output$place_for_structured_data <- renderDataTable({
   })
   
   ListTerms <-reactive({
-    if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml)))   { return() } 
+    if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data())))   { return() } 
     
     if(!is.null(input$file.article)) {
       corpus.lda <- ExtractRawContentPDF()#Selection()#$text.extract
@@ -124,7 +135,7 @@ output$place_for_structured_data <- renderDataTable({
     })  
   
   output$term_print <- renderUI ({
-    if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+    if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
     len <- input$len
     term <- input$choose_term
     HTML(paste("Your Term: ", term, "Your Context Length: ", len,  sep=" ", collapse="\n"))
@@ -163,7 +174,6 @@ output$place_for_structured_data <- renderDataTable({
             ),
             "JSON"= fileInput('json_file_name', 'Choose JSON File', multiple=FALSE, accept=c('application/json',',JSON')),
             "XML" = fileInput('xml_file_name', 'Choose XML File', multiple=FALSE, accept=c('application/xml','text/xml','.xml'))
-   
        )
   })
   ## Reading Metadata File from csv
@@ -176,7 +186,6 @@ output$place_for_structured_data <- renderDataTable({
       my_data <- fromJSON(input$json_file_name$datapath, flatten = TRUE)
     }
     else if( !is.null(input$xml_file_name) ) {
-      print(input$xml_file_name$datapath)
       my_data <- xmlToDataFrame(input$xml_file_name$datapath)
     }
     else if( !is.null(input$file.article)) {
@@ -240,7 +249,7 @@ output$print_abstract <- renderUI({
 }) 
 
 output$print_preprocessed <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if (input$preprocessing=="No Changes") {
     pdf.lines <- "No pre-processing steps are applied"
   }
@@ -262,7 +271,7 @@ output$print_preprocessed <- renderUI({
 ########
 ### Pre-Processing
 PreprocessingSteps <- reactive ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if(!is.null(input$file.article)) {
    if(input$article_content=="Full Text"){
     x <- ExtractRawContentPDF()
@@ -276,7 +285,7 @@ PreprocessingSteps <- reactive ({
    x <- ExtractRawContentTXT()
    y <- input$file.article.txt
   }
-  if(!is.null(input$structured_data_file_json)) {
+  if(!is.null(structured_data())) {
     parsed_json = parseJSON(structured_data())
     x <- parsed_json$corpus
     y <- list(name = parsed_json$titles, size = 0, type = "", datapath = "")
@@ -325,7 +334,7 @@ output$print_stopwords <- renderPrint({
 
 #Allows for interactive instant word removals from user
 RemoveWordsStepOne <-reactive({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   #cutoff.lower=0#input$cutoff_lower
   #cutoff.high=input$cutoff_high
   mycorpus <- PreprocessingSteps()[6]
@@ -391,7 +400,7 @@ RemoveWordsStepOne <-reactive({
 })
 
 RemoveWordsStepTwo <-reactive({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if (is.null(input$remove_words)) {
     corpus <-RemoveWordsStepOne()$corpus
     lda.corpus<-RemoveWordsStepOne()$lda.corpus
@@ -432,7 +441,7 @@ RemoveWordsStepTwo <-reactive({
 })
 
 RemoveWordsStepThree <-reactive({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   corpus <- stemming()
   doc.vect <- VectorSource(corpus)
   docs <-Corpus(doc.vect)
@@ -491,7 +500,7 @@ output$print_apply_stops <- renderUI({
 })
 
 stemming <- reactive ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if(input$stopwords=="None") {
     corpus <-RemoveWordsStepOne()$corpus
    # d <-RemoveWordsStepOne()$d
@@ -532,14 +541,14 @@ stemming <- reactive ({
 })
 
 output$print_stemmer <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
     # if (is.null(input$remove_manual)) { return() }
     HTML(paste0(stemming()))
     # HTML(paste0(RemoveWordsStepTwo()$words.list))#PreprocessingSteps()$lda.format))# RemoveWordsNew()$corpus.lda))
   })
 #########
 rawFrequency <- reactive ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if(!is.null(input$file.article)) {
     x <-ExtractRawContentPDF()
   }
@@ -551,13 +560,13 @@ rawFrequency <- reactive ({
 })
 
 output$freq <- renderDataTable ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   d<-rawFrequency()$dataf
   return(d)#,options=list(lengthMenu = c(5, 10, 15), pageLength = 5))
 })
 
 output$zipf <- renderPlot ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   tdm <- ListTerms()$tdm
   dtm <- ListTerms()$dtm
   p<- Zipf_plot(dtm, type="l")
@@ -574,7 +583,7 @@ output$zipf <- renderPlot ({
 
 
 output$choose_text <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if (!is.null(input$file.article)) {
     names <- input$file.article$name
   }
@@ -645,7 +654,7 @@ output$choose_bin <-renderUI({
                 selected = 30)
 }) 
 output$words <- renderPlot ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if (input$show_word=="None") {return()}
   if (input$show_word=="Word Length") {
   newtab <- LengthWord()
@@ -723,7 +732,7 @@ output$choose_top <- renderUI({
 }) 
 
 output$choose_remove <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   word <- RemoveWordsStepOne()$d[[2]]
   selectizeInput("remove_words", label = "Select words to be removed", 
                  choices = word,
@@ -734,14 +743,14 @@ output$choose_remove <- renderUI({
   })
 
 output$printWords <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
  # if (is.null(input$remove_manual)) { return() }
   HTML(paste0(RemoveWordsStepOne()$d[[2]]))
  # HTML(paste0(RemoveWordsStepTwo()$words.list))#PreprocessingSteps()$lda.format))# RemoveWordsNew()$corpus.lda))
 })
 
 output$word_count <- renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   x <- input$top
 #  word <- RemoveWordsNew()$d[[2]][1:x]
 #  frequency <- RemoveWordsNew()$d[[1]][1:x]
@@ -753,7 +762,7 @@ output$word_count <- renderPlot({
 })
 
 output$choose_min_frequency <- renderUI({
-#  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+#  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
  # if ((is.null(input$choose_cloud)) || (input$choose_cloud=="NULL")) { return() }
   #d <- RemoveWordsStepThree()$d
  # word <-  RemoveWordsStepThree()$d[[2]][1:x]
@@ -775,7 +784,7 @@ output$choose_min_frequency <- renderUI({
 })
 
 output$choose_max_words <- renderUI({
-#  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+#  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   #if ((is.null(input$choose_cloud)) || (input$choose_cloud=="NULL")) { return() }
  # d <- RemoveWordsStepThree()$d
  # d <- RemoveWordsStepThree()$d
@@ -793,7 +802,7 @@ output$choose_max_words <- renderUI({
 })
 
 output$print_cloud <-renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
  # if ((is.null(input$choose_cloud)) || (input$choose_cloud=="NULL")) { return() }
   # withProgress(message = 'Plotting in progress',
   #              detail = 'This may take a while...', value = 0, {
@@ -850,7 +859,7 @@ output$print_cloud <-renderPlot({
 })
 
 kwicAnalysis <- reactive({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   len <- input$len
   term <- input$choose_term
   if(!is.null(input$file.article)) {
@@ -865,7 +874,7 @@ kwicAnalysis <- reactive({
 })
 
 output$print_kwic <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if (is.null(input$choose_term)) { return() }
     lines <- kwicAnalysis()
 
@@ -916,7 +925,7 @@ output$eta <- renderUI({
 
 
 chronology <- reactive ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if( input$metadata_source == "None") {return()}
   if((is.null(input$chronology)) ||(input$chronology=="None")) { return() }
   remove.words.file <- stopWordsTxt()
@@ -964,12 +973,12 @@ chronology <- reactive ({
 })
 
 output$chronology_top <- renderPrint ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((input$chronology=="None") || (is.null(input$chronology))) { return() }
    chronology()$term
 })
 output$chronology_plot <- renderPlot ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((input$chronology=="None") || (is.null(input$chronology))) { return() }
   dft<-chronology()$M
 #  terms <- chronology()$term
@@ -979,7 +988,7 @@ output$chronology_plot <- renderPlot ({
   return(g)
 })
 output$chronology_table <- renderTable ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((input$chronology=="NULL") || (is.null(input$chronology))) { return() }
   dft<-chronology()$M
  # g <- ggplot(dft,aes(x= dft[,2],y=dft[,3]),color=dft[,1])+geom_point()  + geom_density2d(alpha=.2)
@@ -989,7 +998,7 @@ output$chronology_table <- renderTable ({
 })
 
 BestK <- reactive ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$best_num)) || (input$best_num=="NULL")) { return() }
   withProgress(message = 'Calculation in progress',
                detail = 'This may take a while...', value = 0, {
@@ -1048,7 +1057,7 @@ BestK <- reactive ({
   return(info)
 })
 output$best_k <- renderTable ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$best_num)) || (input$best_num=="NULL")) { return() }
   withProgress(message = 'Calculation in progress',
                detail = 'This may take a while...', value = 0, {
@@ -1063,7 +1072,7 @@ output$best_k <- renderTable ({
   best.model.logLik.df[which.max(best.model.logLik.df$LL),]
 })
 output$best_k_plot <- renderPlot ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$best_num)) || (input$best_num=="NULL")) { return() }
   withProgress(message = 'Plotting in progress',
                detail = 'This may take a while...', value = 0, {
@@ -1076,7 +1085,7 @@ output$best_k_plot <- renderPlot ({
 })
 
 LdaAnalysis <- reactive({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$lda)) || (input$lda=="None")) { return() }
   set.seed(2013)
   remove.words.file <- stopWordsTxt()
@@ -1146,19 +1155,19 @@ LdaAnalysis <- reactive({
 })
 
 output$topics <- renderTable({ #renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$lda)) || (input$lda=="None")) { return() }
   LdaAnalysis()$topics
 })
 
 output$docs <- renderPrint({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$lda)) || (input$lda=="None")) { return() }
   LdaAnalysis()$docs
 })
 
 output$docsNames <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$lda)) ||  (input$lda=="None")) { return() }
   if (!is.null(input$file.article.txt)) {
     k <- length(input$file.article.txt$name)
@@ -1173,7 +1182,7 @@ output$docsNames <- renderUI({
 })
 
 output$printCoordinates <-renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$lda)) || (input$lda=="None")) { return() }
   
   distance <- LdaAnalysis()$lda.coordinates
@@ -1199,7 +1208,7 @@ output$best_topic_num <-renderUI({
   }) 
 
 stmAnalysis <- reactive ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   novel.vector <- as.list(RemoveWordsStepTwo()$d$word)
   corpus <- Corpus(VectorSource(novel.vector))
   tdm <-DocumentTermMatrix(corpus)   
@@ -1215,7 +1224,7 @@ return(stmmodel)
 #### Print Documents for each topic
 #Example of documents associated with topics
 output$association <- renderPlot ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$stm)) || (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
   novel.vector <-RemoveWordsStepThree()$corpus#PreprocessingSteps()[6]#PreprocessingSteps()$lda.format#window.one()$lda.format
@@ -1231,7 +1240,7 @@ for (i in 1:K){
 ### Summary
 # Expected Topic Proportion
 output$proportion <- renderPlot ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$stm))|| (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
 #par(mfrow=c(1,1),mar=c(5,5,5,5))
@@ -1240,7 +1249,7 @@ plot.STM(stmmodel, type = "summary", xlim = c(0, .9))
 
 #####
 output$perspectives <- renderPlot ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$stm))|| (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
   K=as.integer(input$num)
@@ -1249,7 +1258,7 @@ plot.STM(stmmodel, type = "labels")#, xlim = c(0, .9))#,xlim = c(1, 5))
 })
 
 output$cloud_stm <- renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$stm))|| (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
   K=as.integer(input$num)
@@ -1258,7 +1267,7 @@ cloud(stmmodel, topic = K, scale = c(5,.25))
 
 ### graphical display of topic correlation
 output$corelation <-renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$stm)) || (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
   modoutcorr <- topicCorr(stmmodel)
@@ -1267,7 +1276,7 @@ output$corelation <-renderPlot({
 })
 
 output$topics_stm <- renderPrint({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if((is.null(input$stm)) || (input$stm=="None")) { return() }
   stmmodel<-  stmAnalysis()
   labelTopics(stmmodel)
@@ -1281,7 +1290,7 @@ output$topics_stm <- renderPrint({
 ### CLUSTER ANALYSIS
 
 cluster <-reactive ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   method=input$method
   distance = input$distance
   dtm <-ListTerms()$dtm
@@ -1293,7 +1302,7 @@ cluster <-reactive ({
 })
 
 output$cluster_plot <- renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   par(cex=1.2,mar=c(5, 4, 4, 2))
   color=input$color
   k=as.numeric(input$cuttree)
@@ -1408,7 +1417,7 @@ output$cuttree <-renderUI({
 #### PUNCTUATION ANALYSIS
 
 punctuation <- reactive ({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   text <-PreprocessingSteps()[3]#$text.extract#window.one()$text.extract
   data.del <- gsub("[A-Za-z0-9]"," \\1", text) # only punctuation is left with space
   data.punct <-  gsub("\\s+","",data.del)
@@ -1418,7 +1427,7 @@ punctuation <- reactive ({
   return(m)
 })
 output$type_punctuation <-renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   d<-punctuation()
      plot <- ggplot(d, aes(x=d[[1]], y=d[[2]])) +
        geom_bar(stat='identity') +
@@ -1431,7 +1440,7 @@ return(plot)
 })
 
 output$chunks <- renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if (is.null(input$choose_term)){ return() }
   if(!is.null(input$file.article)) {
     text <- ExtractRawContentPDF()#Selection()#$text.extract
@@ -1445,7 +1454,7 @@ output$chunks <- renderPlot({
 
 
 output$heatmap_punct <- renderPlot({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if(!is.null(input$file.article)) {
     text <- ExtractRawContentPDF()#Selection()#$text.extract
   }
@@ -1478,7 +1487,7 @@ output$heatmap_punct <- renderPlot({
 }) 
 
 output$choose_speaker <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if ((is.null(input$article_content)) || (input$article_content=="NULL")) {return()}
   if (is.null(input$choose_type)) {return()}
   if (input$article_content=="By Speaker") { #&& (input$choose_type=="Transcript")) {
@@ -1492,7 +1501,7 @@ output$choose_speaker <- renderUI({
 }) 
 
 output$choose_interviewer <- renderUI({
-  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(input$structured_data_file_json)) && (is.null(input$structured_data_file_xml))) { return() }
+  if ((is.null(input$file.article)) && (is.null(input$file.article.txt)) && (is.null(structured_data()))) { return() }
   if ((is.null(input$article_content)) || (input$article_content=="NULL")) {return()}
   if (is.null(input$choose_type)) {return()}
   if (input$article_content=="By Speaker") {#&& (input$choose_type=="Transcript")) {

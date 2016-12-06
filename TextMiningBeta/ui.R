@@ -120,9 +120,11 @@ shinyUI(
                 column(6, 
                           #tags$hr(),
                           radioButtons('structured_data_file_source', 'Choose file format',
-                                       c("JSON"="JSON",
-                                         "XML"="XML"),
-                                       "JSON"),
+                                       c("XML"="XML",
+                                         "JSON"="JSON",
+                                         "Google Books Search" = "GoogleAPI"
+                                         ),
+                                       "GoogleAPI"),
                           uiOutput("place_for_structured_data_browser")
                 ),
                 column(6, 
