@@ -9,6 +9,7 @@ source("words.R")
 source("preprocess.R")
 source("kwic.R")
 source("parseJSON.R")
+source("parseMODS.R")
 library(tm)
 library(qdap)
 library(qdapRegex)
@@ -33,9 +34,11 @@ library(ggplot2)
 library(RTextTools)
 library(SnowballC)
 library(jsonlite)
-#library(rjson)
+#library(rjson) Conflicts with jsonlite
 library(XML)
 library(ggthemes)
+library(RCurl)
+library(curl)
 shinyServer(function(input, output) {
   
   output$print_name_article <- renderPrint({
@@ -65,25 +68,49 @@ output$place_for_structured_data_browser <- renderUI ({
 
 ## Reading Structured Data
 structured_data <- reactive({ # loading data
-  my_data = NULL
+  parsed_data = NULL
   if( !is.null(input$structured_data_file_json) ) {
     my_data <- fromJSON(input$structured_data_file_json$datapath)
+    parsed_json <- parseJSON(my_data)
+    parsed_data <- data.frame(parsed_json)
   }
   else if( !is.null(input$structured_data_file_xml) ) {
     #my_data <- xmlToDataFrame(input$structured_data_file_xml$datapath)
-    my_data <- xmlTreeParse("input$structured_data_file_xml$datapath", useInternalNodes=TRUE)
+    my_data <- xmlTreeParse(input$structured_data_file_xml$datapath, useInternalNodes=TRUE)
+    parsed_MODS <- parseMODS(my_data)
+    parsed_data <- data.frame(parsed_MODS)
   }
   else if (!is.null( Google_keywords_submitted() ) ) {
     query <- gsub("\\s+", "+", Google_keywords_submitted())
-    u <- URLencode( paste("https://www.googleapis.com/books/v1/volumes?q=", query, sep = "") )
-    my_data <- fromJSON( getURL(u) )
+#    u <- URLencode( paste("https://www.googleapis.com/books/v1/volumes?q=", query, "&maxResults=40", sep = "") )
+#    my_data <- fromJSON( getURL(u) )
+
+    
+    #uncomment to load the entire result from Google API - takes a really long time
+    con <- curl( URLencode( paste("https://www.googleapis.com/books/v1/volumes?q=", query, "&maxResults=40", sep = "") ) )
+    text <- readLines(con)
+    close(con)
+    my_data <- fromJSON(text)
+
+    parsed_json <- parseJSON(my_data)
+    parsed_data <- data.frame(parsed_json)
+    
+    #Trying to overcome the 40 results limit and fix the encoding problem
+    #my_data <- fromJSON(stream_in(curl(u)))
+    #my_data <- do.call(rbind, lapply(paste(readLines(curl(u), warn=FALSE), collapse=""), jsonlite::fromJSON))
+    
+    #initial_JSON <- readLines(curl(u))
+    #collapsedJSON <- paste(initial_JSON, collapse="")
+    
+
   }
-  return(my_data)
+  return(parsed_data)
 })
 
 Google_keywords_submitted <- eventReactive(input$Google_submit, {
   input$Google_keywords
 })
+
 
 ### Display Structured Data
 output$place_for_structured_data <- renderDataTable({
@@ -195,10 +222,10 @@ output$place_for_structured_data <- renderDataTable({
       my_data <- data.frame(date=dt, title=t, author = a)
      # my_data <- data.frame(metadataPdf()$metapdf)
     }
-    else if( !is.null(input$structured_data_file_json) ) {
-      parsed_json <- parseJSON(structured_data())
-      my_data <- data.frame(date=parsed_json$dates, title=parsed_json$titles, author = parsed_json$authors)
-    }
+    #else if( !is.null(input$structured_data_file_json) ) {
+    #  parsed_json <- parseJSON(structured_data())
+    #  my_data <- data.frame(date=parsed_json$dates, title=parsed_json$titles, author = parsed_json$authors)
+    #}
     return(my_data)
   })
   ### Display Metadata from CSV
@@ -286,9 +313,9 @@ PreprocessingSteps <- reactive ({
    y <- input$file.article.txt
   }
   if(!is.null(structured_data())) {
-    parsed_json = parseJSON(structured_data())
-    x <- parsed_json$corpus
-    y <- list(name = parsed_json$titles, size = 0, type = "", datapath = "")
+   # parsed_json = parseJSON(structured_data())
+    x <- structured_data()$corpus
+    y <- list(name = structured_data()$titles, size = 0, type = "", datapath = "")
   }
 #  num<-length(file.names)
  # file.names <-x

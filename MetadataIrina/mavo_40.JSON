@@ -1,0 +1,2406 @@
+{
+ "kind": "books#volumes",
+ "totalItems": 1534,
+ "items": [
+  {
+   "kind": "books#volume",
+   "id": "UaUCjgaV3y4C",
+   "etag": "jRyPVrsGfR4",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/UaUCjgaV3y4C",
+   "volumeInfo": {
+    "title": "Mavo",
+    "subtitle": "Japanese Artists and the Avant-garde, 1905-1931",
+    "authors": [
+     "Gennifer Stacy Weisenfeld"
+    ],
+    "publisher": "Univ of California Press",
+    "publishedDate": "2002",
+    "description": "MAVO is the first book-length study in English that critically evaluates the Japanese artistic avant-garde (1905-1931) and its relationship to broader developments in modernism worldwide.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "0520223381"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9780520223387"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 368,
+    "printType": "BOOK",
+    "categories": [
+     "Art"
+    ],
+    "averageRating": 5.0,
+    "ratingsCount": 1,
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.1",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=UaUCjgaV3y4C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=UaUCjgaV3y4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=UaUCjgaV3y4C&printsec=frontcover&dq=mavo&hl=&cd=1&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=UaUCjgaV3y4C&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo.html?hl=&id=UaUCjgaV3y4C"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=UaUCjgaV3y4C&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "MAVO is the first book-length study in English that critically evaluates the Japanese artistic avant-garde (1905-1931) and its relationship to broader developments in modernism worldwide."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "JLW7DAAAQBAJ",
+   "etag": "9byoY44PF6w",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/JLW7DAAAQBAJ",
+   "volumeInfo": {
+    "title": "MAVO \u0097 High School in the 1960s, Freshman Year",
+    "authors": [
+     "Mike Bonner"
+    ],
+    "publisher": "Lulu.com",
+    "publishedDate": "2016-07-06",
+    "description": "MAVO - High School in the 1960s, Freshman Year \"MAVO.\" The word is a slur aimed at poor white youths from Portland, Oregon's east side, originating in the early 1960s. Other places called them Hoods or Greasers. In Portland, they were called Mavos. This is the 1965-66 fictional memoir of Patrick Compton, a fourteen year old from a troubled family, who takes an irreverent look at life during his freshman year. With that pivotal period serving as the backdrop to a host of delinquent adventures, MAVO contrasts the schemes and dreams of a precocious adolescent with the bitter realities that rarely fail to curdle the joy of living. Patrick's narrative is a meditation on the notion that misery plus time equals comedy. His engaging outlook and subversive storytelling style conspire to create a truly unique literary experience.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_13",
+      "identifier": "9781312838574"
+     },
+     {
+      "type": "ISBN_10",
+      "identifier": "1312838574"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 436,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.1.0.0.preview.1",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=JLW7DAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=JLW7DAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=JLW7DAAAQBAJ&printsec=frontcover&dq=mavo&hl=&cd=2&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=JLW7DAAAQBAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/MAVO_High_School_in_the_1960s_Freshman_Y.html?hl=&id=JLW7DAAAQBAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=JLW7DAAAQBAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "In Portland, they were called Mavos. This is the 1965-66 fictional memoir of Patrick Compton, a fourteen year old from a troubled family, who takes an irreverent look at life during his freshman year."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "N7EqAQAAIAAJ",
+   "etag": "nXHJPiCjTYA",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/N7EqAQAAIAAJ",
+   "volumeInfo": {
+    "title": "Mavo le-toldot ha-mizra? ha-tikhon ba-?et he-?adashah",
+    "subtitle": "te?udot le-targil",
+    "authors": [
+     "Yehoshua Porath"
+    ],
+    "publishedDate": "1981",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "UCAL:B3312380"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 159,
+    "printType": "BOOK",
+    "categories": [
+     "History"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=N7EqAQAAIAAJ&q=mavo&dq=mavo&hl=&cd=3&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=N7EqAQAAIAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_le_toldot_ha_mizra%E1%B8%A5_ha_tikhon_ba.html?hl=&id=N7EqAQAAIAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=N7EqAQAAIAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "OrUl4ev6MSsC",
+   "etag": "VEldRS/gbxw",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/OrUl4ev6MSsC",
+   "volumeInfo": {
+    "title": "Mavo",
+    "subtitle": "Japanese Artists and the Avant-garde, 1905-1931",
+    "authors": [
+     "Gennifer Stacy Weisenfeld"
+    ],
+    "publisher": "ICON Group International",
+    "publishedDate": "2002",
+    "description": "MAVO is the first book-length study in English that critically evaluates the Japanese artistic avant-garde (1905-1931) and its relationship to broader developments in modernism worldwide.",
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 368,
+    "printType": "BOOK",
+    "categories": [
+     "Art"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=OrUl4ev6MSsC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=OrUl4ev6MSsC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=OrUl4ev6MSsC&dq=mavo&hl=&cd=4&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=OrUl4ev6MSsC&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo.html?hl=&id=OrUl4ev6MSsC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=OrUl4ev6MSsC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "MAVO is the first book-length study in English that critically evaluates the Japanese artistic avant-garde (1905-1931) and its relationship to broader developments in modernism worldwide."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "ifYLngEACAAJ",
+   "etag": "/UOfze+Fdno",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/ifYLngEACAAJ",
+   "volumeInfo": {
+    "title": "Student's Guide to Young Adult Literature for Havo/mavo- 3/4 and Mavo-d(plus)",
+    "authors": [
+     "Annet Smith",
+     "Syb Hartog"
+    ],
+    "publishedDate": "1994",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "OCLC:850980222"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 22,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=ifYLngEACAAJ&dq=mavo&hl=&cd=5&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=ifYLngEACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Student_s_Guide_to_Young_Adult_Literatur.html?hl=&id=ifYLngEACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=ifYLngEACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "BUhoouWh16MC",
+   "etag": "TsUir+yfVjE",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/BUhoouWh16MC",
+   "volumeInfo": {
+    "title": "Nieuwe MAVO 5 - leerwerkboek",
+    "authors": [
+     "Stefaan Debersaques",
+     "Stefaan Debersaques Greetje Meekers André Uytterhoeven Elke Verkinder",
+     "Greetje Meekers",
+     "André Uytterhoeven",
+     "Elke Verkinder"
+    ],
+    "publisher": "De Boeck Hoger",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "9045512025"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9789045512020"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=BUhoouWh16MC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=BUhoouWh16MC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "nl",
+    "previewLink": "http://books.google.com/books?id=BUhoouWh16MC&dq=mavo&hl=&cd=6&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=BUhoouWh16MC&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Nieuwe_MAVO_5_leerwerkboek.html?hl=&id=BUhoouWh16MC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=BUhoouWh16MC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "egl9rgEACAAJ",
+   "etag": "xzVtng9X+do",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/egl9rgEACAAJ",
+   "volumeInfo": {
+    "title": "Automated Power-aware System-level Design with the MAVO Framework",
+    "authors": [
+     "Yasaman Samei Syahkal"
+    ],
+    "publishedDate": "2014",
+    "description": "For the past few decades, semiconductor capabilities have been improving as Moore's law predicted. Transistor size has been shrinking and technology size will be less than 20nm in the near future. These improvements enable designers to come up with more complex systems. However, this has made power dissipation a major design obstacle. Conventionally, power consumption is considered in the later stages of the design process, like the architecture level, Register Transfer Level (RTL), gate level, and physical level, where detailed information about the design is available. Although there are many power-aware design tools at these lower levels, the simulation and evaluation time are high and often beyond the time-to-market requirements. To tackle the long simulation time as well as avoiding time consuming design modifications at lower levels, designers are raising the level of abstraction to the system level. Over the last decade, research in Electronic System Level (ESL) design has resulted in significant advances in addressing the rising design complexity and meeting the required performance constraints. Now a major concern of system-level design is power dissipation in System-on-Chip (SoC) which not only affects battery lifetime but also thermal aspects and reliability of the end product. Although power aware design is crucial in ESL design, System Level Description Languages (SLDL) are not supporting this feature natively. Towards power-aware ESL design, in this dissertation we present MAVO, an automated framework to Monitor, Analyze, Visualize and Optimize both power and performance at the early stages of the design process. The proposed framework supports waveform-based power estimation and optimization for rapid system-level design. MAVO is adapted for automated SoC design and it is integrated to System-on-Chip Environment, a prototype ESL design tool for rapid power-aware design. We perform different experiments to evaluate the accuracy and fidelity of the framework, including JPEG image encoder, MP3 audio decoder and H.264 video decoder and encoder. Experimental results show that our developed framework can achieve a high degree of fidelity while providing significant speedup. We also examined MAVO for applying different power optimization mechanisms on a Canny edge detector application. Our studies show large potential for design modification toward power efficient design models at system-level. Additionally we applied MAVO along with static analyzer tool in order to capture power and performance trade-offs and apply power optimization techniques automatically. Overall, our work provides an advanced power estimation infrastructure for power- and performance-aware system model development. It can significantly help embedded system designers to build low-power and reliable products in shorter time frame.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "1321441452"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9781321441451"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 127,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=egl9rgEACAAJ&dq=mavo&hl=&cd=7&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=egl9rgEACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Automated_Power_aware_System_level_Desig.html?hl=&id=egl9rgEACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=egl9rgEACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "For the past few decades, semiconductor capabilities have been improving as Moore&#39;s law predicted."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "Lp3xTRuP5iYC",
+   "etag": "HH1hN3CPLa4",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/Lp3xTRuP5iYC",
+   "volumeInfo": {
+    "title": "Mavo ´ el Mikra ´e kodesh",
+    "authors": [
+     "Judah Loeb Benze ´eb"
+    ],
+    "publishedDate": "1810",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "BDM:13020100013477"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 198,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "full-1.0.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=Lp3xTRuP5iYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=Lp3xTRuP5iYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "iw",
+    "previewLink": "http://books.google.com/books?id=Lp3xTRuP5iYC&printsec=frontcover&dq=mavo&hl=&cd=8&source=gbs_api",
+    "infoLink": "https://play.google.com/store/books/details?id=Lp3xTRuP5iYC&source=gbs_api",
+    "canonicalVolumeLink": "https://market.android.com/details?id=book-Lp3xTRuP5iYC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "FREE",
+    "isEbook": true,
+    "buyLink": "https://play.google.com/store/books/details?id=Lp3xTRuP5iYC&rdid=book-Lp3xTRuP5iYC&rdot=1&source=gbs_api"
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "ALL_PAGES",
+    "embeddable": true,
+    "publicDomain": true,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": true,
+     "downloadLink": "http://books.google.com/books/download/Mavo_%CC%81_el_Mikra_%CC%81e_kodesh.pdf?id=Lp3xTRuP5iYC&hl=&output=pdf&sig=ACfU3U0gRf0-3I_u33lx_W47CFXpPU7MHA&source=gbs_api"
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=Lp3xTRuP5iYC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "FULL_PUBLIC_DOMAIN",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "tl1YunGtIuUC",
+   "etag": "k2qefM2DeZ0",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/tl1YunGtIuUC",
+   "volumeInfo": {
+    "title": "MAVO 7 - werkboek",
+    "authors": [
+     "Stefaan Debersaques Raf Plasschaert André Uytterhoeven"
+    ],
+    "publisher": "De Boeck Hoger",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "9045502690"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9789045502694"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=tl1YunGtIuUC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=tl1YunGtIuUC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=tl1YunGtIuUC&dq=mavo&hl=&cd=9&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=tl1YunGtIuUC&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/MAVO_7_werkboek.html?hl=&id=tl1YunGtIuUC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=tl1YunGtIuUC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "zFUuzeopoUoC",
+   "etag": "FPcmMdj4ISI",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/zFUuzeopoUoC",
+   "volumeInfo": {
+    "title": "MAVO 7 - leerboek",
+    "authors": [
+     "Stefaan Debersaques Raf Plasschaert André Uytterhoeven"
+    ],
+    "publisher": "De Boeck Hoger",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "9045502682"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9789045502687"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=zFUuzeopoUoC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=zFUuzeopoUoC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=zFUuzeopoUoC&dq=mavo&hl=&cd=10&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=zFUuzeopoUoC&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/MAVO_7_leerboek.html?hl=&id=zFUuzeopoUoC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=zFUuzeopoUoC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "lkb2j20ap-kC",
+   "etag": "xGgVfBH1Oe4",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/lkb2j20ap-kC",
+   "volumeInfo": {
+    "title": "Nieuwe MAVO 4 - leerwerkboek",
+    "authors": [
+     "Stefaan Debersaques",
+     "Stefaan Debersaques Sophie Lahousse Francky Lannoo Lesley Sengier André Uytterhoeven",
+     "Sophie Lahousse",
+     "Francky Lannoo",
+     "Lesley Sengier",
+     "André Uytterhoeven"
+    ],
+    "publisher": "De Boeck Hoger",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "904550751X"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9789045507514"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=lkb2j20ap-kC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=lkb2j20ap-kC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=lkb2j20ap-kC&dq=mavo&hl=&cd=11&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=lkb2j20ap-kC&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Nieuwe_MAVO_4_leerwerkboek.html?hl=&id=lkb2j20ap-kC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=lkb2j20ap-kC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "FuGJGwAACAAJ",
+   "etag": "F2CLU97kGXI",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/FuGJGwAACAAJ",
+   "volumeInfo": {
+    "title": "Schoolstraat 101",
+    "subtitle": "75 jaar ulo/mavo in Burgum",
+    "authors": [
+     "Tsjerk Veenstra",
+     "Pleuni Hooghiemstra",
+     "Joahnnes Brands-mavo"
+    ],
+    "publishedDate": "1997",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "OCLC:68249200"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 64,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=FuGJGwAACAAJ&dq=mavo&hl=&cd=12&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=FuGJGwAACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Schoolstraat_101.html?hl=&id=FuGJGwAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=FuGJGwAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "VKIeAQAAIAAJ",
+   "etag": "FkTYkM1QGSI",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/VKIeAQAAIAAJ",
+   "volumeInfo": {
+    "title": "Mavo sifruti-histori le-khitve ha-kodesh",
+    "authors": [
+     "Simon Bernfeld"
+    ],
+    "publishedDate": "1929",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "UCAL:B2968522"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "categories": [
+     "Religion"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "iw",
+    "previewLink": "http://books.google.com/books?id=VKIeAQAAIAAJ&q=mavo&dq=mavo&hl=&cd=13&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=VKIeAQAAIAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_sifruti_histori_le_khitve_ha_kodesh.html?hl=&id=VKIeAQAAIAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=VKIeAQAAIAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "08lIAAAAcAAJ",
+   "etag": "bN525pJDZHA",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/08lIAAAAcAAJ",
+   "volumeInfo": {
+    "title": "Halikhot olam im mavo ha-gemara sive Clavis Talmvdica latine reddita per Constantinvm L'Emperevr ab Oppyck ... (lat. et hebr.)",
+    "authors": [
+     "Yehôšua? Ben-Yôsef hal-Lewî",
+     "????? ?? ???? ????",
+     "Constantinus L'Empereur"
+    ],
+    "publishedDate": "1634",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "ONB:+Z119593005"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 232,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.3.0.0.full.1",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=08lIAAAAcAAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=08lIAAAAcAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "un",
+    "previewLink": "http://books.google.com/books?id=08lIAAAAcAAJ&pg=PA8&dq=mavo&hl=&cd=14&source=gbs_api",
+    "infoLink": "https://play.google.com/store/books/details?id=08lIAAAAcAAJ&source=gbs_api",
+    "canonicalVolumeLink": "https://market.android.com/details?id=book-08lIAAAAcAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "FREE",
+    "isEbook": true,
+    "buyLink": "https://play.google.com/store/books/details?id=08lIAAAAcAAJ&rdid=book-08lIAAAAcAAJ&rdot=1&source=gbs_api"
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "ALL_PAGES",
+    "embeddable": true,
+    "publicDomain": true,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": true,
+     "downloadLink": "http://books.google.com/books/download/Halikhot_olam_im_mavo_ha_gemara_sive_Cla.pdf?id=08lIAAAAcAAJ&hl=&output=pdf&sig=ACfU3U1W-JOa1Ui_tf0vlAz0e1WYzWdqfg&source=gbs_api"
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=08lIAAAAcAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "FULL_PUBLIC_DOMAIN",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "8s_fAAAAMAAJ",
+   "etag": "ElvLDEXcjbU",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/8s_fAAAAMAAJ",
+   "volumeInfo": {
+    "title": "Mavo ha-Talmud",
+    "subtitle": "?elek mi-ma?amar ?al ha-midot veha-mishkalot be-Torah shebi-ketav uve-Torah she-ba?al peh",
+    "authors": [
+     "Joseph ben Judah ben Jacob Ibn Aknin",
+     "Jacob Reifmann"
+    ],
+    "publishedDate": "1871",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "PRNC:32101071977563"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 37,
+    "printType": "BOOK",
+    "categories": [
+     "Talmud"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=8s_fAAAAMAAJ&q=mavo&dq=mavo&hl=&cd=15&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=8s_fAAAAMAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_ha_Talmud.html?hl=&id=8s_fAAAAMAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=8s_fAAAAMAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "NELcRgdpMzQC",
+   "etag": "RSOiEyX9vxY",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/NELcRgdpMzQC",
+   "volumeInfo": {
+    "title": "Kommentar zur Rahmenordnung für eine Mitarbeitervertretungsordnung",
+    "subtitle": "MAVO",
+    "authors": [
+     "Franzjosef Bleistein",
+     "Adolf Thiel"
+    ],
+    "publisher": "Wolters Kluwer Deutschland",
+    "publishedDate": "2006",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "347206496X"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9783472064961"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 968,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=NELcRgdpMzQC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=NELcRgdpMzQC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "de",
+    "previewLink": "http://books.google.com/books?id=NELcRgdpMzQC&dq=mavo&hl=&cd=16&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=NELcRgdpMzQC&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Kommentar_zur_Rahmenordnung_f%C3%BCr_eine_Mi.html?hl=&id=NELcRgdpMzQC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=NELcRgdpMzQC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "lRkdAAAAIAAJ",
+   "etag": "OTYUXo+ifmY",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/lRkdAAAAIAAJ",
+   "volumeInfo": {
+    "title": "????? ?????? ???? ??????: Mavo. Kitve ha-di?du?",
+    "subtitle": "",
+    "authors": [
+     "??? ???????"
+    ],
+    "publishedDate": "1957",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "STANFORD:36105117162714"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "categories": [
+     "Aramaic language"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "iw",
+    "previewLink": "http://books.google.com/books?id=lRkdAAAAIAAJ&q=mavo&dq=mavo&hl=&cd=17&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=lRkdAAAAIAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/%D7%A2%D7%91%D7%A8%D7%99%D7%AA_%D7%95%D7%90%D7%A8%D7%9E%D7%99%D7%AA_%D7%A0%D7%95%D7%A1%D7%97_%D7%A9%D7%95%D7%9E.html?hl=&id=lRkdAAAAIAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=lRkdAAAAIAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "wte5AAAAIAAJ",
+   "etag": "WpfI2uz9gro",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/wte5AAAAIAAJ",
+   "volumeInfo": {
+    "title": "Mavo el ha-ni?ud ha-Ashuri o ha-Bavli ?al pi kitve yad ...",
+    "subtitle": "?e-nil?ah ela? Sefer Yesod mispar",
+    "authors": [
+     "Sim?ah Pinsker",
+     "Abraham ben Meïr Ibn Ezra"
+    ],
+    "publishedDate": "1863",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "UCAL:B4219689"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 192,
+    "printType": "BOOK",
+    "categories": [
+     "Foreign Language Study"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "iw",
+    "previewLink": "http://books.google.com/books?id=wte5AAAAIAAJ&q=mavo&dq=mavo&hl=&cd=18&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=wte5AAAAIAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_el_ha_ni%E1%B8%B3ud_ha_Ashuri_o_ha_Bavli.html?hl=&id=wte5AAAAIAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=wte5AAAAIAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "aQ4XAAAAIAAJ",
+   "etag": "hxlynOjUQMs",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/aQ4XAAAAIAAJ",
+   "volumeInfo": {
+    "title": "Mavo le-sefer Bereshit",
+    "subtitle": "",
+    "authors": [
+     "Hermann Gunkel"
+    ],
+    "publishedDate": "1967",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "UCAL:B3949958"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 67,
+    "printType": "BOOK",
+    "categories": [
+     "Bible"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "1.1.1.0.preview.0",
+    "language": "iw",
+    "previewLink": "http://books.google.com/books?id=aQ4XAAAAIAAJ&q=mavo&dq=mavo&hl=&cd=19&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=aQ4XAAAAIAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_le_sefer_Bereshit.html?hl=&id=aQ4XAAAAIAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=aQ4XAAAAIAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "nnQVT8BMX_QC",
+   "etag": "4A2XYZf9Yns",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/nnQVT8BMX_QC",
+   "volumeInfo": {
+    "title": "Ketavim niv?arim /c[me-et] Re?uven Braynin. [mavo me-et D. Ben Na?um]",
+    "authors": [
+     "???? ???????",
+     "???? ???????"
+    ],
+    "publishedDate": "1965",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "UOM:39015011406504"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 602,
+    "printType": "BOOK",
+    "categories": [
+     "Jews"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "iw",
+    "previewLink": "http://books.google.com/books?id=nnQVT8BMX_QC&q=mavo&dq=mavo&hl=&cd=20&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=nnQVT8BMX_QC&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Ketavim_niv%E1%B8%A5arim_c_me_et_Re%CA%BEuven_Bray.html?hl=&id=nnQVT8BMX_QC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=nnQVT8BMX_QC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "aOkXAQAAIAAJ",
+   "etag": "Pr666uWtfiI",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/aOkXAQAAIAAJ",
+   "volumeInfo": {
+    "title": "Ge ?izayon",
+    "subtitle": "Avraham ben ?ananyah Yagel ; mavo u-ferushim Da?id Ruderman ; [targum ha-mavo ?eha-perushim, Aharon Ari'el]",
+    "authors": [
+     "Abraham ben Hananiah dei Galicchi Jagel",
+     "David B. Ruderman",
+     "Aharon Ariel"
+    ],
+    "publishedDate": "1997",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "STANFORD:36105022402163"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 255,
+    "printType": "BOOK",
+    "categories": [
+     "Fiction"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "iw",
+    "previewLink": "http://books.google.com/books?id=aOkXAQAAIAAJ&q=mavo&dq=mavo&hl=&cd=21&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=aOkXAQAAIAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Ge_%E1%B8%A5izayon.html?hl=&id=aOkXAQAAIAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=aOkXAQAAIAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "EhsnAQAAMAAJ",
+   "etag": "IqbeY50xN58",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/EhsnAQAAMAAJ",
+   "volumeInfo": {
+    "title": "Mavo u-fasakalyah ketanah",
+    "subtitle": "Intrata & passacaglia piccola, for organ",
+    "authors": [
+     "Giora Schuster"
+    ],
+    "publishedDate": "1970",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "NWU:35556012551230"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 8,
+    "printType": "BOOK",
+    "categories": [
+     "Organ music"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=EhsnAQAAMAAJ&dq=mavo&hl=&cd=22&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=EhsnAQAAMAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_u_fasakalyah_ketanah.html?hl=&id=EhsnAQAAMAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=EhsnAQAAMAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "yG8wAAAAYAAJ",
+   "etag": "tVxijC9rX9g",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/yG8wAAAAYAAJ",
+   "volumeInfo": {
+    "title": "Sifra de-ve Rav: Mavo",
+    "authors": [
+     "Louis Finkelstein"
+    ],
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "UVA:X001784699"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "categories": [
+     "Bible"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.1.0.0.preview.0",
+    "language": "iw",
+    "previewLink": "http://books.google.com/books?id=yG8wAAAAYAAJ&q=mavo&dq=mavo&hl=&cd=23&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=yG8wAAAAYAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Sifra_de_ve_Rav_Mavo.html?hl=&id=yG8wAAAAYAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=yG8wAAAAYAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "OgvrsKk6sp0C",
+   "etag": "vMYnZSihDlE",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/OgvrsKk6sp0C",
+   "volumeInfo": {
+    "title": "Vaardigheden in de steigers",
+    "publisher": "Garant",
+    "publishedDate": "1999",
+    "description": "Schets van de eerste ervaringen van een aantal scholen met het vaardigheidsonderwijs in het kader van het Studiehuis.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "9053508996"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9789053508992"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 96,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.1",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=OgvrsKk6sp0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=OgvrsKk6sp0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "nl",
+    "previewLink": "http://books.google.com/books?id=OgvrsKk6sp0C&pg=PA33&dq=mavo&hl=&cd=24&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=OgvrsKk6sp0C&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Vaardigheden_in_de_steigers.html?hl=&id=OgvrsKk6sp0C"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=OgvrsKk6sp0C&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "Brugklassen met doorstroommogelijkheden naar zowel \u003cb\u003eMavo\u003c/b\u003e, Havo als VWO zijn \u003cbr\u003e\nin beide vestigingsplaatsen aanwezig. De locatie met de Ha- vo/VWO-afdeling (\u003cbr\u003e\nMiddelburg) kent brugklassen Havo/VWO (tweejarig) en brugklassen&nbsp;..."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "S5kqMwAACAAJ",
+   "etag": "ohXL0WjCATc",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/S5kqMwAACAAJ",
+   "volumeInfo": {
+    "title": "Kirchliche Mitbestimmung im Vergleich",
+    "subtitle": "BetrVG - MVG/EKD - MAVO",
+    "authors": [
+     "Bernhard Baumann-Czichon",
+     "Mira Gathmann"
+    ],
+    "publishedDate": "2006",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "OCLC:180967314"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 63,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=S5kqMwAACAAJ&dq=mavo&hl=&cd=25&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=S5kqMwAACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Kirchliche_Mitbestimmung_im_Vergleich.html?hl=&id=S5kqMwAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=S5kqMwAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "L_mbyVoqbdsC",
+   "etag": "wUY9LV3poo4",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/L_mbyVoqbdsC",
+   "volumeInfo": {
+    "title": "Dyslexie. Zorg van ons allemaal",
+    "publisher": "Garant",
+    "publishedDate": "2006",
+    "description": "Artikelen over de concrete aanpak van dyslexie op onderwijsinstellingen.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_13",
+      "identifier": "9789044120073"
+     },
+     {
+      "type": "ISBN_10",
+      "identifier": "9044120077"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 130,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.1.0.0.preview.1",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=L_mbyVoqbdsC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=L_mbyVoqbdsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "nl",
+    "previewLink": "http://books.google.com/books?id=L_mbyVoqbdsC&pg=PA81&dq=mavo&hl=&cd=26&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=L_mbyVoqbdsC&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Dyslexie_Zorg_van_ons_allemaal.html?hl=&id=L_mbyVoqbdsC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=L_mbyVoqbdsC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "Carolavan den Hoogen Dyslexie: zorg van ons allemaal! Actieonderzoek naar \u003cbr\u003e\ndyslexiebeleid en dyslexiebegeleiding op de Rientjes \u003cb\u003eMavo\u003c/b\u003e Het plan &#39;Dyslexie, \u003cbr\u003e\nzorg van ons allemaal!&#39; bevat aanbevelingen ten aanzien van dyslexiebeleid en\u003cbr\u003e\n&nbsp;..."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "gdJemgEACAAJ",
+   "etag": "947YkMOx+so",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/gdJemgEACAAJ",
+   "volumeInfo": {
+    "title": "Mavo-tse-tung gi gsung-rtsom gces-bsdus",
+    "authors": [
+     "Mavo-tse-tung"
+    ],
+    "publishedDate": "1992",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "7105014032"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9787105014033"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "categories": [
+     "Communism"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=gdJemgEACAAJ&dq=mavo&hl=&cd=27&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=gdJemgEACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_tse_tung_gi_gsung_rtsom_gces_bsdus.html?hl=&id=gdJemgEACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=gdJemgEACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "jpDcBQAAQBAJ",
+   "etag": "8tyRmGxcVcw",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/jpDcBQAAQBAJ",
+   "volumeInfo": {
+    "title": "Enhancing Educational Excellence, Equity and Efficiency",
+    "subtitle": "Evidence from evaluations of systems and schools in change",
+    "authors": [
+     "Roel J. Bosker",
+     "Bert P.M. Creemers",
+     "Sam Stringfield"
+    ],
+    "publisher": "Springer Science & Business Media",
+    "publishedDate": "2012-12-06",
+    "description": "Promoting high standards in education while striving for equal opportunities under the budget constraints - these are the new global objectives of education systems. This book brings together research-based evidence on the effectiveness of major Australian, Dutch, and UK improvement efforts in education at both primary and secondary level, whilst making comparisons with similar US initiatives. The book addresses several major questions in this new environment. Those questions include: how to combat educational disadvantages, how to integrate pupils with special educational needs in regular education, how to implement educational standards initiatives, how to restructure secondary education, how to implement decentralized policy-making, and how to implement a class size reduction initiative? Finally, the authors suggest directions for future research in order to increase our understanding of what works in education and why.",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_13",
+      "identifier": "9789401142533"
+     },
+     {
+      "type": "ISBN_10",
+      "identifier": "940114253X"
+     }
+    ],
+    "readingModes": {
+     "text": true,
+     "image": true
+    },
+    "pageCount": 259,
+    "printType": "BOOK",
+    "categories": [
+     "Education"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "1.3.3.0.preview.3",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=jpDcBQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=jpDcBQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=jpDcBQAAQBAJ&pg=PA129&dq=mavo&hl=&cd=28&source=gbs_api",
+    "infoLink": "https://play.google.com/store/books/details?id=jpDcBQAAQBAJ&source=gbs_api",
+    "canonicalVolumeLink": "https://market.android.com/details?id=book-jpDcBQAAQBAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "FOR_SALE_AND_RENTAL",
+    "isEbook": true,
+    "listPrice": {
+     "amount": 99.0,
+     "currencyCode": "USD"
+    },
+    "retailPrice": {
+     "amount": 79.2,
+     "currencyCode": "USD"
+    },
+    "buyLink": "https://play.google.com/store/books/details?id=jpDcBQAAQBAJ&rdid=book-jpDcBQAAQBAJ&rdot=1&source=gbs_api",
+    "offers": [
+     {
+      "finskyOfferType": 1,
+      "listPrice": {
+       "amountInMicros": 9.9E7,
+       "currencyCode": "USD"
+      },
+      "retailPrice": {
+       "amountInMicros": 7.92E7,
+       "currencyCode": "USD"
+      },
+      "giftable": true
+     },
+     {
+      "finskyOfferType": 3,
+      "listPrice": {
+       "amountInMicros": 3.465E7,
+       "currencyCode": "USD"
+      },
+      "retailPrice": {
+       "amountInMicros": 3.015E7,
+       "currencyCode": "USD"
+      },
+      "rentalDuration": {
+       "unit": "DAY",
+       "count": 90.0
+      }
+     }
+    ]
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+    "epub": {
+     "isAvailable": true,
+     "acsTokenLink": "http://books.google.com/books/download/Enhancing_Educational_Excellence_Equity-sample-epub.acsm?id=jpDcBQAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+    },
+    "pdf": {
+     "isAvailable": true,
+     "acsTokenLink": "http://books.google.com/books/download/Enhancing_Educational_Excellence_Equity-sample-pdf.acsm?id=jpDcBQAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=jpDcBQAAQBAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "The effect sizes vary between 03 for \u003cb\u003eMAVO\u003c/b\u003e to -12 for VWO. For mathematics the \u003cbr\u003e\nachievements have improved significantly in VBO and \u003cb\u003eMAVO\u003c/b\u003e and decreased \u003cbr\u003e\nsignificantly in VWO. The effect sizes vary between .01 for IVBO to -.16 for VWO."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "bU8gtwAACAAJ",
+   "etag": "JznSe4mVcNk",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/bU8gtwAACAAJ",
+   "volumeInfo": {
+    "title": "De Bisweide",
+    "subtitle": "klooster, Ursulinenpensionaat en MAVO in Grubbenvorst",
+    "authors": [
+     "Th.J.F.A. van der Vijver"
+    ],
+    "publishedDate": "1989",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "OCLC:64861469"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 152,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=bU8gtwAACAAJ&dq=mavo&hl=&cd=29&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=bU8gtwAACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/De_Bisweide.html?hl=&id=bU8gtwAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=bU8gtwAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "Ih2BrgEACAAJ",
+   "etag": "Yj3MMWvkyg4",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/Ih2BrgEACAAJ",
+   "volumeInfo": {
+    "title": "Mavo ha Talmud",
+    "subtitle": "the outline of the Talmud : a popular presentation in simple language, and in chronological order, of all Talmudical contents, with a digest of the background, the different opinions, the arguments and the final decisions reached in each halacha contained in the Talmud, and in accordance with the authentic interpretation of ancient and authoritative commentators",
+    "authors": [
+     "Israel Porath"
+    ],
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "LCCN:43030271"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "categories": [
+     "Talmud"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=Ih2BrgEACAAJ&dq=mavo&hl=&cd=30&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=Ih2BrgEACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_ha_Talmud.html?hl=&id=Ih2BrgEACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=Ih2BrgEACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "ou31vQAACAAJ",
+   "etag": "d/LNDCYrLOU",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/ou31vQAACAAJ",
+   "volumeInfo": {
+    "title": "???? ????: Mavo, siman 119 le-dugma",
+    "authors": [
+     "???? ?? ?????? ???"
+    ],
+    "publishedDate": "1995*",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "STANFORD:36105018304134"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "categories": [
+     "Jewish law"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "iw",
+    "previewLink": "http://books.google.com/books?id=ou31vQAACAAJ&dq=mavo&hl=&cd=31&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=ou31vQAACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/%D7%A9%D7%9C%D7%97%D7%9F_%D7%A2%D7%A8%D7%95%D7%9A_Mavo_siman_119_le_dugm.html?hl=&id=ou31vQAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=ou31vQAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "cCpytZlWgScC",
+   "etag": "HQECl+Lg3Tg",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/cCpytZlWgScC",
+   "volumeInfo": {
+    "title": "Nieuwe MAVO 2 - leerwerkboek",
+    "authors": [
+     "Stefaan Debersaques",
+     "Rita Goethals",
+     "Francky Lannoo",
+     "Lesley Sengier",
+     "André Uytterhoeven"
+    ],
+    "publisher": "Marshall Cavendish",
+    "publishedDate": "2009-05-11",
+    "description": "Dit leerwerkboek Maatschappelijke Vorming is bestemd voor het 2de jaar bso. Het is gedrukt in vier kleuren met een luchtige vormgeving. De nadruk ligt op vaardigheden en attitudes; opdrachten die aanzetten tot kritisch omgaan met informatiebronnen. ICT werd op functionele wijze geïntegreerd via de methodesite www.mavo.be. De site biedt bovendien veel extra materiaal waarmee differentiëren mogelijk wordt!",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "9045529327"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9789045529325"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 200,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "0.0.1.0.preview.0",
+    "imageLinks": {
+     "smallThumbnail": "http://books.google.com/books/content?id=cCpytZlWgScC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+     "thumbnail": "http://books.google.com/books/content?id=cCpytZlWgScC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "nl",
+    "previewLink": "http://books.google.com/books?id=cCpytZlWgScC&dq=mavo&hl=&cd=32&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=cCpytZlWgScC&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Nieuwe_MAVO_2_leerwerkboek.html?hl=&id=cCpytZlWgScC"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=cCpytZlWgScC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "Dit leerwerkboek Maatschappelijke Vorming is bestemd voor het 2de jaar bso."
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "6ucFAgAACAAJ",
+   "etag": "+1oxjtz+KqY",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/6ucFAgAACAAJ",
+   "volumeInfo": {
+    "title": "Eindexamenbesluit avondscholen v.w.o.-h.a.v.o.-m.a.v.o",
+    "authors": [
+     "Nederland. Ministerie van Onderwijs en Wetenschappen, Centrale directie voorlichting"
+    ],
+    "publishedDate": "1982",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "9012041791"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9789012041799"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 39,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=6ucFAgAACAAJ&dq=mavo&hl=&cd=33&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=6ucFAgAACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Eindexamenbesluit_avondscholen_v_w_o_h_a.html?hl=&id=6ucFAgAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=6ucFAgAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "RMPscQAACAAJ",
+   "etag": "zCH2qkeRBF8",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/RMPscQAACAAJ",
+   "volumeInfo": {
+    "title": "Mavo le-toldot ha-sifrut ha-?aravit",
+    "authors": [
+     "Sir Hamilton Alexander Rosskeen Gibb",
+     "Jacob M. Landau",
+     "Naftali Ginaton"
+    ],
+    "publishedDate": "1970",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "OCLC:488586270"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 238,
+    "printType": "BOOK",
+    "categories": [
+     "Arabic literature"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=RMPscQAACAAJ&dq=mavo&hl=&cd=34&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=RMPscQAACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_le_toldot_ha_sifrut_ha_%CA%BBaravit.html?hl=&id=RMPscQAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=RMPscQAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "iDHhjwEACAAJ",
+   "etag": "e2zrTG2iWZY",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/iDHhjwEACAAJ",
+   "volumeInfo": {
+    "title": "Mavo le-sifrut Yidish bi-Vrit ha-Mo?atsot",
+    "subtitle": "?omer ?erií ah le-shi?ur ule-targil. Kuntras 1",
+    "publishedDate": "1957",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "OCLC:941016486"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 104,
+    "printType": "BOOK",
+    "categories": [
+     "Yiddish literature"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=iDHhjwEACAAJ&dq=mavo&hl=&cd=35&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=iDHhjwEACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_le_sifrut_Yidish_bi_Vrit_ha_Mo%CA%BBats.html?hl=&id=iDHhjwEACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=iDHhjwEACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "dqBSSAAACAAJ",
+   "etag": "909SRbyK7qw",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/dqBSSAAACAAJ",
+   "volumeInfo": {
+    "title": "Chemie voor mavo",
+    "authors": [
+     "Johannes Wijnand Schuijl"
+    ],
+    "publishedDate": "1979",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "OCLC:64806089"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=dqBSSAAACAAJ&dq=mavo&hl=&cd=36&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=dqBSSAAACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Chemie_voor_mavo.html?hl=&id=dqBSSAAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=dqBSSAAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "ayXlHwAACAAJ",
+   "etag": "F0LkjLUKT8o",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/ayXlHwAACAAJ",
+   "volumeInfo": {
+    "title": "?inukh lashon ?Ivri u-mavo ha-di?du?",
+    "subtitle": "?on?yene por pra??i?ar lah ablah Gudizmah (lashon ha-?odesh), sobre sis?emah grama?i?ah parah elebos de ?lasah segundah o ?reserah del Talmud Torah",
+    "authors": [
+     "Mosheh Da?id Al?alai"
+    ],
+    "publishedDate": "1889",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "OCLC:22832954"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 102,
+    "printType": "BOOK",
+    "categories": [
+     "Hebrew language"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=ayXlHwAACAAJ&dq=mavo&hl=&cd=37&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=ayXlHwAACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/%E1%B8%A4inukh_lashon_%CA%BBIvri_u_mavo_ha_di%E1%B8%B3du.html?hl=&id=ayXlHwAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=ayXlHwAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "cXVRcgAACAAJ",
+   "etag": "ED0LTiLawaE",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/cXVRcgAACAAJ",
+   "volumeInfo": {
+    "title": "Mavo le-dine Yisra'el b-ime hab-bayit haš-šeni",
+    "authors": [
+     "Ze'ev W. Falk"
+    ],
+    "publishedDate": "1971",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "OCLC:634396456"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 236,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=cXVRcgAACAAJ&dq=mavo&hl=&cd=38&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=cXVRcgAACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_le_dine_Yi%C5%9Bra_el_b_ime_hab_bayit_h.html?hl=&id=cXVRcgAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=cXVRcgAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "f1lxNQEACAAJ",
+   "etag": "RYOm/bWdEm0",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/f1lxNQEACAAJ",
+   "volumeInfo": {
+    "title": "Mavo u-ferush le-Talmud Yerushalmi Bava Qama",
+    "subtitle": "praqim 1-6",
+    "authors": [
+     "Israel Lewy"
+    ],
+    "publishedDate": "1895",
+    "industryIdentifiers": [
+     {
+      "type": "OTHER",
+      "identifier": "OCLC:466199144"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 186,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=f1lxNQEACAAJ&dq=mavo&hl=&cd=39&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=f1lxNQEACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Mavo_u_ferush_le_Talmud_Yerushalmi_Bava.html?hl=&id=f1lxNQEACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=f1lxNQEACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  },
+  {
+   "kind": "books#volume",
+   "id": "YUXuAAAACAAJ",
+   "etag": "BgC4MFsA2Lo",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/YUXuAAAACAAJ",
+   "volumeInfo": {
+    "title": "Startsituatie van de pilotprojecten mavo/vbo/vso",
+    "authors": [
+     "Jan Gijtenbeek",
+     "Johann Berkenbosch",
+     "M. E. W. Voncken"
+    ],
+    "publishedDate": "1997",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_10",
+      "identifier": "906813552X"
+     },
+     {
+      "type": "ISBN_13",
+      "identifier": "9789068135527"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": false
+    },
+    "pageCount": 59,
+    "printType": "BOOK",
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=YUXuAAAACAAJ&dq=mavo&hl=&cd=40&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=YUXuAAAACAAJ&dq=mavo&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.com/books/about/Startsituatie_van_de_pilotprojecten_mavo.html?hl=&id=YUXuAAAACAAJ"
+   },
+   "saleInfo": {
+    "country": "US",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "US",
+    "viewability": "NO_PAGES",
+    "embeddable": false,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.com/books/reader?id=YUXuAAAACAAJ&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "NONE",
+    "quoteSharingAllowed": false
+   }
+  }
+ ]
+}

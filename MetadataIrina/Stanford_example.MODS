@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:local="local" version="3.5" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+  <typeOfResource>still image</typeOfResource>
+  <titleInfo>
+    <title>Stanford Band</title>
+  </titleInfo>
+  <name type="personal" authority="local">
+    <namePart>Milligan, J. C.</namePart>
+    <role>
+      <roleTerm type="text" authority="marcrelator">creator</roleTerm>
+    </role>
+  </name>
+  <genre authority="aat" valueURI="http://vocab.getty.edu/aat/300046300">photographs</genre>
+  <originInfo displayLabel="Place of creation">
+    <place>
+      <placeTerm type="text" authorityURI="http://id.loc.gov/authorities/names" valueURI="http://id.loc.gov/authorities/names/n50046557">Stanford (Calif.)</placeTerm>
+    </place>
+  </originInfo>
+  <originInfo>
+    <dateCreated encoding="w3cdtf" keyDate="yes">1922</dateCreated>
+  </originInfo>
+  <physicalDescription>
+    <internetMediaType>image/jpeg</internetMediaType>
+    <extent>1 photograph; 14 x 11 in</extent>
+    <digitalOrigin>reformatted digital</digitalOrigin>
+  </physicalDescription>
+  <note>"Stanford University Band, Grumans Theater, Los Angeles, One week, spring, 1922" written on back. "Photo by J. C. Milligan, Mason Opera House Bldg. Phone 62650. Los
+            Angeles California, Please credit" stamped on back.</note>
+  <note>Digitized by Stanford University Libraries.</note>
+  <subject>
+    <topic>Stanford Band</topic>
+  </subject>
+  <identifier type="local" displayLabel="SHPC Photo ID">15449</identifier>
+  <location>
+    <physicalLocation type="repository" authority="naf" authorityURI="http://id.loc.gov/authorities/names" valueURI="http://id.loc.gov/authorities/names/no2014019980">Stanford University. Libraries. Department of Special Collections and University Archives</physicalLocation>
+    <physicalLocation>Series: General Photographs, Box: B6</physicalLocation>
+    <shelfLocator>SC1071</shelfLocator>
+  </location>
+  <relatedItem type="host" displayLabel="Series">
+    <titleInfo>
+      <title>General Photographs</title>
+    </titleInfo>
+  </relatedItem>
+  <recordInfo>
+    <recordContentSource authority="marcorg">CSt</recordContentSource>
+    <recordOrigin>Transformed from legacy Metadata ToolKit MODS records.</recordOrigin>
+    <recordIdentifier>druid:qn141gz9851</recordIdentifier>
+    <languageOfCataloging>
+      <languageTerm authority="iso639-2b">eng</languageTerm>
+    </languageOfCataloging>
+  </recordInfo>
+  <relatedItem type="host">
+    <titleInfo>
+      <title>Stanford historical photograph collection, 1887-circa 1996 (inclusive)</title>
+    </titleInfo>
+    <location>
+      <url>https://purl.stanford.edu/kx532cb7981</url>
+    </location>
+    <typeOfResource collection="yes"/>
+  </relatedItem>
+  <accessCondition type="useAndReproduction">Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Special Collections Public Services Librarian at speccollref@stanford.edu.</accessCondition>
+  <accessCondition type="copyright">Property rights reside with the repository. Copyright © Stanford University. All Rights Reserved.</accessCondition>
+</mods>

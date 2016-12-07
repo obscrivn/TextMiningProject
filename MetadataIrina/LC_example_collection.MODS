@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modsCollection xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/mods/v3" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-3.xsd">
+<mods version="3.3">
+<titleInfo>
+<title>At Gettysburg, or, What a Girl Saw and Heard of the Battle: A True Narrative</title>
+</titleInfo>
+<name type="personal">
+<namePart>Alleman, Tillie Pierce [1848-1914]</namePart>
+<role>
+<roleTerm type="code" authority="marcrelator">aut</roleTerm>
+<roleTerm type="text" authority="marcrelator">Author</roleTerm>
+</role>
+</name>
+<typeOfResource>text</typeOfResource>
+<originInfo>
+<place>
+<placeTerm type="text">New York</placeTerm>
+</place>
+<publisher>W. Lake Borland</publisher>
+<dateIssued keyDate="yes" encoding="w3cdtf">1889</dateIssued>
+</originInfo>
+<language>
+<languageTerm authority="iso639-2b">eng</languageTerm>
+<languageTerm type="text">English</languageTerm>
+</language>
+<physicalDescription>
+<internetMediaType>text/html</internetMediaType>
+<digitalOrigin>reformatted digital</digitalOrigin>
+</physicalDescription>
+<subject authority="lcsh">
+<topic >Gettysburg, Battle of, Gettysburg, Pa., 1863</topic>
+</subject>
+<subject authority="lcsh">
+<topic>Gettysburg (Pa.) -- History -- Civil War, 1861-1865</topic>
+</subject>
+<subject authority="lcsh">
+<topic>United States -- History -- Civil War, 1861-1865 -- Campaigns</topic>
+</subject>
+<classification authority="lcc">E475.53 .A42</classification>
+<relatedItem type="host">
+<titleInfo type="uniform" authority="dlfaqcoll">
+<title>A Celebration of Women Writers: Americana</title>
+</titleInfo>
+</relatedItem>
+<location>
+<url usage="primary display" access="object in context"> http://digital.library.upenn.edu/women/alleman/gettysburg/gettysburg.html
+</url>
+</location>
+<accessCondition>Personal, noncommercial use of this item is permitted in the United States of America. Please see http://digital.library.upenn.edu/women/ for other rights and restrictions that may apply to this resource.
+</accessCondition>
+<recordInfo>
+<recordContentSource>University of Pennsylvania Digital Library</recordContentSource>
+<recordOrigin>MODS auto-converted from a simple Online Books Page metadata record. For details, see http://onlinebooks.library.upenn.edu/mods.html</recordOrigin>
+<languageOfCataloging>
+<languageTerm type="code" authority="iso639-2b">eng</languageTerm>
+</languageOfCataloging>
+<dateIssued keyDate="yes" encoding="w3cdtf">1922</dateIssued>
+</recordInfo>
+<titleInfo>
+<title>Telescope Peak from Zabriskie Point</title>
+</titleInfo>
+<titleInfo type="alternative" >
+<title>Telescope PK from Zabriskie Pt.</title>
+</titleInfo>
+<name type="personal">
+<namePart>Cushman, Charles Weever</namePart>
+<role>
+<roleTerm type="code" authority="marcrelator">pht</roleTerm>
+<roleTerm type="text" authority="marcrelator">Photographer</roleTerm>
+</role>
+</name>
+<typeOfResource>still image</typeOfResource>
+<genre authority="gmgpc">Landscape photographs</genre>
+<originInfo>
+<dateCreated encoding="w3cdtf" keyDate="yes">1955-03-22</dateCreated>
+<copyrightDate encoding="w3cdtf">2003</copyrightDate>
+</originInfo>
+<physicalDescription>
+<internetMediaType>image/jpeg</internetMediaType>
+<digitalOrigin>reformatted digital</digitalOrigin>
+<note> Original 35mm slide was digitized in 2003 as a TIFF image. Display versions in JPEG format in three sizes are available.</note>
+<note>100 f 6.3 tl</note>
+</physicalDescription>
+<subject authority="lctgm">
+<topic>Mountains</topic>
+</subject>
+<subject authority="lctgm">
+<topic>Snow</topic>
+</subject>
+<subject>
+<topic>Telescope Peak (Inyo County, Calif.)</topic>
+</subject>
+<subject>
+<topic>Zabriskie Point (Calif.)</topic>
+</subject>
+<subject>
+<hierarchicalGeographic>
+<country>United States</country>
+<state>California</state>
+<county>Inyo</county>
+</hierarchicalGeographic>
+</subject>
+<relatedItem type="original">
+<originInfo>
+<dateCreated encoding="w3cdtf" keyDate="yes">1955-03-22</dateCreated>
+</originInfo>
+<physicalDescription>
+<form authority="gmd">graphic</form>
+<extent>1 slide : col. ; 35mm</extent>
+<note>Original 35mm slide was digitized in 2003 as a TIFF image. Display versions in JPEG format in three sizes are available.</note>
+</physicalDescription>
+<location>
+<physicalLocation displayLabel="Original slide">Indiana University, Bloomington. University Archives P07803</physicalLocation>
+</location>
+</relatedItem>
+<relatedItem type="host">
+<titleInfo type="uniform" authority="dlfaqcoll">
+<title>Indiana University Digital Library Program: Charles W. Cushman Photograph Collection</title>
+</titleInfo>
+</relatedItem>
+<identifier displayLabel="Cushman number" type="local">955.11</identifier>
+<identifier displayLabel="IU Archives number" type="local">P07803</identifier>
+<location>
+<url>http://purl.dlib.indiana.edu/iudl/archives/cushman/P07803</url>
+<url access="preview">http://quod.lib.umich.edu/m/mods/thumbs/Indiana/oai.dlib.indiana.edu/ archives/cushman/oai_3Aoai.dlib.indiana.edu_3Aarchives_5Ccushman_5CP07803.png</url>
+</location>
+<accessCondition>Copyright and reproduction rights for all Charles W. Cushman photographs are held by Indiana University and administered by the University Archives, Indiana University, Bloomington, IN 47405</accessCondition>
+<recordInfo>
+<recordContentSource>Indiana University Digital Library Program</recordContentSource>
+<recordCreationDate encoding="w3cdtf">2004-09-09</recordCreationDate>
+<recordIdentifier>archives/cushman/P07803</recordIdentifier>
+</recordInfo>
+<titleInfo>
+<title>Hiring and recruitment practices in academic libraries</title>
+</titleInfo>
+<name type="personal">
+<namePart>Raschke, Gregory K.</namePart>
+<displayForm>Gregory K. Raschke</displayForm>
+</name>
+<typeOfResource>text</typeOfResource>
+<genre>journal article</genre>
+<originInfo>
+<place>
+<placeTerm>Baltimore, Md.</placeTerm>
+</place>
+<publisher>Johns Hopkins University Press</publisher>
+<dateIssued>2003</dateIssued>
+<issuance>monographic</issuance>
+</originInfo>
+<language><languageTerm authority="iso639-2b">eng</languageTerm></language>
+<physicalDescription>
+<form authority="marcform">print</form>
+<extent>15 p.</extent>
+</physicalDescription>
+<abstract>Academic libraries need to change their recruiting and hiring procedures to stay competitive in today's changing marketplace. By taking too long to find and to hire talented professionals in a tight labor market, academic libraries are losing out on top candidates and limiting their ability to become innovative and dynamic organizations. Traditional, deliberate, and risk-averse hiring models lead to positions remaining open for long periods, opportunities lost as top prospects find other positions, and a reduction in the overall talent level of the organization. To be more competitive and effective in their recruitment and hiring processes, academic libraries must foster manageable internal solutions, look to other professions for effective hiring techniques and models, and employ innovative concepts from modern personnel management literature. </abstract>
+<subject>
+<topic>College librarians</topic>
+<topic>Recruiting</topic>
+<geographic>United States</geographic>
+</subject>
+<subject>
+<topic>College librarians</topic>
+<topic>Selection and appointment</topic>
+<geographic>United States</geographic>
+</subject>
+<relatedItem type="host">
+<titleInfo>
+<title>portal: libraries and the academy</title>
+</titleInfo>
+<part>
+<detail type="volume">
+<number>3</number>
+<caption>vol.</caption>
+</detail>
+<detail type="number">
+<number>1</number>
+<caption>no.</caption>
+</detail>
+<extent unit="page">
+<start>53</start>
+<end>57</end>
+</extent>
+<date>Jan. 2003</date>
+</part>
+<identifier type="issn">1531-2542</identifier>
+</relatedItem>
+
+</mods>
+
+</modsCollection>
