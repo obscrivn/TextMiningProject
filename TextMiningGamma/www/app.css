@@ -1,0 +1,41 @@
+body {
+	padding-top: 50.889px;
+	margin-top: 20px;
+}
+
+.navbar-brand {
+	padding: 5px;
+}
+
+.app-logo {
+	float:left;
+	margin-right:10px;
+}
+
+.app-title {
+	width:350px;
+	margin-right:10px;
+	padding: 10px;
+}
+
+.welcome {
+	font-weight: bold;
+	color: dodgerblue;
+}
+
+fieldset.ITMS-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.ITMS-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width:auto;
+    padding:0 10px;
+    border-bottom:none;
+}
