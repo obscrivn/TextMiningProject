@@ -1,0 +1,342 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:link="http://purl.org/rss/1.0/modules/link/"
+ xmlns:vcard="http://nwalsh.com/rdf/vCard#">
+    <bib:Article rdf:about="http://www.tandfonline.com/doi/abs/10.
+   
+ <bib:Article rdf:about="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=111795867&amp;site=ehost-live">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:18747981"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Auby</foaf:surname>
+                        <foaf:givenname>Jean-Bernard</foaf:givenname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_137484"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>ADMINISTRATIVE law</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>CONSTITUTIONAL law</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>EUROPE</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>EUROPEAN Union countries</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>JUDICIAL review</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>LAW</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>PUBLIC law</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=111795867&amp;site=ehost-live</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <bib:pages>19-34</bib:pages>
+        <dc:date>July 2014</dc:date>
+        <dcterms:dateSubmitted>2016-07-06 08:26:40</dcterms:dateSubmitted>
+        <z:libraryCatalog>EBSCOhost</z:libraryCatalog>
+        <dcterms:abstract>The article offers reflections on the influence of legal Europeanization on national mechanisms contributing to the judicial supervision of and resolution of disputes involving administrative bodies. Topics covered include the European legal influence on national judicial review systems, reasons for the existence of the impact of European law on domestic judicial review and the consequences of Europeanization.</dcterms:abstract>
+        <dc:title>About Europeanization of Domestic Judicial Review</dc:title>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:18747981">
+        <prism:volume>7</prism:volume>
+        <prism:number>2</prism:number>
+        <dc:title>Review of European Administrative Law</dc:title>
+        <dc:identifier>ISSN 18747981</dc:identifier>
+        <dcterms:alternative>Review of European Administrative Law</dcterms:alternative>
+        <dc:identifier>DOI 10.7590/187479814X14186465137906</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_137484">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/137484/Auby - 2014 - About Europeanization of Domestic Judicial Review.pdf"/>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://content.ebscohost.com.library3.webster.edu/ContentServer.asp?T=P&amp;P=AN&amp;K=111795867&amp;S=R&amp;D=a9h&amp;EbscoContent=dGJyMNXb4kSeprQ4yOvqOLCmr06eprJSsKy4S7aWxWXS&amp;ContentCustomer=dGJyMPGut1G1qLdKuePfgeyx44Dt6fIA</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2016-07-06 08:26:40</dcterms:dateSubmitted>
+        <dc:title>EBSCO Full Text</dc:title>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+
+
+
+
+
+
+
+
+
+
+
+
+    <bib:Article rdf:about="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=102359896&amp;site=ehost-live">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:00205893"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Giliker</foaf:surname>
+                        <foaf:givenname>Paula</foaf:givenname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_137482"/>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>CIVIL law</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>comparative law</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>COURTS</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>ENGLAND</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>EU law</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>EUROPE</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>EUROPEAN communities</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>EUROPEAN Court of Human Rights</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>European human rights law</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>EUROPEAN Union law -- Social aspects</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>GREAT Britain</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>HUMAN rights</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>LAW &amp; legislation</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>private law</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>SOCIAL aspects</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>SOCIAL influence</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>STATUTES</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=102359896&amp;site=ehost-live</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <bib:pages>237-265</bib:pages>
+        <dc:date>April 2015</dc:date>
+        <dcterms:dateSubmitted>2016-07-06 08:26:40</dcterms:dateSubmitted>
+        <z:libraryCatalog>EBSCOhost</z:libraryCatalog>
+        <dcterms:abstract>This article examines the extent to which EU and European human rights law, following the enactment of the European Communities Act 1972 and the Human Rights Act 1998, have changed the manner in which English courts use comparative law in the private law field. Despite legislative intervention rendering EU law part of the national legal system and requiring the courts ‘to take into account’ the jurisprudence of the European Court of Human Rights, there remains evidence that private law courts retain a preference for comparisons within the common law world. This article will examine, with reference to a number of recent empirical studies, the reasons for this position and what this signifies in terms of future comparative law reasoning.</dcterms:abstract>
+        <dc:title>The Influence of Eu and European Human Rights Law on English Private Law</dc:title>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:00205893">
+        <prism:volume>64</prism:volume>
+        <prism:number>2</prism:number>
+        <dc:title>International &amp; Comparative Law Quarterly</dc:title>
+        <dc:identifier>ISSN 00205893</dc:identifier>
+        <dcterms:alternative>International &amp; Comparative Law Quarterly</dcterms:alternative>
+        <dc:identifier>DOI 10.1017/S0020589315000111</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_137482">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/137482/Giliker - 2015 - The Influence of Eu and European Human Rights Law .pdf"/>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://content.ebscohost.com.library3.webster.edu/ContentServer.asp?T=P&amp;P=AN&amp;K=102359896&amp;S=R&amp;D=a9h&amp;EbscoContent=dGJyMNXb4kSeprQ4yOvqOLCmr06eprJSsKy4S7aWxWXS&amp;ContentCustomer=dGJyMPGut1G1qLdKuePfgeyx44Dt6fIA</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2016-07-06 08:26:40</dcterms:dateSubmitted>
+        <dc:title>EBSCO Full Text</dc:title>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+
+
+
+
+
+
+    <z:Collection rdf:about="#collection_593">
+        <dc:title>EU Influence</dc:title>
+        <dcterms:hasPart rdf:resource="#item_137479"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=102359896&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=111795867&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=69626684&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=93445325&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=69626679&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=10131437&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="#item_137493"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=93393360&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=99044668&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=34741234&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="#item_137501"/>
+        <dcterms:hasPart rdf:resource="#item_137503"/>
+        <dcterms:hasPart rdf:resource="#item_137505"/>
+        <dcterms:hasPart rdf:resource="#item_137507"/>
+        <dcterms:hasPart rdf:resource="#item_137509"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=98682005&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="#item_137513"/>
+        <dcterms:hasPart rdf:resource="#item_137515"/>
+        <dcterms:hasPart rdf:resource="#item_137517"/>
+        <dcterms:hasPart rdf:resource="#item_137519"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=97321849&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=111590939&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=51594626&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=94190120&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=101715680&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=77925507&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=93279436&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=85200156&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=90376066&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=a9h&amp;AN=86038177&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://onlinelibrary.wiley.com/doi/10.1111/1468-5965.00353/full"/>
+        <dcterms:hasPart rdf:resource="http://link.springer.com/chapter/10.1057/9780230305601_11"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/abs/10.1080/13501760500451600"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/abs/10.1080/13501760500451634"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/abs/10.1080/13501760500451733"/>
+        <dcterms:hasPart rdf:resource="http://opus.bath.ac.uk/21216/"/>
+        <dcterms:hasPart rdf:resource="http://onlinelibrary.wiley.com/doi/10.1111/j.1468-5965.2007.00717.x/full"/>
+        <dcterms:hasPart rdf:resource="http://www.laws.canterbury.ac.nz/documents/NCRE_Jean_Monnet_Normative.pdf"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/abs/10.1080/13501760701314326"/>
+        <dcterms:hasPart rdf:resource="http://www.ef.huji.ac.il/publications/Huber.pdf"/>
+        <dcterms:hasPart rdf:resource="https://books.google.com/books?hl=en&amp;lr=&amp;id=vNK6Tisyl_8C&amp;oi=fnd&amp;pg=PA173&amp;dq=%22normative+power%22+europe&amp;ots=mJ-L8QFPn_&amp;sig=B5V6s4B_TsWI6lPHwSz0fVeOYh8"/>
+        <dcterms:hasPart rdf:resource="http://link.springer.com/chapter/10.1057/9780230305601_12"/>
+        <dcterms:hasPart rdf:resource="http://onlinelibrary.wiley.com/doi/10.1111/j.0021-9886.2005.00547.x/pdf"/>
+        <dcterms:hasPart rdf:resource="http://onlinelibrary.wiley.com/doi/10.1111/j.1468-5965.2011.02194.x/full"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/abs/10.1080/13501760500451667"/>
+        <dcterms:hasPart rdf:resource="http://mil.sagepub.com/content/33/3/613.short"/>
+        <dcterms:hasPart rdf:resource="http://link.springer.com/chapter/10.1057/9780230305601_1"/>
+        <dcterms:hasPart rdf:resource="http://dspace.ruc.dk/handle/1800/10619"/>
+        <dcterms:hasPart rdf:resource="http://www.sv.uio.no/arena/english/research/projects/cidel/old/WorkshopOsloSecurity/Manners.pdf"/>
+        <dcterms:hasPart rdf:resource="http://link.springer.com/chapter/10.1057/9780230305601_2"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/pdf/10.1080/02589000600976646"/>
+        <dcterms:hasPart rdf:resource="http://link.springer.com/chapter/10.1057/9780230305601_9"/>
+        <dcterms:hasPart rdf:resource="http://onlinelibrary.wiley.com/doi/10.1111/j.1468-2346.2008.00685.x/full"/>
+        <dcterms:hasPart rdf:resource="http://www.kluwerlawonline.com/abstract.php?area=Journals&amp;id=EERR2009015"/>
+        <dcterms:hasPart rdf:resource="http://link.springer.com/chapter/10.1057/9780230305601_8"/>
+        <dcterms:hasPart rdf:resource="http://www.kluwerlawonline.com/abstract.php?area=Journals&amp;id=EERR2007006"/>
+        <dcterms:hasPart rdf:resource="http://www.academia.edu/download/35804460/Orbie_2006_-_Civilian_Power_Europe.pdf"/>
+        <dcterms:hasPart rdf:resource="http://onlinelibrary.wiley.com/doi/10.1111/j.1468-5965.2007.00759.x/full"/>
+        <dcterms:hasPart rdf:resource="http://cac.sagepub.com/content/48/2/247.short"/>
+        <dcterms:hasPart rdf:resource="#item_137606"/>
+        <dcterms:hasPart rdf:resource="http://onlinelibrary.wiley.com/doi/10.1111/j.1468-2346.2008.00687.x/full"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/abs/10.1080/13501760903226872"/>
+        <dcterms:hasPart rdf:resource="http://aei.pitt.edu/7263/"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/abs/10.1080/09662830701305880"/>
+        <dcterms:hasPart rdf:resource="http://link.springer.com/article/10.1007/s12140-009-9090-3"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_594">
+       <dc:title>Influence of the European Union</dc:title>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_595">
+        <dc:title>Measuring power</dc:title>
+        <dcterms:hasPart rdf:resource="#item_137631"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=17274893&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=4288958&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=17287208&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=5545948&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=5408485&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=109539750&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=39778178&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=4408328&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=9708230865&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=102304755&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=108346984&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=92596099&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=36907136&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=4014427&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=6412550&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=65364158&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=9107220334&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=67693912&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=69636553&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=17164594&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=17278073&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=7595131&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=101114790&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://library3.webster.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&amp;db=bth&amp;AN=51793363&amp;site=ehost-live"/>
+        <dcterms:hasPart rdf:resource="http://public.eblib.com/choice/publicfullrecord.aspx?p=1046504"/>
+        <dcterms:hasPart rdf:resource="urn:isbn:978-1-4462-6503-1"/>
+        <dcterms:hasPart rdf:resource="https://books.google.com/books?hl=en&amp;lr=&amp;id=SGmMAgAAQBAJ&amp;oi=fnd&amp;pg=PP1&amp;ots=QzrRkNzXo0&amp;sig=j8ICH0yiZ4stURXqdYerz7i9ieM"/>
+        <dcterms:hasPart rdf:resource="http://aei.pitt.edu/8045/"/>
+        <dcterms:hasPart rdf:resource="https://books.google.com/books?hl=en&amp;lr=&amp;id=HLccBQAAQBAJ&amp;oi=fnd&amp;pg=PP1&amp;ots=SFTXQ1d8iB&amp;sig=0_-mvpgPwNXkt1xOuuVzjG3YMx0"/>
+        <dcterms:hasPart rdf:resource="http://journals.cambridge.org/abstract_S026021051000135X"/>
+        <dcterms:hasPart rdf:resource="https://books.google.com/books?hl=en&amp;lr=&amp;id=AHPh_IPH4KkC&amp;oi=fnd&amp;pg=PR7&amp;ots=fC1csbdFgb&amp;sig=e_Dp2YCmLvJWS2BHDiV4Us5GZr4"/>
+        <dcterms:hasPart rdf:resource="https://www.kpbooks.com/uploads/47e2876cbebcc.pdf"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/abs/10.1080/09512740500473148"/>
+        <dcterms:hasPart rdf:resource="http://journals.cambridge.org/abstract_S0020818305050010"/>
+        <dcterms:hasPart rdf:resource="http://www.econstor.eu/handle/10419/44660"/>
+        <dcterms:hasPart rdf:resource="http://journals.cambridge.org/abstract_S0020818300028022"/>
+        <dcterms:hasPart rdf:resource="http://ejt.sagepub.com/content/10/4/533.short"/>
+        <dcterms:hasPart rdf:resource="https://books.google.com/books?hl=en&amp;lr=&amp;id=kdXVqWtfyLMC&amp;oi=fnd&amp;pg=PP11&amp;dq=%22power+and+international+relations%22+baldwin+measuring&amp;ots=oqfvoFto_l&amp;sig=4awHRmTakKEaVGIgpQr5zInzdwo"/>
+        <dcterms:hasPart rdf:resource="#item_137743"/>
+        <dcterms:hasPart rdf:resource="http://mil.sagepub.com/content/33/3/771.short"/>
+        <dcterms:hasPart rdf:resource="http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1644559"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/abs/10.1080/2158379X.2011.555960"/>
+        <dcterms:hasPart rdf:resource="http://www.tandfonline.com/doi/abs/10.1080/2158379X.2011.557886"/>
+        <dcterms:hasPart rdf:resource="http://oai.dtic.mil/oai/oai?verb=getRecord&amp;metadataPrefix=html&amp;identifier=ADA522626"/>
+        <dcterms:hasPart rdf:resource="#item_137755"/>
+        <dcterms:hasPart rdf:resource="https://books.google.com/books?hl=en&amp;lr=&amp;id=XcOt_5kekoEC&amp;oi=fnd&amp;pg=PR3&amp;dq=%22power+and+international+relations%22+baldwin+measuring&amp;ots=mNPrmyHdfQ&amp;sig=eNIGxaTCYsCdSyOcjam_OzDWi8E"/>
+        <dcterms:hasPart rdf:resource="http://www.academia.edu/download/22146751/BISA_ISA_Pusto-Kremer_2012.pdf"/>
+        <dcterms:hasPart rdf:resource="http://www.cgu.edu/MSDocs/SPE/Willett/Econ%20140/Background_paper.doc"/>
+        <dcterms:hasPart rdf:resource="http://wesscholar.wesleyan.edu/cgi/viewcontent.cgi?article=1057&amp;context=div2facpubs"/>
+        <dcterms:hasPart rdf:resource="http://eisa-net.org/be-bruga/eisa/files/events/stockholm/DINKEL%20FINK%20Brazil%20-%20without%20animation-1.pdf"/>
+        <dcterms:hasPart rdf:resource="http://papers.ssrn.com/abstract=2302175"/>
+    </z:Collection>
+</rdf:RDF>
